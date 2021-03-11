@@ -20,7 +20,7 @@ export default function App() {
   let [definition, setDefinition] = useState(getDefinition(userLang));
 
   function swapLang(lang = "en") {
-    if (userLang.slice(0, 2) === "en") {
+    if (userLang === "en") {
       userLang = "fr";
     } else {
       userLang = lang;

@@ -11,35 +11,76 @@
 }
 
 .results {
-  display: grid;
-  /* grid-template-areas:
-    "head head head head head head"
-    "knobs viz viz viz viz viz"; */
-  grid-template-columns: 20% auto;
-  grid-gap: 1em;
-  padding: 1em 1em;
+  padding: 1em 0;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   user-select: none;
+  border: 1px solid #eee;
+}
+
+.intro {
+  color: #993300;
+  padding: 1em 6em;
+  padding-bottom: 6em;
+  background: linear-gradient(#faa687 0%, #faa687 85%, transparent 100%);
+}
+
+.intro h1,
+.intro p {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.intro h1 {
+  text-align: center;
+  font-size: 2.4em;
+  font-weight: 400;
+}
+
+.intro p {
+  font-size: 1.4em;
 }
 
 .knobs {
-  /* grid-area: knobs; */
-  grid-column: 1;
-  align-self: start;
-  position: sticky;
-  left: 0;
-  top: 1em;
   padding: 0.5em 1em;
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
   opacity: 1;
 }
 
-.knobs select {
-  max-width: 95%;
+.knob {
+  margin-bottom: 1em;
+}
+
+.knobselect > select {
+  max-width: 25em;
+}
+
+.slider,
+.knobselect {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.slider > label,
+.knobselect > label {
+  flex-basis: 9em;
+}
+
+.slider > input[type="range"] {
+  max-width: 25em;
+}
+
+.customchck {
+  margin-bottom: 0.5em;
+}
+.customchck > input {
+  margin-right: 0.5em;
 }
 
 .colorLegend {
   margin: 1em auto;
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
 }
 
 .knobssubsection {
@@ -51,10 +92,8 @@
 }
 
 .visualsContainer {
-  /* grid-area: viz; */
-  grid-column: 2 / span 5;
+  width: 100%;
   padding: 0.5em 1em;
-  border: 1px solid #eee;
 }
 
 .customViz {
@@ -63,13 +102,48 @@
 
 .standardViz {
 }
+.resultspart {
+  margin-bottom: 5em;
+}
+.parttitle {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+  margin-bottom: 5em;
+  font-size: 2em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.parttitle div:nth-child(1) {
+  white-space: nowrap;
+  text-align: left;
+}
+.parttitle div:nth-child(2) {
+  text-align: right;
+}
+
+.partdescription {
+  margin-bottom: 5em;
+}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-device-width: 414px) {
   /* Styles */
   .results {
-    display: inherit;
     padding: 1em 0.2em;
+  }
+
+  .intro {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+
+  .intro h1 {
+    font-size: 2em;
+  }
+  .intro p {
+    text-align: justify;
+    font-size: 1.2em;
   }
 
   .knobssubsection > label {
@@ -85,5 +159,9 @@
   } */
   .visualsContainer {
     border: none;
+  }
+
+  .parttitle {
+    font-size: 1.2em;
   }
 }

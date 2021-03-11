@@ -1,0 +1,340 @@
+import { Text } from "preact-i18n";
+import { useContext } from "preact/hooks";
+import { Language } from "../../components/language-context";
+// import ColorScaleLegend from "../../components/viz/colorScaleLegend/colorScaleLegend";
+import { DATASETS, GRAPH_TYPE } from "../../constants";
+import { hasXAxis } from "../../lib/misc";
+import style from "./style.css";
+
+export default function Knobs(props) {
+  const { state, swapLang, dispatch } = props;
+  const lang = useContext(Language);
+
+  // ALIASES
+  const totalRespondants = state.data?.length;
+  const graphType = state.options.graph;
+
+  // CONDITIONALS
+  const isScatterplot =
+    graphType === GRAPH_TYPE.scatterplot ||
+    graphType === GRAPH_TYPE.contourScatterplot ||
+    graphType === GRAPH_TYPE.density;
+  // const isHeatmap = graphType === GRAPH_TYPE.heatmap;
+
+  // const hasColor =
+  //   graphType === GRAPH_TYPE.colorContour || graphType === GRAPH_TYPE.heatmap;
+
+  const hasDots =
+    graphType === GRAPH_TYPE.scatterplot ||
+    graphType === GRAPH_TYPE.contourScatterplot ||
+    graphType === GRAPH_TYPE.density;
+
+  const hasContour =
+    graphType === GRAPH_TYPE.contourScatterplot ||
+    graphType === GRAPH_TYPE.colorContour ||
+    graphType === GRAPH_TYPE.contour;
+
+  const shouldDisableDotSize = !isScatterplot;
+  const shouldDisableDotOpacity = shouldDisableDotSize;
+  // const shouldDisableColorMid = !wantsColorDimension;
+  // const shouldDisableColorSchemeSelect = !hasColor;
+  const shouldDisableXAxisSelect = !state.customViz;
+  const shouldDisableYAxisSelect =
+    !state.customViz || !hasXAxis(state.userAxes);
+
+  // EVENT HANDLERS
+  const handleSettingChange = (type, prop, callback = null) => event => {
+    dispatch({ type, payload: { [prop]: event.target.value } });
+    if (callback != null && typeof callback === "function") callback();
+  };
+
+  const handleGraphTypeChange = handleSettingChange(
+    "CHANGE_GRAPH_TYPE",
+    "graph"
+  );
+  // const handleColorSchemeChange = handleSettingChange(
+  //   "CHANGE_COLOR_SCHEME",
+  //   "color"
+  // );
+  const handleDotSizeChange = handleSettingChange("CHANGE_DOT_SIZE", "size");
+  const handleDotOpacityChange = handleSettingChange(
+    "CHANGE_DOT_OPACITY",
+    "opacity"
+  );
+  const handleContourBandwidthChange = handleSettingChange(
+    "CHANGE_CONTOUR_BANDWIDTH",
+    "contourBandwidth"
+  );
+  const handleWantsCustomGraphClick = handleSettingChange("TOGGLE_CUSTOM");
+  // const handleReverseColorClick = handleSettingChange("TOGGLE_REV_COLOR");
+  const handleXSelectChange = handleSettingChange("SET_X_AXIS", "x");
+  const handleYSelectChange = handleSettingChange("SET_Y_AXIS", "y");
+
+  const handleDatasetChange = event => {
+    const clicked = event.target.value;
+    let other,
+      dataset = { ...state.options.dataset };
+    if (DATASETS.form.includes(clicked))
+      other = clicked === "aga" ? "ba" : "aga";
+    else if (DATASETS.language.includes(clicked))
+      other = clicked === "en" ? "fr" : "en";
+
+    dataset[clicked] = !dataset[clicked];
+    if (!dataset[clicked] && !dataset[other]) {
+      dataset[other] = true;
+    }
+    dispatch({ type: "FILTER_DATASET", payload: { dataset } });
+  };
+
+  const handleResetClick = () => dispatch({ type: "RESET" });
+
+  return (
+    <div class={style.knobs}>
+      <div style="float: right; text-align: right;">
+        <a href="#" onclick={() => swapLang()}>
+          <Text id="language">Français</Text>
+        </a>
+      </div>
+      <div class={style.knob}>
+        <label for="graphselect">
+          <Text id="results.knobs.graphtype">Graph type:</Text>
+        </label>
+        <select
+          id="graphselect"
+          name="graphselect"
+          onchange={handleGraphTypeChange}
+        >
+          <option selected value={GRAPH_TYPE.scatterplot}>
+            <Text id="results.knobs.scatterplot">scatterplot</Text>
+          </option>
+          <option value={GRAPH_TYPE.contour}>
+            <Text id="results.knobs.contour">contour</Text>
+          </option>
+          <option value={GRAPH_TYPE.heatmap}>
+            <Text id="results.knobs.heatmap">heatmap</Text>
+          </option>
+        </select>
+      </div>
+      {/* <div
+        id="colorKnobs"
+        class={style.knobssubsection}
+        style={`display: ${hasColor ? "initial" : "none"}`}
+      >
+        <label for="colorselect">
+          <Text id="results.knobs.color">Color scheme:</Text>
+        </label>
+        <select
+          id="colorselect"
+          name="colorselect"
+          onchange={handleColorSchemeChange}
+          disabled={shouldDisableColorSchemeSelect}
+        >
+          {Object.entries(COLOR_SCHEME).map(([name, value]) => (
+            <option value={value}>{name}</option>
+          ))}
+        </select>
+        <input
+          type="checkbox"
+          id="revcolorcheckbox"
+          value="custom"
+          checked={state.options.reverseColor}
+          onclick={handleReverseColorClick}
+        />
+        <label for="revcolorcheckbox">
+          <Text id="results.knobs.revColor">reverse?</Text>
+        </label>
+        <div class={style.colorLegend}>
+          <ColorScaleLegend colorScale={state.colorScale} />
+        </div>
+      </div> */}
+
+      <div
+        id="dotsKnobs"
+        class={style.knobssubsection}
+        style={`display: ${hasDots ? "initial" : "none"}`}
+      >
+        <div class={style.slider}>
+          <label for="dotsize">
+            <Text id="results.knobs.dotsize">Dot size:</Text>
+          </label>
+          <input
+            type="range"
+            id="dotsize"
+            min="1"
+            max="90"
+            step="0.1"
+            name="size"
+            value={state.options.size}
+            onchange={handleDotSizeChange}
+            disabled={shouldDisableDotSize}
+          />
+          {/* <span id="dotsizevalue">{dotSize}</span> */}
+        </div>
+        <div class={style.slider}>
+          <label for="dotopacity">
+            <Text id="results.knobs.dotopacity">Dot opacity:</Text>
+          </label>
+          <input
+            type="range"
+            id="dotopacity"
+            min="0.01"
+            max="1"
+            step="0.01"
+            name="opacity"
+            value={state.options.opacity}
+            onchange={handleDotOpacityChange}
+            disabled={shouldDisableDotOpacity}
+          />
+          {/* <span id="dotopacityvalue">{dotOpacity}</span> */}
+        </div>
+      </div>
+      <div
+        id="contourknobs"
+        class={style.knobssubsection}
+        style={`display: ${hasContour ? "initial" : "none"}`}
+      >
+        <div class={style.slider}>
+          <label for="bandwidthrange">
+            <Text id="results.knobs.bandwidthrange">Density bandwidth:</Text>
+          </label>
+          <input
+            type="range"
+            id="contourBandwitdh"
+            min="1"
+            max="100"
+            step="1"
+            name="contourBandwitdh"
+            value={state.options.contourBandwidth}
+            onchange={handleContourBandwidthChange}
+          />
+        </div>
+      </div>
+      <div id="axesselectors" class={style.knobssubsection}>
+        <div class={style.customchck}>
+          <input
+            type="checkbox"
+            id="customgraphcheckbox"
+            value="custom"
+            checked={state.customViz}
+            onclick={handleWantsCustomGraphClick}
+          />
+          <label for="customgraphcheckbox">
+            <Text id="results.knobs.custom">Custom axes:</Text>
+          </label>
+        </div>
+        <div style={`display: ${state.customViz ? "inherit" : "none"}`}>
+          <div class={style.knobselect}>
+            <label for="xselect">
+              <Text id="results.knobs.horizontal">Horizontal axis:</Text>
+            </label>
+            <select
+              id="xselect"
+              onchange={handleXSelectChange}
+              disabled={shouldDisableXAxisSelect}
+            >
+              <option value="">
+                <Text id="results.knobs.option">choose an option</Text>
+              </option>
+              {state.questions != null &&
+                state.questions.map((option, idx) => (
+                  <option value={`${idx}`}>{option}</option>
+                ))}
+            </select>
+          </div>
+          <div class={style.knobselect}>
+            <label for="yselect">
+              <Text id="results.knobs.vertical">Vertical axis:</Text>
+            </label>
+            <select
+              id="yselect"
+              onchange={handleYSelectChange}
+              disabled={shouldDisableYAxisSelect}
+            >
+              <option value="">
+                <Text id="results.knobs.option">choose an option</Text>
+              </option>
+              {state.questions != null &&
+                state.questions.map((option, idx) => (
+                  <option value={`${idx}`}>{option}</option>
+                ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="dataselectors" class={style.knobssubsection}>
+        <p>
+          <Text id="results.knobs.showdata">Show answers collected from:</Text>{" "}
+        </p>
+        <div class={style.customchck}>
+          <input
+            type="checkbox"
+            id="aga"
+            name="aga"
+            value="aga"
+            checked={state.options.dataset.aga}
+            onclick={handleDatasetChange}
+          />
+          <label for="aga">
+            <Text id="results.knobs.aga">
+              Sobey Art Award Exhibition, Art Gallery of Alberta, Edmonton,
+              October 5, 2019 - January 5, 2020
+            </Text>
+          </label>
+        </div>
+        <div class={style.customchck}>
+          <input
+            type="checkbox"
+            id="ba"
+            name="ba"
+            value="ba"
+            checked={state.options.dataset.ba}
+            onclick={handleDatasetChange}
+          />
+          <label for="ba">
+            <Text id="results.knobs.ba">
+              Exhibition "Positions", Galerie Bradley Ertaskiran, Montreal,
+              January 24 - March 7, 2020
+            </Text>
+          </label>
+        </div>
+        <div class={style.customchck}>
+          <input
+            type="checkbox"
+            id="enforms"
+            name="en"
+            value="en"
+            checked={state.options.dataset.en}
+            onclick={handleDatasetChange}
+          />
+          <label for="enforms">
+            <Text id="results.knobs.engforms">English questionnaires</Text>
+          </label>
+        </div>
+        <div class={style.customchck}>
+          <input
+            type="checkbox"
+            id="frforms"
+            name="fr"
+            value="fr"
+            checked={state.options.dataset.fr}
+            onclick={handleDatasetChange}
+          />
+          <label for="frforms">
+            <Text id="results.knobs.frforms">French questionnaires</Text>
+          </label>
+        </div>
+      </div>
+      <div>
+        <p>
+          <span>{totalRespondants}</span>{" "}
+          <Text id="results.knobs.respondants">respondants</Text>
+        </p>
+      </div>
+      <div>
+        <button type="button" onclick={handleResetClick}>
+          <Text id="results.knobs.reset">Reset</Text>
+        </button>
+      </div>
+    </div>
+  );
+}

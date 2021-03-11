@@ -1,26 +1,69 @@
 .vizContainer {
-  position: relative;
   display: grid;
-  width: 100%;
-  grid-template-columns: 10% 10% auto 10% 10%;
-  grid-template-rows: 1% 20% auto 20% 2%;
+  grid-template-rows: 10% auto 10%;
+  grid-template-columns: 5% auto 5%;
 
   justify-content: center;
   align-items: center;
-
   margin-bottom: 15em;
 }
 
 .viz {
-  /* grid-area: viz; */
-  grid-row: 1 / span 5;
-  grid-column: 2 / span 3;
+  grid-row-start: 1;
+  grid-row-end: -1;
+  grid-column-start: 1;
+  grid-column-end: -1;
   width: 100%;
   height: auto;
-  justify-self: center;
-  align-self: center;
+  justify-self: stretch;
+  align-self: stretch;
 }
 
+/* GRAPH LABELS */
+
+.label {
+  text-align: center;
+  text-shadow: 1px 1px white;
+  z-index: 1;
+  user-select: none;
+}
+
+.top,
+.bottom {
+  grid-column: 2;
+  max-width: 28em;
+  margin: 0 auto;
+}
+
+.top {
+  grid-row: 1;
+  padding-top: 2em;
+  align-self: start;
+}
+
+.bottom {
+  grid-row: 3;
+  padding-bottom: 2em;
+  align-self: end;
+}
+
+.left,
+.right {
+  width: 8em;
+}
+
+.left {
+  grid-row: 2;
+  grid-column: 1;
+  justify-self: start;
+  transform: translate(-2em);
+}
+.right {
+  grid-row: 2;
+  grid-column: 3;
+  justify-self: end;
+  transform: translate(2em);
+}
 /* SCATTERPLOTS */
 
 .dot {
@@ -68,54 +111,29 @@
   right: 0;
 }
 
-/* GRAPH LABELS */
-
-.label {
-  text-align: center;
-  text-shadow: 1px 1px white;
-  z-index: 1;
-  user-select: none;
-}
-
-.top {
-  /* grid-area: top; */
-  grid-row: 1 / span 2;
-  grid-column: 3;
-}
-
-.bottom {
-  /* grid-area: bottom; */
-  grid-row: 4 / span 2;
-  grid-column: 3;
-}
-
-.left {
-  /* grid-area: left; */
-  grid-row: 3;
-  grid-column: 1 / span 2;
-}
-.right {
-  /* grid-area: right; */
-  grid-row: 3;
-  grid-column: 4 / span 2;
-}
-
 @media only screen and (max-device-width: 414px) {
-  .viz {
-    grid-column: 1 / span 5;
+  .label {
+    font-size: 0.9em;
   }
 
+  .top,
+  .bottom {
+    width: 14em;
+  }
+  .top {
+    transform: translate(0, -4em);
+  }
+  .bottom {
+    transform: translate(0, 4em);
+  }
   .right,
   .left {
-    width: 20em;
-    transform: translate(-8.5em) rotate(270deg);
-  }
-}
-@media only screen and (max-device-width: 414px) {
-  .savebtn {
-    display: none;
+    justify-self: inherit;
+    width: 24em;
+    transform: translate(-11.5em) rotate(270deg);
   }
   .vizContainer {
-    grid-template-columns: 2% 10% auto 10% 2%;
+    grid-template-rows: 10% auto 10%;
+    /* grid-template-columns: 10% auto 10%; */
   }
 }

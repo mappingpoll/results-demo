@@ -18,6 +18,7 @@ export const COLOR_SCHEME = {
   cividis: "interpolateCividis",
   coolwarm: "coolwarm",
   nicolas: "nicolas",
+  nicolas2: "nicolas2",
 };
 
 export const CUSTOM_COLORS = {
@@ -33,9 +34,16 @@ export const CUSTOM_COLORS = {
     "#1e83ff",
     "#03a2ff",
   ]),
+  nicolas2: d3.interpolateRgbBasis([
+    "#efddff",
+    "#e6abe6",
+    "#d65da4",
+    "#d65da4",
+    "#640700",
+  ]),
 };
 export const DEFAULT_DOT_COLOR = "black";
-export const DEFAULT_COLOR_SCHEME = COLOR_SCHEME.greyscale;
+export const DEFAULT_COLOR_SCHEME = COLOR_SCHEME.nicolas2;
 export const DEFAULT_GRAPH_TYPE = GRAPH_TYPE.scatterplot;
 export const DEFAULT_DOT_SIZE = 18;
 export const DEFAULT_DOT_OPACITY = 0.13;

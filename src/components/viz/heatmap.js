@@ -48,9 +48,9 @@ export default function Heatmap({ data, columns, options }) {
         .attr("x", d => xScale(d.x - UNCERTAINTY))
         .attr("width", xBand.bandwidth())
         .attr("height", yBand.bandwidth())
-        .attr("stroke", ({ value }) =>
-          value < 1 ? colorScale(min + 3) : "none"
-        )
+        // .attr("stroke", ({ value }) =>
+        //   value < 1 ? colorScale(min + 3) : "none"
+        // )
         .attr("fill", d => colorScale(d.value));
 
       // draw axes, columns
@@ -62,11 +62,11 @@ export default function Heatmap({ data, columns, options }) {
   return (
     <>
       <svg
-        class={style.viz}
         ref={ref}
         viewBox={`0, 0, ${DEFAULT_CANVAS_WIDTH}, ${DEFAULT_CANVAS_HEIGHT}`}
         width={DEFAULT_CANVAS_WIDTH}
         height={DEFAULT_CANVAS_HEIGHT}
+        style="width: 100%; height: auto;"
       />
     </>
   );

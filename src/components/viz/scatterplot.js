@@ -55,11 +55,11 @@ export default function Scatterplot({
     <>
       <svg
         id="dataviz_scatterplot"
-        class={style.viz}
         ref={ref}
         viewBox={`0, 0, ${DEFAULT_CANVAS_WIDTH}, ${DEFAULT_CANVAS_HEIGHT}`}
         width={DEFAULT_CANVAS_WIDTH}
         height={DEFAULT_CANVAS_HEIGHT}
+        style="width: 100%; height: auto;"
       />
     </>
   );

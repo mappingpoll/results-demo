@@ -1,18 +1,11 @@
-import { useContext, useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { reducer } from "./asyncReducer";
-import {
-  COLOR_SCHEME,
-  DATASETS,
-  GRAPH_TYPE,
-  INITIAL_STATE,
-} from "../../constants";
+import { INITIAL_STATE } from "../../constants";
 import { Viz } from "../../components/viz/viz";
-import ColorScaleLegend from "../../components/viz/colorScaleLegend/colorScaleLegend";
-import { hasXAxis, canShowCustomViz } from "../../lib/misc";
-
-import { Text } from "preact-i18n";
+import { canShowCustomViz } from "../../lib/misc";
+import Knobs from "./knobs";
 import style from "./style.css";
-import { Language } from "../../components/language-context";
+import { MarkupText, Text } from "preact-i18n";
 
 function useAsyncReducer(reducer, initState) {
   const [state, setState] = useState(initState),
@@ -20,93 +13,15 @@ function useAsyncReducer(reducer, initState) {
   return [state, dispatchState];
 }
 
-const Results = props => {
-  const lang = useContext(Language);
+export default function Results(props) {
   // STATE
   const [state, dispatch] = useAsyncReducer(reducer, INITIAL_STATE);
   useEffect(() => {
     if (state.data == null) dispatch({ type: "FETCH_DATA" });
   });
 
-  // ALIASES
-  const totalRespondants = state.data?.length;
-  const graphType = state.options.graph;
-
-  // CONDITIONALS
-  const isScatterplot =
-    graphType === GRAPH_TYPE.scatterplot ||
-    graphType === GRAPH_TYPE.contourScatterplot ||
-    graphType === GRAPH_TYPE.density;
-  // const isHeatmap = graphType === GRAPH_TYPE.heatmap;
-
-  const hasColor =
-    graphType === GRAPH_TYPE.colorContour || graphType === GRAPH_TYPE.heatmap;
-
-  const hasDots =
-    graphType === GRAPH_TYPE.scatterplot ||
-    graphType === GRAPH_TYPE.contourScatterplot ||
-    graphType === GRAPH_TYPE.density;
-
-  const hasContour =
-    graphType === GRAPH_TYPE.contourScatterplot ||
-    graphType === GRAPH_TYPE.colorContour ||
-    graphType === GRAPH_TYPE.contour;
-
-  const shouldDisableDotSize = !isScatterplot;
-  const shouldDisableDotOpacity = shouldDisableDotSize;
-  // const shouldDisableColorMid = !wantsColorDimension;
-  const shouldDisableColorSchemeSelect = !hasColor;
-  const shouldDisableXAxisSelect = !state.customViz;
-  const shouldDisableYAxisSelect =
-    !state.customViz || !hasXAxis(state.userAxes);
   const shouldShowCustomViz =
     state.customViz && canShowCustomViz(state.userAxes);
-
-  // EVENT HANDLERS
-  const handleSettingChange = (type, prop, callback = null) => event => {
-    dispatch({ type, payload: { [prop]: event.target.value } });
-    if (callback != null && typeof callback === "function") callback();
-  };
-
-  const handleGraphTypeChange = handleSettingChange(
-    "CHANGE_GRAPH_TYPE",
-    "graph"
-  );
-  const handleColorSchemeChange = handleSettingChange(
-    "CHANGE_COLOR_SCHEME",
-    "color"
-  );
-  const handleDotSizeChange = handleSettingChange("CHANGE_DOT_SIZE", "size");
-  const handleDotOpacityChange = handleSettingChange(
-    "CHANGE_DOT_OPACITY",
-    "opacity"
-  );
-  const handleContourBandwidthChange = handleSettingChange(
-    "CHANGE_CONTOUR_BANDWIDTH",
-    "contourBandwidth"
-  );
-  const handleWantsCustomGraphClick = handleSettingChange("TOGGLE_CUSTOM");
-  const handleReverseColorClick = handleSettingChange("TOGGLE_REV_COLOR");
-  const handleXSelectChange = handleSettingChange("SET_X_AXIS", "x");
-  const handleYSelectChange = handleSettingChange("SET_Y_AXIS", "y");
-
-  const handleDatasetChange = event => {
-    const clicked = event.target.value;
-    let other,
-      dataset = { ...state.options.dataset };
-    if (DATASETS.form.includes(clicked))
-      other = clicked === "aga" ? "ba" : "aga";
-    else if (DATASETS.language.includes(clicked))
-      other = clicked === "en" ? "fr" : "en";
-
-    dataset[clicked] = !dataset[clicked];
-    if (!dataset[clicked] && !dataset[other]) {
-      dataset[other] = true;
-    }
-    dispatch({ type: "FILTER_DATASET", payload: { dataset } });
-  };
-
-  const handleResetClick = () => dispatch({ type: "RESET" });
 
   function handleVizInput(input) {
     switch (input.type) {
@@ -116,280 +31,179 @@ const Results = props => {
     }
   }
 
-  const customViz = shouldShowCustomViz ? (
-    <Viz state={state} callback={handleVizInput} />
-  ) : null;
-
-  const visuals = state.standardColumnSet.map(columns => (
-    <Viz state={state} columns={columns} callback={handleVizInput} />
-  ));
+  // const visuals = state.standardColumnSet.map(columns => (
+  //   <Viz state={state} columns={columns} callback={handleVizInput} />
+  // ));
 
   // JSX
   return (
     <div class={style.results}>
-      <div class={style.knobs}>
-        <label for="lang-select">
-          <Text id="form.lang-select">Language</Text>:
-        </label>
-        <select
-          name="lang"
-          value={lang}
-          id="lang-select"
-          onChange={e => props.swapLang(e.target.value)}
-        >
-          <option value="en">English</option>
-          <option value="fr">Français</option>
-        </select>
-        <div id="graphselect" class={style.knobssubsection}>
-          <label for="graphselect">
-            <Text id="results.knobs.graphtype">Graph type:</Text>
-          </label>
-          <select
-            id="graphselect"
-            name="graphselect"
-            onchange={handleGraphTypeChange}
-          >
-            <option selected value={GRAPH_TYPE.scatterplot}>
-              <Text id="results.knobs.scatterplot">scatterplot</Text>
-            </option>
-            <option value={GRAPH_TYPE.density}>
-              <Text id="results.knobs.density">density scatterplot</Text>
-            </option>
-            <option value={GRAPH_TYPE.contour}>
-              <Text id="results.knobs.contour">contour</Text>
-            </option>
-            <option value={GRAPH_TYPE.heatmap}>
-              <Text id="results.knobs.heatmap">heatmap</Text>
-            </option>
-          </select>
-        </div>
-        <div
-          id="colorKnobs"
-          class={style.knobssubsection}
-          style={`display: ${hasColor ? "initial" : "none"}`}
-        >
-          <label for="colorselect">
-            <Text id="results.knobs.color">Color scheme:</Text>
-          </label>
-          <select
-            id="colorselect"
-            name="colorselect"
-            onchange={handleColorSchemeChange}
-            disabled={shouldDisableColorSchemeSelect}
-          >
-            {Object.entries(COLOR_SCHEME).map(([name, value]) => (
-              <option value={value}>{name}</option>
-            ))}
-          </select>
-          <input
-            type="checkbox"
-            id="revcolorcheckbox"
-            value="custom"
-            checked={state.options.reverseColor}
-            onclick={handleReverseColorClick}
-          />
-          <label for="revcolorcheckbox">
-            <Text id="results.knobs.revColor">reverse?</Text>
-          </label>
-          <div class={style.colorLegend}>
-            <ColorScaleLegend colorScale={state.colorScale} />
-          </div>
-        </div>
-
-        <div
-          id="dotsKnobs"
-          class={style.knobssubsection}
-          style={`display: ${hasDots ? "initial" : "none"}`}
-        >
-          <label for="dotsize">
-            <Text id="results.knobs.dotsize">Dot size:</Text>
-          </label>
-          <input
-            type="range"
-            id="dotsize"
-            min="1"
-            max="90"
-            step="0.1"
-            name="size"
-            value={state.options.size}
-            onchange={handleDotSizeChange}
-            disabled={shouldDisableDotSize}
-          />
-          {/* <span id="dotsizevalue">{dotSize}</span> */}
-          <br />
-          <label for="dotopacity">
-            <Text id="results.knobs.dotopacity">Dot opacity:</Text>
-          </label>
-          <input
-            type="range"
-            id="dotopacity"
-            min="0.01"
-            max="1"
-            step="0.01"
-            name="opacity"
-            value={state.options.opacity}
-            onchange={handleDotOpacityChange}
-            disabled={shouldDisableDotOpacity}
-          />
-          {/* <span id="dotopacityvalue">{dotOpacity}</span> */}
-          <br />
-        </div>
-        <div
-          id="contourknobs"
-          class={style.knobssubsection}
-          style={`display: ${hasContour ? "initial" : "none"}`}
-        >
-          <label for="bandwidthrange">
-            <Text id="results.knobs.bandwidthrange">Density bandwidth:</Text>
-          </label>
-          <input
-            type="range"
-            id="contourBandwitdh"
-            min="1"
-            max="100"
-            step="1"
-            name="contourBandwitdh"
-            value={state.options.contourBandwidth}
-            onchange={handleContourBandwidthChange}
-          />
-        </div>
-        <div id="axesselectors" class={style.knobssubsection}>
-          <div>
-            <input
-              type="checkbox"
-              id="customgraphcheckbox"
-              value="custom"
-              checked={state.customViz}
-              onclick={handleWantsCustomGraphClick}
+      <Knobs state={state} swapLang={props.swapLang} dispatch={dispatch} />
+      <div class={style.visualsContainer}>
+        {shouldShowCustomViz && (
+          <div class={style.resultspart}>
+            <div class={style.parttitle}>
+              <Text id="results.customgraph">Custom graph:</Text>
+            </div>
+            <Viz
+              state={state}
+              columns={state.vizColumns}
+              callback={handleVizInput}
             />
-            <label for="customgraphcheckbox">
-              <Text id="results.knobs.custom">Custom axes:</Text>
-            </label>
           </div>
-          <div
-            class={style.userAxes}
-            style={`display: ${state.customViz ? "inherit" : "none"}`}
-          >
-            <label for="xselect">
-              <Text id="results.knobs.horizontal">Horizontal axis:</Text>
-            </label>
-            <select
-              id="xselect"
-              onchange={handleXSelectChange}
-              disabled={shouldDisableXAxisSelect}
-            >
-              <option value="">
-                <Text id="results.knobs.option">choose an option</Text>
-              </option>
-              {state.questions != null &&
-                state.questions.map((option, idx) => (
-                  <option value={`${idx}`}>{option}</option>
-                ))}
-            </select>
+        )}
+      </div>
+      <div class={style.intro}>
+        <MarkupText id="results.intro">
+          <h1>
+            Mapping Exercise:
             <br />
-            <label for="yselect">
-              <Text id="results.knobs.vertical">Vertical axis:</Text>
-            </label>
-            <select
-              id="yselect"
-              onchange={handleYSelectChange}
-              disabled={shouldDisableYAxisSelect}
-            >
-              <option value="">
-                <Text id="results.knobs.option">choose an option</Text>
-              </option>
-              {state.questions != null &&
-                state.questions.map((option, idx) => (
-                  <option value={`${idx}`}>{option}</option>
-                ))}
-            </select>
-          </div>
-        </div>
-        <div id="dataselectors" class={style.knobssubsection}>
+            Results
+          </h1>
           <p>
-            <Text id="results.knobs.showdata">
-              Show answers collected from:
-            </Text>{" "}
+            “Mapping Exercise” is a work that I made in order to poll viewers on
+            a variety of existential questions. I included the work in two
+            exhibitions: the Sobey Art Award Exhibition at the Art Gallery of
+            Alberta, Edmonton (October 5 2019 to January 5 2020), and
+            “Positions” at Galerie Bradley Ertaskiran, Montreal (January 24 to
+            March 7, 2020).
           </p>
-          <div>
-            <input
-              type="checkbox"
-              id="aga"
-              name="aga"
-              value="aga"
-              checked={state.options.dataset.aga}
-              onclick={handleDatasetChange}
-            />
-            <label for="aga">
-              <Text id="results.knobs.aga">
-                Sobey Art Award Exhibition, Art Gallery of Alberta, Edmonton,
-                October 5, 2019 - January 5, 2020
-              </Text>
-            </label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="ba"
-              name="ba"
-              value="ba"
-              checked={state.options.dataset.ba}
-              onclick={handleDatasetChange}
-            />
-            <label for="ba">
-              <Text id="results.knobs.ba">
-                Exhibition "Positions", Galerie Bradley Ertaskiran, Montreal,
-                January 24 - March 7, 2020
-              </Text>
-            </label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="enforms"
-              name="en"
-              value="en"
-              checked={state.options.dataset.en}
-              onclick={handleDatasetChange}
-            />
-            <label for="enforms">
-              <Text id="results.knobs.engforms">English questionnaires</Text>
-            </label>
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="frforms"
-              name="fr"
-              value="fr"
-              checked={state.options.dataset.fr}
-              onclick={handleDatasetChange}
-            />
-            <label for="frforms">
-              <Text id="results.knobs.frforms">French questionnaires</Text>
-            </label>
-          </div>
-        </div>
-        <div>
           <p>
-            <span>{totalRespondants}</span>{" "}
-            <Text id="results.knobs.respondants">respondants</Text>
+            Visitors were invited to sit down and fill a paper questionnaire, in
+            which they were asked to mark their position with a dot on a series
+            of diagrams.
           </p>
-        </div>
-        <div>
-          <button type="button" onclick={handleResetClick}>
-            <Text id="results.knobs.reset">Reset</Text>
-          </button>
-        </div>
+          <p>
+            Here are the results. In the scatterplot graphs (the default
+            presentation), each dot represents the answer of one participant. In
+            total, 1222 persons participated.
+          </p>
+        </MarkupText>
       </div>
       <div class={style.visualsContainer}>
         {shouldShowCustomViz && (
-          <div class={style.customViz}>Custom graph:{customViz}</div>
+          <div class={style.resultspart}>
+            <div class={style.parttitle}>
+              <Text id="results.customgraph">Custom graph:</Text>
+            </div>
+            <Viz
+              state={state}
+              columns={state.vizColumns}
+              callback={handleVizInput}
+            />
+          </div>
         )}
-        <div class={style.standardViz}>{visuals}</div>
+        {/* <div class={style.standardViz}>{visuals}</div> */}
+        <div class={style.resultspart}>
+          <div class={style.parttitle}>
+            <div>
+              <Text id="results.part">PART</Text> I
+            </div>
+            <div>
+              <Text id="results.part1.title">YOU</Text>
+            </div>
+          </div>
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[0]}
+            callback={handleVizInput}
+          />
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[1]}
+            callback={handleVizInput}
+          />
+        </div>
+        <div class={style.resultspart}>
+          <div class={style.parttitle}>
+            <div>
+              <Text id="results.part">Part</Text> II
+            </div>
+            <div>
+              <Text id="results.part2.title">You and the world</Text>
+            </div>
+          </div>
+          <div class={style.partdescription}>
+            <MarkupText id="results.part2.description">
+              <p>
+                Think of the land where you grew up. Think of its natural
+                physical properties, such as mountains, valleys, plains,
+                forests, wetlands, rivers, lakes, sea, desert, etc. Then try to
+                imagine this land in relation to the totality of physical spaces
+                all across the globe.
+              </p>
+              <p>
+                In your life, how much did you get to know the physical world?
+              </p>
+            </MarkupText>
+          </div>
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[2]}
+            callback={handleVizInput}
+          />
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[3]}
+            callback={handleVizInput}
+          />
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[4]}
+            callback={handleVizInput}
+          />
+        </div>
+        <div class={style.resultspart}>
+          <div class={style.parttitle}>
+            <div>
+              <Text id="results.part">Part</Text> III
+            </div>
+            <div>
+              <Text id="results.part3.title">You and the future</Text>
+            </div>
+          </div>
+          <div class={style.partdescription}>
+            <MarkupText id="results.part3.description">
+              <p>
+                Try to picture the totality of human activities taking place on
+                the planet today.
+              </p>
+              <p>
+                Do you think that humanity as a whole is moving in a good
+                direction, aligned with a coherent vision for the future?
+              </p>
+            </MarkupText>
+          </div>
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[5]}
+            callback={handleVizInput}
+          />
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[6]}
+            callback={handleVizInput}
+          />
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[7]}
+            callback={handleVizInput}
+          />
+        </div>
+        <div class={style.resultspart}>
+          <div class={style.parttitle}>
+            <div />
+            <div>
+              <Text id="results.part4.title">You and this exercise</Text>
+            </div>
+          </div>
+          <Viz
+            state={state}
+            columns={state.standardColumnSet?.[8]}
+            callback={handleVizInput}
+          />
+        </div>
       </div>
     </div>
   );
-};
-
-export default Results;
+}

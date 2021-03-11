@@ -6,6 +6,7 @@ import {
   filterDataByDataset,
   cleanQuestions,
   getPairwiseColumns,
+  getCustomColumns,
 } from "../../lib/data-manipulation";
 import { getColorScale } from "../../lib/viztools";
 
@@ -76,10 +77,10 @@ export async function reducer(state, action) {
       return assign({ ...state }, { customViz });
     }
     case "SET_X_AXIS":
-    case "SET_Y_AXIS":
-    case "SET_Z_AXIS": {
+    case "SET_Y_AXIS": {
       const userAxes = assign({ ...state.userAxes }, action.payload);
-      return assign({ ...state }, { userAxes });
+      const vizColumns = getCustomColumns(state.questions, userAxes);
+      return assign({ ...state }, { userAxes, vizColumns });
     }
     case "BRUSH": {
       const brushMap = action.payload;

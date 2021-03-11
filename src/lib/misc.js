@@ -12,9 +12,6 @@ export const hasXAxis = ({ x }) => isChosenAxis(x);
 
 export const hasXYAxes = ({ x, y }) => isChosenAxis(x) && isChosenAxis(y);
 
-export const hasThreeAxes = ({ x, y, z }) =>
-  isChosenAxis(x) && isChosenAxis(y) && isChosenAxis(z);
-
 export const canShowCustomViz = axes => hasXYAxes(axes);
 
 // "symetrical" floor fn

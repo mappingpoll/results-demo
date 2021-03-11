@@ -1,4 +1,5 @@
 {
+  "language": "English",
   "header": {
     "title": "Recensement Cartographique",
     "home": "Accueil",
@@ -39,6 +40,23 @@
       "respondants": "répondant.e.s",
       "reset": "Réinitialiser"
     },
+    "intro": "<h1>Exercice de cartographie:<br />Résultats</h1><p>«Exercice de cartographie» est une œuvre que j'ai conçue dans le but d'interroger les visiteurs·euses en lien avec une variété de questions existentielles. J'ai inclu cette œuvre dans deux expositions: le Sobey Art Award Exhibition à la Art Gallery of Alberta, Edmonton (5 octobre 2019 au 5 janvier 2020), et «Positions» à la Galerie Bradley Ertaskiran, Montréal (24 janvier au 7 mars 2020).</p><p>Les visiteurs·euses étaient invité·e·s à s'asseoir et à remplir un questionnaire papier, dans lequel on devait indiquer sa position par un point sur une série de diagrammes.</p><p>Voici donc les résultats. Dans les nuages de points (la présentation par défaut), chaque point représente la réponse d'un·e participant·e. En tout, 1222 personnes ont participé.</p>",
+    "customgraph": "Graphique sur mesure:",
+    "part": "Partie",
+    "part1": {
+      "title": "Vous"
+    },
+    "part2": {
+      "title": "Vous et le monde",
+      "description": "<p>Pensez au territoire où vous avez grandi. Pensez à ses propriétés physiques naturelles: montagnes, vallées, plaines, forêts, milieux humides, rivières, lacs, mer, désert, etc. Imaginez ensuite ce territoire en rapport avec la totalité des espaces physiques de la planète.</p><p>Dans votre vie, jusqu'à quel point avez-vous appris à connaître le monde physique?</p>"
+    },
+    "part3": {
+      "title": "Vous et le future",
+      "description": "<p>Essayez de vous représenter la totalité des activités humaines se déroulant sur la planète aujourd'hui.</p><p>Croyez-vous que l'humanité dans son ensemble se dirige dans une bonne direction, alignée sur une vision cohérente pour le futur?</p>"
+    },
+    "part4": {
+      "title": "Vous et cet exercice"
+    },
     "savebtn": "Télécharger l'image"
   },
   "form": {
@@ -52,23 +70,6 @@
       "bottom": "L'identité de genre est biologique à 100%",
       "left": "Homme",
       "right": "Femme"
-    },
-    "part1": {
-      "description": "Pensez au territoire où vous avez grandi. Pensez à ses propriétés physiques naturelles: montagnes, vallées, plaines, forêts, milieux humides, rivières, lacs, mer, désert, etc. Imaginez ensuite ce territoire en rapport avec la totalité des espaces physiques de la planète.<br/>Dans votre vie, jusqu'à quel point avez-vous appris à connaître le monde physique?",
-      "q1": {
-        "question": "",
-        "top": "J'accepte la légitimité de l'ordre mondial actuel, avec ses frontières, états, nations, etc.",
-        "bottom": "Je ne crois pas en la légitimité de l'ordre mondial actuel",
-        "left": "Je me préoccupe exclusivement de la réalité concrète et tangible de la vie",
-        "right": "Je me préoccupe exclusivement des grandes questions et abstractions"
-      },
-      "q2": {
-        "question": "Deuxième question...",
-        "top": "",
-        "bottom": "",
-        "left": "",
-        "right": ""
-      }
     },
     "submit": "Soumettre"
   },
@@ -130,7 +131,7 @@
         "end": "La moralité et les normes sociales sont universelles"
       }
     },
-    "I never left / keep moving": {
+    "I never left / I keep moving": {
       "en": {
         "start": "I never left the place where I was born",
         "end": "I constantly keep moving far and wide"
@@ -140,7 +141,7 @@
         "end": "Je me déplace constamment, sur de grandes distances"
       }
     },
-    "I have a deep / never think about land": {
+    "Deep connection / never think about land": {
       "en": {
         "start": "I never even think about the land",
         "end": "I have a deep connection with the land and I can feel the vastness of the physical world in my bones"
@@ -150,7 +151,7 @@
         "end": "J'ai une profonde connexion avec le monde physique, j'en ressens l'immensité dans mes tripes"
       }
     },
-    "I care only concrete / abstractions": {
+    "I care only about concrete / abstractions": {
       "en": {
         "start": "I care only about the concrete and tangible reality of life",
         "end": "I care only about the larger questions and abstractions"
@@ -170,7 +171,7 @@
         "end": "J'accepte la légitimité de l'ordre mondial actuel, avec ses frontières, états, nations, etc."
       }
     },
-    "I define on my own / relation to groups": {
+    "I define myself / in relation to groups": {
       "en": {
         "start": "I define myself and my convictions on my own, not in relation to any group",
         "end": "I define myself and my convictions in relation to groups with which I identify"
@@ -190,7 +191,7 @@
         "end": "S'exposer à différents systèmes de valeurs et croyances mène à une plus grandes tolérance et à une compréhension mutuelle"
       }
     },
-    "We're self-destruction / progress": {
+    "Going toward self-destruction / progress": {
       "en": {
         "start": "We're moving towards self-destruction",
         "end": "We're making constant progress"
@@ -200,7 +201,7 @@
         "end": "Nous progressons constamment"
       }
     },
-    "We have cosmological importance / no impact": {
+    "Impact on future of humanity / no impact": {
       "en": {
         "start": "We, humans living today, will have no impact whatsoever on the future of humanity",
         "end": "We, humans living today, will have an impact of cosmological importance for the future of humanity"
@@ -220,7 +221,7 @@
         "end": "Nous devons combattre le pouvoir dominant et créer une vision radicallement nouvelle afin de protéger la planète et de réinventer un monde plus égalitaire"
       }
     },
-    "I'm ready to / I don't care": {
+    "I'm ready to give my life / I don't care": {
       "en": {
         "start": "I don't care",
         "end": "I'm ready to give my life for this"
@@ -250,7 +251,7 @@
         "end": "J'ai le pouvoir de changer les choses sur le plan structurel"
       }
     },
-    "I found annoying / well balanced": {
+    "Questions annoying / well balanced": {
       "en": {
         "start": "I found the questions biased and/or moralizing and/or annoying",
         "end": "I though the questions were relevant and well balanced"
@@ -260,7 +261,7 @@
         "end": "J'ai trouvé les questions pertinentes et bien équilibrées"
       }
     },
-    "My answers truly / means nothing": {
+    "My answers represent / it means nothing": {
       "en": {
         "start": "I answered randomly, it means nothing",
         "end": "My answers truly represent how I feel about these issues"
