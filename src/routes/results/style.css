@@ -1,0 +1,89 @@
+:root {
+  --svg-defaultdotsize: 23;
+  --svg-defaultdotopacity: 0.2;
+  --svg-defaultdotcolor: rgb(29, 29, 29);
+  --svg-canvaswidth: 1000;
+  --svg-canvasheight: 800;
+  --svg-canvasmargintop: 40;
+  --svg-canvasmarginright: 40;
+  --svg-canvasmarginbottom: 40;
+  --svg-canvasmarginleft: 40;
+}
+
+.results {
+  display: grid;
+  /* grid-template-areas:
+    "head head head head head head"
+    "knobs viz viz viz viz viz"; */
+  grid-template-columns: 20% auto;
+  grid-gap: 1em;
+  padding: 1em 1em;
+  user-select: none;
+}
+
+.knobs {
+  /* grid-area: knobs; */
+  grid-column: 1;
+  align-self: start;
+  position: sticky;
+  left: 0;
+  top: 1em;
+  padding: 0.5em 1em;
+  border: 1px solid #eee;
+  opacity: 1;
+}
+
+.knobs select {
+  max-width: 95%;
+}
+
+.colorLegend {
+  margin: 1em auto;
+  border: 1px solid #eee;
+}
+
+.knobssubsection {
+  margin: 1em 0;
+}
+
+.userAxes {
+  padding-left: 1em;
+}
+
+.visualsContainer {
+  /* grid-area: viz; */
+  grid-column: 2 / span 5;
+  padding: 0.5em 1em;
+  border: 1px solid #eee;
+}
+
+.customViz {
+  border: 1px solid #eee;
+}
+
+.standardViz {
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-device-width: 414px) {
+  /* Styles */
+  .results {
+    display: inherit;
+    padding: 1em 0.2em;
+  }
+
+  .knobssubsection > label {
+    padding-left: 1em;
+  }
+
+  .knobs {
+    position: static;
+  }
+
+  /* .knobs select {
+    max-width: 75vw;
+  } */
+  .visualsContainer {
+    border: none;
+  }
+}
