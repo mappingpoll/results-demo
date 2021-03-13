@@ -4,12 +4,14 @@
       format("woff"),
     url("./assets/fonts/Atkinson-Hyperlegible-Regular-102.ttf") format("ttf");
   font-weight: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Atkinson";
   src: url("./assets/fonts/Atkinson-Hyperlegible-Bold-102.woff") format("woff"),
     url("./assets/fonts/Atkinson-Hyperlegible-Bold-102.ttf") format("ttf");
   font-weight: bold;
+  font-display: swap;
 }
 @font-face {
   font-family: "Atkinson";
@@ -17,6 +19,7 @@
       format("woff"),
     url("./assets/fonts/Atkinson-Hyperlegible-Italic-102.ttf") format("ttf");
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: "Atkinson";
@@ -25,6 +28,7 @@
     url("./assets/fonts/Atkinson-Hyperlegible-BoldItalic-102.ttf") format("ttf");
   font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 /* ==========================================================================
@@ -37,11 +41,6 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  background: #fff;
-  font-family: "Atkinson";
-  font-weight: normal;
-  font-size: 110%;
-  color: #000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -102,6 +101,9 @@ video {
 /* App specific */
 
 :root {
+  --background-color: white;
+  --text-color: black;
+
   --slider-contrast: 25%;
   --track-width: 95%;
   --track-height: 5px;
@@ -124,6 +126,15 @@ video {
   --svg-canvasmarginright: 40;
   --svg-canvasmarginbottom: 40;
   --svg-canvasmarginleft: 40;
+}
+
+html,
+body {
+  font-family: "Atkinson";
+  font-weight: normal;
+  font-size: 110%;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 @import "rangeslider.css";
