@@ -6,7 +6,6 @@ import {
 } from "../../constants";
 import { xScale, yScale, xBand, yBand } from "../../lib/scales";
 import { calcHeatmap, getColorScale } from "../../lib/viztools";
-import style from "./style.css";
 import { useD3 } from "../../hooks/useD3";
 import { appendAxes } from "./scatterplot-axes";
 

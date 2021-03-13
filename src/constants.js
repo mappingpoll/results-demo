@@ -1,4 +1,4 @@
-import * as d3 from "d3";
+import { interpolateRgbBasis } from "d3";
 
 export const NA_SYMBOL = "NA";
 
@@ -22,8 +22,8 @@ export const COLOR_SCHEME = {
 };
 
 export const CUSTOM_COLORS = {
-  coolwarm: d3.interpolateRgbBasis(["CornflowerBlue", "DimGray", "IndianRed"]),
-  nicolas: d3.interpolateRgbBasis([
+  coolwarm: interpolateRgbBasis(["CornflowerBlue", "DimGray", "IndianRed"]),
+  nicolas: interpolateRgbBasis([
     "#de0000",
     "#b9001e",
     "#a5013c",
@@ -34,7 +34,7 @@ export const CUSTOM_COLORS = {
     "#1e83ff",
     "#03a2ff",
   ]),
-  nicolas2: d3.interpolateRgbBasis([
+  nicolas2: interpolateRgbBasis([
     "#efddff",
     "#e6abe6",
     "#d65da4",
@@ -95,7 +95,6 @@ export const INITIAL_STATE = {
   userAxes: {
     x: "",
     y: "",
-    // z: "",
   },
   brushMap: {},
   colorScale: () => {}, //getColorScale(DEFAULT_COLOR_SCHEME, AXES_DOMAIN),

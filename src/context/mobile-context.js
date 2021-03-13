@@ -1,4 +1,4 @@
-import { createContext } from "preact";
+import { h, createContext } from "preact";
 import { useContext } from "preact/hooks";
 
 // Mobile check
@@ -19,7 +19,7 @@ const mobileCheck = function () {
 
 export const MobileContext = createContext();
 
-function MobileContextProvider({ children }) {
+export function MobileContextProvider({ children }) {
   const isMobileClient = mobileCheck();
   return (
     <MobileContext.Provider value={isMobileClient}>
@@ -28,7 +28,7 @@ function MobileContextProvider({ children }) {
   );
 }
 
-function useMobileContext() {
+export function useMobileContext() {
   const context = useContext(MobileContext);
   if (context == null)
     throw new Error(
@@ -36,5 +36,3 @@ function useMobileContext() {
     );
   return context;
 }
-
-export { MobileContextProvider, useMobileContext };

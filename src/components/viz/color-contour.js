@@ -1,10 +1,10 @@
 import { h } from "preact";
-import * as d3 from "d3";
+import { geoPath } from "d3";
 import { useD3 } from "../../hooks/useD3";
 import { DEFAULT_CANVAS_HEIGHT, DEFAULT_CANVAS_WIDTH } from "../../constants";
-import style from "./style.css";
 import { computeDensity, getColorScale } from "../../lib/viztools";
 import { appendAxes } from "./scatterplot-axes";
+import style from "./viz.css";
 
 export default function ColorContour({ data, columns: columns2d, options }) {
   const ref = useD3(
@@ -36,7 +36,7 @@ export default function ColorContour({ data, columns: columns2d, options }) {
         .enter()
         .append("path")
         .attr("class", style.coutourPath)
-        .attr("d", d3.geoPath())
+        .attr("d", geoPath())
         .attr("stroke", (_, i) => (i === 0 ? color(1) : "none"))
         .attr("fill", d => color(d.value));
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { h } from "preact";
-import * as d3 from "d3";
+import { scaleLinear, line, curveCardinal } from "d3";
 import { useD3 } from "../../hooks/useD3";
 import {
   DEFAULT_CANVAS_HEIGHT,
@@ -8,14 +8,14 @@ import {
   DOMAIN,
   AXES_DOMAIN,
 } from "../../constants";
-import style from "./style.css";
 import { appendAxes } from "./scatterplot-axes";
 import { xScale, yScale } from "../../lib/scales";
 import { brushFn, isValidDatum, makeBrushTool } from "../../lib/viztools";
 
 import { symFloor } from "../../lib/misc";
 import { inRange } from "../../lib/data-manipulation";
-import { useMobileContext } from "../mobile-context";
+import { useMobileContext } from "../../context/mobile-context";
+import style from "./viz.css";
 
 export default function DensityScatterplot({
   data,
@@ -87,8 +87,7 @@ export default function DensityScatterplot({
       const vMax = max(vDensity);
 
       function dScale(max, scl, range) {
-        return d3
-          .scaleLinear()
+        return scaleLinear()
           .domain([0, max])
           .range([scl(range[0]), scl(range[1])]);
       }
@@ -96,15 +95,13 @@ export default function DensityScatterplot({
       const hScale = dScale(hMax, yScale, [AXES_DOMAIN[1], DOMAIN[1]]);
       const vScale = dScale(vMax, xScale, [AXES_DOMAIN[1], DOMAIN[1]]);
 
-      const curveFn = d3.curveCardinal;
+      const curveFn = curveCardinal;
 
-      const hLine = d3
-        .line()
+      const hLine = line()
         .x(([n, _]) => xScale(n))
         .y(([_, d]) => hScale(d))
         .curve(curveFn);
-      const vLine = d3
-        .line()
+      const vLine = line()
         .x(([_, d]) => vScale(d))
         .y(([n, _]) => yScale(n))
         .curve(curveFn);

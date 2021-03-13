@@ -1,13 +1,14 @@
-import * as d3 from "d3";
+import { select } from "d3";
 import { useEffect, useRef } from "preact/hooks";
 
 export const useD3 = (renderChartFn, dependencies) => {
   const ref = useRef();
 
   useEffect(() => {
-    renderChartFn(d3.select(ref.current));
+    renderChartFn(select(ref.current));
     return () => {};
-  }, dependencies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [renderChartFn, ...dependencies]);
 
-  return ref
-}
+  return ref;
+};

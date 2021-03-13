@@ -1,28 +1,31 @@
-import * as d3 from "d3";
+import { h } from "preact";
+import { scaleLinear, axisBottom, axisLeft } from "d3";
 import { xScale, yScale } from "../../lib/scales";
 import { ORIGIN, AXES_DOMAIN } from "../../constants";
 import style from "./scatterplot-axes.css";
 import { useD3 } from "../../hooks/useD3";
 
-const xAxisScale = d3
-  .scaleLinear(AXES_DOMAIN)
-  .range([xScale(AXES_DOMAIN[0]), xScale(AXES_DOMAIN[1])]);
+const xAxisScale = scaleLinear(AXES_DOMAIN).range([
+  xScale(AXES_DOMAIN[0]),
+  xScale(AXES_DOMAIN[1]),
+]);
 
-const yAxisScale = d3
-  .scaleLinear(AXES_DOMAIN)
-  .range([yScale(AXES_DOMAIN[1]), yScale(AXES_DOMAIN[0])]);
+const yAxisScale = scaleLinear(AXES_DOMAIN).range([
+  yScale(AXES_DOMAIN[1]),
+  yScale(AXES_DOMAIN[0]),
+]);
 
 export const xAxis = g =>
   g
     .attr("transform", `translate(0, ${ORIGIN.y})`)
     .attr("class", style.axis)
-    .call(d3.axisBottom(xAxisScale).ticks("").tickSizeOuter(0));
+    .call(axisBottom(xAxisScale).ticks("").tickSizeOuter(0));
 
 export const yAxis = g =>
   g
     .attr("transform", `translate(${ORIGIN.x}, 0)`)
     .attr("class", style.axis)
-    .call(d3.axisLeft(yAxisScale).ticks("").tickSizeOuter(0));
+    .call(axisLeft(yAxisScale).ticks("").tickSizeOuter(0));
 
 const ARROW_LENGTH = 24;
 const ARROW_FEATHER_SIZE = 8;

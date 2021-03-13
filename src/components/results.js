@@ -1,11 +1,13 @@
+import { h } from "preact";
 import { useEffect, useState } from "preact/hooks";
-import { reducer } from "./asyncReducer";
-import { INITIAL_STATE } from "../../constants";
-import { Viz } from "../../components/viz/viz";
-import { canShowCustomViz } from "../../lib/misc";
-import Knobs from "./knobs";
-import style from "./style.css";
 import { MarkupText, Text } from "preact-i18n";
+import { reducer } from "../asyncReducer";
+
+import { canShowCustomViz } from "../lib/misc";
+import { Viz } from "./viz/viz";
+import { INITIAL_STATE } from "../constants";
+import Knobs from "./knobs";
+import style from "./results.css";
 
 function useAsyncReducer(reducer, initState) {
   const [state, setState] = useState(initState),
@@ -13,7 +15,7 @@ function useAsyncReducer(reducer, initState) {
   return [state, dispatchState];
 }
 
-export default function Results(props) {
+export default function Results() {
   // STATE
   const [state, dispatch] = useAsyncReducer(reducer, INITIAL_STATE);
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function Results(props) {
   // JSX
   return (
     <div class={style.results}>
-      <Knobs state={state} swapLang={props.swapLang} dispatch={dispatch} />
+      <Knobs state={state} dispatch={dispatch} />
       <div class={style.visualsContainer}>
         {shouldShowCustomViz && (
           <div class={style.resultspart}>

@@ -1,14 +1,14 @@
+import { h } from "preact";
 import { Text } from "preact-i18n";
-import { useContext } from "preact/hooks";
-import { Language } from "../../components/language-context";
-// import ColorScaleLegend from "../../components/viz/colorScaleLegend/colorScaleLegend";
-import { DATASETS, GRAPH_TYPE } from "../../constants";
-import { hasXAxis } from "../../lib/misc";
-import style from "./style.css";
+import { useLanguageContext } from "../context/language-context";
+// import ColorScaleLegend from "./components/viz/colorScaleLegend/colorScaleLegend";
+import { DATASETS, GRAPH_TYPE } from "../constants";
+import { hasXAxis } from "../lib/misc";
+import style from "./results.css";
 
 export default function Knobs(props) {
-  const { state, swapLang, dispatch } = props;
-  const lang = useContext(Language);
+  const { state, dispatch } = props;
+  const { swapLang } = useLanguageContext();
 
   // ALIASES
   const totalRespondants = state.data?.length;

@@ -1,9 +1,9 @@
 import { h } from "preact";
-import * as d3 from "d3";
+import { geoPath } from "d3";
 import { useD3 } from "../../hooks/useD3";
 import { DEFAULT_CANVAS_HEIGHT, DEFAULT_CANVAS_WIDTH } from "../../constants";
 import { appendAxes } from "./scatterplot-axes";
-import style from "./style.css";
+import style from "./viz.css";
 import { computeDensity } from "../../lib/viztools";
 
 export default function ContourChart({ data, columns, options }) {
@@ -26,7 +26,7 @@ export default function ContourChart({ data, columns, options }) {
         .enter()
         .append("path")
         .attr("class", style.contourPath)
-        .attr("d", d3.geoPath());
+        .attr("d", geoPath());
 
       // draw axes, columns
       appendAxes(svg);
