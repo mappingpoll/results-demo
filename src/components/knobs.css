@@ -1,0 +1,70 @@
+.knobs {
+  padding: 0.5em 1em;
+  /* border: 1px solid #eee; */
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.knob {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.knobselect > select {
+  max-width: 25em;
+}
+
+.slider,
+.knobselect {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.slider > label,
+.knobselect > label {
+  white-space: nowrap;
+  flex-basis: 9em;
+}
+
+.slider > input[type="range"] {
+  max-width: 25em;
+}
+
+.customchck {
+  margin-bottom: 0.5em;
+}
+.customchck > input {
+  margin-right: 0.5em;
+}
+
+.colorLegend {
+  margin: 1em auto;
+  /* border: 1px solid #eee; */
+}
+
+.knobssubsection {
+  margin: 1em 0;
+}
+
+.userAxes {
+  padding-left: 1em;
+}
+
+.resetbtn {
+  text-align: right;
+}
+
+@media only screen and (max-device-width: 414px) {
+  .knobssubsection > label {
+    padding-left: 1em;
+  }
+
+  .knobs {
+    position: static;
+  }
+}
