@@ -4,10 +4,10 @@ import { useLanguageContext } from "../context/language-context";
 // import ColorScaleLegend from "./components/viz/colorScaleLegend/colorScaleLegend";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
-import style from "./results.css";
+import style from "./knobs.css";
 
 export default function Knobs(props) {
-  const { state, dispatch } = props;
+  const { state, dispatch } = props.reducer;
   const { swapLang } = useLanguageContext();
 
   // ALIASES
@@ -90,72 +90,37 @@ export default function Knobs(props) {
 
   return (
     <div class={style.knobs}>
-      <div style="float: right; text-align: right;">
+      <div class={style.knob}>
         <a href="#" onclick={() => swapLang()}>
           <Text id="language">Français</Text>
         </a>
       </div>
       <div class={style.knob}>
-        <label for="graphselect">
-          <Text id="results.knobs.graphtype">Graph type:</Text>
-        </label>
-        <select
-          id="graphselect"
-          name="graphselect"
-          onchange={handleGraphTypeChange}
-        >
-          <option selected value={GRAPH_TYPE.scatterplot}>
-            <Text id="results.knobs.scatterplot">scatterplot</Text>
-          </option>
-          <option value={GRAPH_TYPE.contour}>
-            <Text id="results.knobs.contour">contour</Text>
-          </option>
-          <option value={GRAPH_TYPE.heatmap}>
-            <Text id="results.knobs.heatmap">heatmap</Text>
-          </option>
-        </select>
-      </div>
-      {/* <div
-        id="colorKnobs"
-        class={style.knobssubsection}
-        style={`display: ${hasColor ? "initial" : "none"}`}
-      >
-        <label for="colorselect">
-          <Text id="results.knobs.color">Color scheme:</Text>
-        </label>
-        <select
-          id="colorselect"
-          name="colorselect"
-          onchange={handleColorSchemeChange}
-          disabled={shouldDisableColorSchemeSelect}
-        >
-          {Object.entries(COLOR_SCHEME).map(([name, value]) => (
-            <option value={value}>{name}</option>
-          ))}
-        </select>
-        <input
-          type="checkbox"
-          id="revcolorcheckbox"
-          value="custom"
-          checked={state.options.reverseColor}
-          onclick={handleReverseColorClick}
-        />
-        <label for="revcolorcheckbox">
-          <Text id="results.knobs.revColor">reverse?</Text>
-        </label>
-        <div class={style.colorLegend}>
-          <ColorScaleLegend colorScale={state.colorScale} />
+        <div class={style.labeledinput}>
+          <label for="graphselect">
+            <Text id="results.knobs.graphtype">Graph type</Text>
+          </label>
+          <select
+            id="graphselect"
+            name="graphselect"
+            onchange={handleGraphTypeChange}
+          >
+            <option selected value={GRAPH_TYPE.scatterplot}>
+              <Text id="results.knobs.scatterplot">scatterplot</Text>
+            </option>
+            <option value={GRAPH_TYPE.contour}>
+              <Text id="results.knobs.contour">contour</Text>
+            </option>
+            <option value={GRAPH_TYPE.heatmap}>
+              <Text id="results.knobs.heatmap">heatmap</Text>
+            </option>
+          </select>
         </div>
-      </div> */}
-
-      <div
-        id="dotsKnobs"
-        class={style.knobssubsection}
-        style={`display: ${hasDots ? "initial" : "none"}`}
-      >
-        <div class={style.slider}>
+      </div>
+      <div class={style.knob}>
+        <div class={style.labeledinput} style={hasDots ? "" : "display: none"}>
           <label for="dotsize">
-            <Text id="results.knobs.dotsize">Dot size:</Text>
+            <Text id="results.knobs.dotsize">Dot size</Text>
           </label>
           <input
             type="range"
@@ -170,9 +135,9 @@ export default function Knobs(props) {
           />
           {/* <span id="dotsizevalue">{dotSize}</span> */}
         </div>
-        <div class={style.slider}>
+        <div class={style.labeledinput} style={hasDots ? "" : "display: none"}>
           <label for="dotopacity">
-            <Text id="results.knobs.dotopacity">Dot opacity:</Text>
+            <Text id="results.knobs.dotopacity">Dot opacity</Text>
           </label>
           <input
             type="range"
@@ -187,15 +152,12 @@ export default function Knobs(props) {
           />
           {/* <span id="dotopacityvalue">{dotOpacity}</span> */}
         </div>
-      </div>
-      <div
-        id="contourknobs"
-        class={style.knobssubsection}
-        style={`display: ${hasContour ? "initial" : "none"}`}
-      >
-        <div class={style.slider}>
+        <div
+          class={style.labeledinput}
+          style={hasContour ? "" : "display: none"}
+        >
           <label for="bandwidthrange">
-            <Text id="results.knobs.bandwidthrange">Density bandwidth:</Text>
+            <Text id="results.knobs.bandwidthrange">Density bandwidth</Text>
           </label>
           <input
             type="range"
@@ -209,21 +171,25 @@ export default function Knobs(props) {
           />
         </div>
       </div>
-      <div id="axesselectors" class={style.knobssubsection}>
-        <div class={style.customchck}>
-          <input
-            type="checkbox"
-            id="customgraphcheckbox"
-            value="custom"
-            checked={state.customViz}
-            onclick={handleWantsCustomGraphClick}
-          />
-          <label for="customgraphcheckbox">
-            <Text id="results.knobs.custom">Custom axes:</Text>
-          </label>
-        </div>
-        <div style={`display: ${state.customViz ? "inherit" : "none"}`}>
-          <div class={style.knobselect}>
+      <div>
+        <input
+          type="checkbox"
+          id="customgraphcheckbox"
+          value="custom"
+          checked={state.customViz}
+          onclick={handleWantsCustomGraphClick}
+        />
+        <label for="customgraphcheckbox">
+          <Text id="results.knobs.custom">Custom axes</Text>
+        </label>
+      </div>
+      <div
+        id="axesselectors"
+        class={style.knob}
+        style={state.customViz ? "" : "display: none"}
+      >
+        <div>
+          <div class={style.labeledinput}>
             <label for="xselect">
               <Text id="results.knobs.horizontal">Horizontal axis:</Text>
             </label>
@@ -241,7 +207,9 @@ export default function Knobs(props) {
                 ))}
             </select>
           </div>
-          <div class={style.knobselect}>
+        </div>
+        <div>
+          <div class={style.labeledinput}>
             <label for="yselect">
               <Text id="results.knobs.vertical">Vertical axis:</Text>
             </label>
@@ -261,11 +229,15 @@ export default function Knobs(props) {
           </div>
         </div>
       </div>
-      <div id="dataselectors" class={style.knobssubsection}>
+      <div id="dataselectors" class={style.knob}>
         <p>
-          <Text id="results.knobs.showdata">Show answers collected from:</Text>{" "}
+          <Text id="results.knobs.showdata">
+            Showing answers collected from
+          </Text>{" "}
+          {totalRespondants}{" "}
+          <Text id="results.knobs.respondants">respondants</Text>
         </p>
-        <div class={style.customchck}>
+        <div>
           <input
             type="checkbox"
             id="aga"
@@ -281,7 +253,7 @@ export default function Knobs(props) {
             </Text>
           </label>
         </div>
-        <div class={style.customchck}>
+        <div>
           <input
             type="checkbox"
             id="ba"
@@ -297,7 +269,7 @@ export default function Knobs(props) {
             </Text>
           </label>
         </div>
-        <div class={style.customchck}>
+        <div>
           <input
             type="checkbox"
             id="enforms"
@@ -310,7 +282,7 @@ export default function Knobs(props) {
             <Text id="results.knobs.engforms">English questionnaires</Text>
           </label>
         </div>
-        <div class={style.customchck}>
+        <div>
           <input
             type="checkbox"
             id="frforms"
@@ -324,13 +296,7 @@ export default function Knobs(props) {
           </label>
         </div>
       </div>
-      <div>
-        <p>
-          <span>{totalRespondants}</span>{" "}
-          <Text id="results.knobs.respondants">respondants</Text>
-        </p>
-      </div>
-      <div>
+      <div class={style.knob}>
         <button type="button" onclick={handleResetClick}>
           <Text id="results.knobs.reset">Reset</Text>
         </button>

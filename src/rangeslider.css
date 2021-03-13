@@ -1,6 +1,5 @@
 input[type="range"] {
   -webkit-appearance: none;
-  margin: 1em 1em;
   width: var(--track-width);
 }
 

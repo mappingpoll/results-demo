@@ -3,7 +3,7 @@ import { h } from "preact";
 import { LanguageContextProvider } from "./context/language-context";
 import { MobileContextProvider } from "./context/mobile-context";
 import Results from "./components/results";
-import "./style.css";
+import "./index.css";
 
 export default function App() {
   return (

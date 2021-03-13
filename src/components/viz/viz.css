@@ -15,8 +15,8 @@
   grid-column-end: -1;
   width: 100%;
   height: auto;
-  justify-self: stretch;
-  align-self: stretch;
+  /* justify-self: stretch;
+  align-self: stretch; */
 }
 
 /* GRAPH LABELS */
@@ -121,19 +121,27 @@
     width: 14em;
   }
   .top {
-    transform: translate(0, -4em);
+    transform: translate(0, -3.5em);
   }
   .bottom {
-    transform: translate(0, 4em);
+    transform: translate(0, 3em);
   }
+
   .right,
   .left {
-    justify-self: inherit;
-    width: 24em;
-    transform: translate(-11.5em) rotate(270deg);
+    justify-self: initial;
+    width: 20rem;
   }
+
+  .left {
+    transform: translate(-10em) rotate(270deg);
+  }
+  .right {
+    transform: translate(-10.5em) rotate(270deg);
+  }
+
   .vizContainer {
-    grid-template-rows: 10% auto 10%;
-    /* grid-template-columns: 10% auto 10%; */
+    /* grid-template-rows: 10% auto 10%; */
+    grid-template-columns: 10% auto 10%;
   }
 }
