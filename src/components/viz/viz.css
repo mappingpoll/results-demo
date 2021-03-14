@@ -1,11 +1,14 @@
 .vizContainer {
+  position: relative;
+  width: 100%;
+  /* square div: https://dev.to/tchaflich/a-width-responsive-perfect-square-in-pure-css-3dao */
+  padding-bottom: 100%;
   display: grid;
   grid-template-rows: 10% auto 10%;
   grid-template-columns: 5% auto 5%;
 
   justify-content: center;
   align-items: center;
-  margin-bottom: 15em;
 }
 
 .viz {
