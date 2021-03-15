@@ -5,13 +5,15 @@ import { useLanguageContext } from "../context/language-context";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
+import { useState } from "preact/hooks";
 
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
+  let [wantsChooseRespondents, setWantsChooseRespondents] = useState(false);
   const { swapLang } = useLanguageContext();
 
   // ALIASES
-  const totalRespondants = state.data?.length;
+  const totalRespondents = state.data?.length;
   const graphType = state.options.graph;
 
   // CONDITIONALS
@@ -19,6 +21,8 @@ export default function Knobs(props) {
     graphType === GRAPH_TYPE.scatterplot ||
     graphType === GRAPH_TYPE.contourScatterplot ||
     graphType === GRAPH_TYPE.density;
+
+  const isBrushed = Object.keys(state.brushMap).length > 0;
   // const isHeatmap = graphType === GRAPH_TYPE.heatmap;
 
   // const hasColor =
@@ -90,7 +94,7 @@ export default function Knobs(props) {
 
   return (
     <div class={style.knobs}>
-      <div class={style.knob}>
+      <div class={`${style.knob} ${style["lang-swap"]}`}>
         <a href="#" onclick={() => swapLang()}>
           <Text id="language">Français</Text>
         </a>
@@ -171,72 +175,24 @@ export default function Knobs(props) {
           />
         </div>
       </div>
-      <div>
+      <div class={style.knob}>
         <input
           type="checkbox"
-          id="customgraphcheckbox"
-          value="custom"
-          checked={state.customViz}
-          onclick={handleWantsCustomGraphClick}
+          id="dataselectors-checkbox"
+          checked={wantsChooseRespondents}
+          onclick={() => setWantsChooseRespondents(!wantsChooseRespondents)}
         />
-        <label for="customgraphcheckbox">
-          <Text id="results.knobs.custom">Custom axes</Text>
+        <label for="dataselectors-checkbox">
+          <Text id="results.knobs.chooseRespondents">
+            Choose respondents...
+          </Text>
         </label>
       </div>
       <div
-        id="axesselectors"
+        id="dataselectors"
         class={style.knob}
-        style={state.customViz ? "" : "display: none"}
+        style={wantsChooseRespondents ? "" : "display: none"}
       >
-        <div>
-          <div class={style.labeledinput}>
-            <label for="xselect">
-              <Text id="results.knobs.horizontal">Horizontal axis:</Text>
-            </label>
-            <select
-              id="xselect"
-              onchange={handleXSelectChange}
-              disabled={shouldDisableXAxisSelect}
-            >
-              <option value="">
-                <Text id="results.knobs.option">choose an option</Text>
-              </option>
-              {state.questions != null &&
-                state.questions.map((option, idx) => (
-                  <option value={`${idx}`}>{option}</option>
-                ))}
-            </select>
-          </div>
-        </div>
-        <div>
-          <div class={style.labeledinput}>
-            <label for="yselect">
-              <Text id="results.knobs.vertical">Vertical axis:</Text>
-            </label>
-            <select
-              id="yselect"
-              onchange={handleYSelectChange}
-              disabled={shouldDisableYAxisSelect}
-            >
-              <option value="">
-                <Text id="results.knobs.option">choose an option</Text>
-              </option>
-              {state.questions != null &&
-                state.questions.map((option, idx) => (
-                  <option value={`${idx}`}>{option}</option>
-                ))}
-            </select>
-          </div>
-        </div>
-      </div>
-      <div id="dataselectors" class={style.knob}>
-        <p>
-          <Text id="results.knobs.showdata">
-            Showing answers collected from
-          </Text>{" "}
-          {totalRespondants}{" "}
-          <Text id="results.knobs.respondants">respondants</Text>
-        </p>
         <div>
           <input
             type="checkbox"
@@ -296,6 +252,76 @@ export default function Knobs(props) {
           </label>
         </div>
       </div>
+      <div class={style.knob}>
+        <input
+          type="checkbox"
+          id="customgraphcheckbox"
+          value="custom"
+          checked={state.customViz}
+          onclick={handleWantsCustomGraphClick}
+        />
+        <label for="customgraphcheckbox">
+          <Text id="results.knobs.custom">
+            Combine questions into a custom diagram...
+          </Text>
+        </label>
+      </div>
+      <div
+        id="axesselectors"
+        class={style.knob}
+        style={state.customViz ? "" : "display: none"}
+      >
+        <div>
+          <div class={style.labeledinput}>
+            <label for="xselect">
+              <Text id="results.knobs.horizontal">Horizontal axis:</Text>
+            </label>
+            <select
+              id="xselect"
+              onchange={handleXSelectChange}
+              disabled={shouldDisableXAxisSelect}
+            >
+              <option value="">
+                <Text id="results.knobs.option">choose an option</Text>
+              </option>
+              {state.questions != null &&
+                state.questions.map((option, idx) => (
+                  <option value={`${idx}`}>{option}</option>
+                ))}
+            </select>
+          </div>
+        </div>
+        <div>
+          <div class={style.labeledinput}>
+            <label for="yselect">
+              <Text id="results.knobs.vertical">Vertical axis:</Text>
+            </label>
+            <select
+              id="yselect"
+              onchange={handleYSelectChange}
+              disabled={shouldDisableYAxisSelect}
+            >
+              <option value="">
+                <Text id="results.knobs.option">choose an option</Text>
+              </option>
+              {state.questions != null &&
+                state.questions.map((option, idx) => (
+                  <option value={`${idx}`}>{option}</option>
+                ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      <p>
+        Total = {totalRespondents}{" "}
+        <Text id="results.knobs.respondents">respondents</Text>
+        {isBrushed && (
+          <span>
+            &nbsp;({Object.keys(state.brushMap).length}
+            &nbsp;<Text id="results.knobs.selected">selected</Text>)
+          </span>
+        )}
+      </p>
       <div class={style.knob}>
         <button type="button" onclick={handleResetClick}>
           <Text id="results.knobs.reset">Reset</Text>
