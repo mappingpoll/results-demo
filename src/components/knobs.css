@@ -47,14 +47,21 @@ input[type="checkbox"] {
 
 @media only screen and (max-device-width: 414px) {
   .knobs {
+    position: static;
     padding: 0 0.5rem;
   }
+
+  .lang-swap {
+    position: static;
+  }
+
   .knob > label {
     padding-left: 1rem;
   }
+
   .labeledinput > label {
     margin-bottom: 0.5em;
-    flex-basis: initial;
+    flex-basis: 2rem;
     white-space: nowrap;
   }
 

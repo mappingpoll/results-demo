@@ -1,4 +1,4 @@
-import { interpolateRgbBasis } from "d3";
+import { interpolateGreys, interpolateRgbBasis } from "d3";
 
 export const NA_SYMBOL = "NA";
 
@@ -19,6 +19,7 @@ export const COLOR_SCHEME = {
   coolwarm: "coolwarm",
   nicolas: "nicolas",
   nicolas2: "nicolas2",
+  nicolas3: "nicolas3",
 };
 
 export const CUSTOM_COLORS = {
@@ -41,22 +42,23 @@ export const CUSTOM_COLORS = {
     "#d65da4",
     "#640700",
   ]),
+  nicolas3: interpolateRgbBasis(["#eeeeee", "#272727"]),
 };
 export const DEFAULT_DOT_COLOR = "black";
-export const DEFAULT_COLOR_SCHEME = COLOR_SCHEME.nicolas2;
+export const DEFAULT_COLOR_SCHEME = COLOR_SCHEME.nicolas3;
 export const DEFAULT_GRAPH_TYPE = GRAPH_TYPE.scatterplot;
 export const DEFAULT_DOT_SIZE = 18;
 export const DEFAULT_DOT_OPACITY = 0.13;
 export const HIGHLIGHT_OPACITY = 1;
-export const HIGHTLIGHT_COLOR = "red";
+export const HIGHLIGHT_COLOR = "red";
 export const DEFAULT_COLOR_MID = 1;
 export const DEFAULT_CANVAS_WIDTH = 1000;
 export const DEFAULT_CANVAS_HEIGHT = 1000;
 export const DEFAULT_CANVAS_MARGIN = {
-  top: 25,
-  right: 25,
-  bottom: 25,
-  left: 25,
+  top: 30,
+  bottom: 30,
+  right: 100,
+  left: 100,
 };
 
 // should be same as --track-width, --track-height, etc in src/style/index.css
@@ -81,9 +83,15 @@ function rangeDiscreet(range) {
 export const DOMAIN_DISCREET = rangeDiscreet(DOMAIN);
 export const AXES_DOMAIN_DISCREET = rangeDiscreet(AXES_DOMAIN);
 export const ORIGIN = {
-  x: MARGIN.left + (DEFAULT_CANVAS_WIDTH - MARGIN.left - MARGIN.right) / 2,
-  y: MARGIN.top + (DEFAULT_CANVAS_HEIGHT - MARGIN.top - MARGIN.bottom) / 2,
+  x: MARGIN.left + DEFAULT_CANVAS_WIDTH / 2,
+  y: MARGIN.top + DEFAULT_CANVAS_HEIGHT / 2,
 };
+export const VIEWBOX = [
+  0,
+  0,
+  MARGIN.left + DEFAULT_CANVAS_WIDTH + MARGIN.right,
+  MARGIN.top + DEFAULT_CANVAS_HEIGHT + MARGIN.bottom,
+];
 
 export const INITIAL_STATE = {
   data: null,

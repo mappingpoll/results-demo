@@ -1,72 +1,53 @@
 .vizContainer {
   position: relative;
   width: 100%;
-  /* square div: https://dev.to/tchaflich/a-width-responsive-perfect-square-in-pure-css-3dao */
-  padding-bottom: 100%;
-  display: grid;
-  grid-template-rows: 10% auto 10%;
-  grid-template-columns: 5% auto 5%;
-
-  justify-content: center;
-  align-items: center;
+  /* border: 1px solid red; */
 }
 
 .viz {
-  grid-row-start: 1;
-  grid-row-end: -1;
-  grid-column-start: 1;
-  grid-column-end: -1;
   width: 100%;
   height: auto;
-  /* justify-self: stretch;
-  align-self: stretch; */
 }
 
 /* GRAPH LABELS */
 
 .label {
+  position: absolute;
   text-align: center;
-  text-shadow: 1px 1px white;
-  z-index: 1;
+  text-shadow: -1px -1px white, -1px 1px white, 1px 1px white, 1px -1px white;
+
   user-select: none;
+  /* border: 1px solid blue; */
 }
 
 .top,
 .bottom {
-  grid-column: 2;
   max-width: 28em;
-  margin: 0 auto;
 }
 
 .top {
-  grid-row: 1;
-  padding-top: 2em;
-  align-self: start;
+  bottom: 85%;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .bottom {
-  grid-row: 3;
-  padding-bottom: 2em;
-  align-self: end;
-}
-
-.left,
-.right {
-  width: 8em;
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .left {
-  grid-row: 2;
-  grid-column: 1;
-  justify-self: start;
-  transform: translate(-2em);
+  top: 50%;
+  right: 85%;
+  transform: translate(0, -50%);
 }
 .right {
-  grid-row: 2;
-  grid-column: 3;
-  justify-self: end;
-  transform: translate(2em);
+  top: 50%;
+  left: 85%;
+  transform: translate(0, -50%);
 }
+
 /* SCATTERPLOTS */
 
 .dot {
@@ -119,32 +100,17 @@
     font-size: 0.9em;
   }
 
-  .top,
-  .bottom {
-    width: 14em;
-  }
-  .top {
-    transform: translate(0, -3.5em);
-  }
-  .bottom {
-    transform: translate(0, 3em);
-  }
-
   .right,
   .left {
-    justify-self: initial;
-    width: 20rem;
+    top: 0;
+    bottom: 0;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
   }
-
   .left {
-    transform: translate(-10em) rotate(270deg);
+    right: 80%;
   }
   .right {
-    transform: translate(-10.5em) rotate(270deg);
-  }
-
-  .vizContainer {
-    /* grid-template-rows: 10% auto 10%; */
-    grid-template-columns: 10% auto 10%;
+    left: 80%;
   }
 }

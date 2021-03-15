@@ -42,7 +42,8 @@
       "respondents": "répondant.e.s",
       "reset": "Réinitialiser"
     },
-    "intro": "<h1>Exercice de cartographie:<br />Résultats</h1><p>«Exercice de cartographie» est une œuvre que j'ai conçue dans le but d'interroger les visiteurs·euses en lien avec une variété de questions existentielles. J'ai inclu cette œuvre dans deux expositions: le Sobey Art Award Exhibition à la Art Gallery of Alberta, Edmonton (5 octobre 2019 au 5 janvier 2020), et «Positions» à la Galerie Bradley Ertaskiran, Montréal (24 janvier au 7 mars 2020).</p><p>Les visiteurs·euses étaient invité·e·s à s'asseoir et à remplir un questionnaire papier, dans lequel on devait indiquer sa position par un point sur une série de diagrammes.</p><p>Voici donc les résultats. Dans les nuages de points (la présentation par défaut), chaque point représente la réponse d'un·e participant·e. En tout, 1222 personnes ont participé.</p>",
+    "intro": "<h1>Exercice de cartographie</h1><p>Dans deux de mes récentes expositions, j'ai invité les visiteurs·euses à prendre quelques minutes pour remplir un questionnaire papier comprenant une variété de questions existentielles.</p><p>Les participant·e·s devaient indiquer leur position en traçant un point sur une série de diagrammes.</p><h1>Résultats</h1><p>Au total, j'ai reçu 1222 questionnaires individuels.</p><p>Dans les graphiques en nuage de points ci-dessous (présentation par défaut), chaque point correspond à la réponse d'un·e participant·e.</p><p>Les questions apparaissent exactement comme sur le questionnaire original.</p>",
+    "footer": "<h2>Comment suivre certains répondants</h2><p>Vous pouvez tracer un rectangle autour d'une sélection de points, et vous verrez alors comment les participants correspondants à ces points ont répondu d'une question à l'autre.</p>",
     "customgraph": "Graphique sur mesure:",
     "part": "Partie",
     "part1": {

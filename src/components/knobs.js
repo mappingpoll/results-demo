@@ -112,11 +112,11 @@ export default function Knobs(props) {
             <option selected value={GRAPH_TYPE.scatterplot}>
               <Text id="results.knobs.scatterplot">scatterplot</Text>
             </option>
-            <option value={GRAPH_TYPE.contour}>
-              <Text id="results.knobs.contour">contour</Text>
-            </option>
             <option value={GRAPH_TYPE.heatmap}>
               <Text id="results.knobs.heatmap">heatmap</Text>
+            </option>
+            <option value={GRAPH_TYPE.contour}>
+              <Text id="results.knobs.contour">contour</Text>
             </option>
           </select>
         </div>

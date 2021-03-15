@@ -3,6 +3,7 @@ import {
   UNCERTAINTY,
   DEFAULT_CANVAS_HEIGHT,
   DEFAULT_CANVAS_WIDTH,
+  VIEWBOX,
 } from "../../constants";
 import { xScale, yScale, xBand, yBand } from "../../lib/scales";
 import { calcHeatmap, getColorScale } from "../../lib/viztools";
@@ -62,9 +63,9 @@ export default function Heatmap({ data, columns, options }) {
     <>
       <svg
         ref={ref}
-        viewBox={`0, 0, ${DEFAULT_CANVAS_WIDTH}, ${DEFAULT_CANVAS_HEIGHT}`}
-        width={DEFAULT_CANVAS_WIDTH}
-        height={DEFAULT_CANVAS_HEIGHT}
+        viewBox={VIEWBOX.join(",")}
+        width={VIEWBOX[2]}
+        height={VIEWBOX[3]}
         style="width: 100%; height: auto;"
       />
     </>

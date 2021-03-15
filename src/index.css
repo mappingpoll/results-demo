@@ -33,39 +33,6 @@
 
 @import "rangeslider.css";
 
-@font-face {
-  font-family: "Atkinson";
-  src: url("./assets/fonts/Atkinson-Hyperlegible-Regular-102.woff")
-      format("woff"),
-    url("./assets/fonts/Atkinson-Hyperlegible-Regular-102.ttf") format("ttf");
-  font-weight: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Atkinson";
-  src: url("./assets/fonts/Atkinson-Hyperlegible-Bold-102.woff") format("woff"),
-    url("./assets/fonts/Atkinson-Hyperlegible-Bold-102.ttf") format("ttf");
-  font-weight: bold;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Atkinson";
-  src: url("./assets/fonts/Atkinson-Hyperlegible-Italic-102.woff")
-      format("woff"),
-    url("./assets/fonts/Atkinson-Hyperlegible-Italic-102.ttf") format("ttf");
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Atkinson";
-  src: url("./assets/fonts/Atkinson-Hyperlegible-BoldItalic-102.woff")
-      format("woff"),
-    url("./assets/fonts/Atkinson-Hyperlegible-BoldItalic-102.ttf") format("ttf");
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
-
 html,
 body {
   height: 100%;
@@ -79,7 +46,7 @@ body {
 
 * {
   box-sizing: border-box;
-  font-family: "Atkinson";
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 select,

@@ -57,29 +57,23 @@ export default function Results() {
       )}
       <div class={style.intro}>
         <MarkupText id="results.intro">
-          <h1>
-            Mapping Exercise:
-            <br />
-            Results
-          </h1>
+          <h1>Mapping Exercise:</h1>
           <p>
-            “Mapping Exercise” is a work that I made in order to poll viewers on
-            a variety of existential questions. I included the work in two
-            exhibitions: the Sobey Art Award Exhibition at the Art Gallery of
-            Alberta, Edmonton (October 5 2019 to January 5 2020), and
-            “Positions” at Galerie Bradley Ertaskiran, Montreal (January 24 to
-            March 7, 2020).
+            In two of my recent exhibitions, I invited visitors to take a few
+            minutes to fill a paper questionnaire comprising a variety of
+            existential questions.
           </p>
           <p>
-            Visitors were invited to sit down and fill a paper questionnaire, in
-            which they were asked to mark their position with a dot on a series
-            of diagrams.
+            Participants were asked to mark their position with a dot on a
+            series of diagrams.
           </p>
+          <h1>Results</h1>
+          <p>In total, I received 1222 individual questionnaires.</p>
           <p>
-            Here are the results. In the scatterplot graphs (the default
-            presentation), each dot represents the answer of one participant. In
-            total, 1222 persons participated.
+            In the scatterplot graphs below (default presentation), each dot
+            corresponds to the answer of one participant.
           </p>
+          <p>The questions appear exactly as on the original questionnaire.</p>
         </MarkupText>
       </div>
       <div class={style.map}>
@@ -213,6 +207,18 @@ export default function Results() {
           />
         </div>
       </div>
+      <footer>
+        <div>
+          <MarkupText id="results.footer">
+            <h2>Track specific respondents</h2>
+            <p>
+              You can draw a rectangle around a selection of dots, and you will
+              then see how the participants corresponding to those dots answered
+              from one question to the next.
+            </p>
+          </MarkupText>
+        </div>
+      </footer>
     </div>
   );
 }
