@@ -6,6 +6,8 @@ import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
 import { useState } from "preact/hooks";
+// eslint-disable-next-line no-duplicate-imports
+import "./knobs.css";
 
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
@@ -100,7 +102,7 @@ export default function Knobs(props) {
         </a>
       </div>
       <div class={style.knob}>
-        <div class={style.labeledinput}>
+        <div class={`${style.graphselect} ${style.labeledinput}`}>
           <label for="graphselect">
             <Text id="results.knobs.graphtype">Graph type</Text>
           </label>
@@ -117,6 +119,9 @@ export default function Knobs(props) {
             </option>
             <option value={GRAPH_TYPE.contour}>
               <Text id="results.knobs.contour">contour</Text>
+            </option>
+            <option value={GRAPH_TYPE.colorContour}>
+              <Text id="results.knobs.colorContour">topography</Text>
             </option>
           </select>
         </div>
@@ -156,7 +161,7 @@ export default function Knobs(props) {
           />
           {/* <span id="dotopacityvalue">{dotOpacity}</span> */}
         </div>
-        <div
+        {/* <div
           class={style.labeledinput}
           style={hasContour ? "" : "display: none"}
         >
@@ -173,7 +178,7 @@ export default function Knobs(props) {
             value={state.options.contourBandwidth}
             onchange={handleContourBandwidthChange}
           />
-        </div>
+        </div> */}
       </div>
       <div class={style.knob}>
         <input
@@ -184,13 +189,13 @@ export default function Knobs(props) {
         />
         <label for="dataselectors-checkbox">
           <Text id="results.knobs.chooseRespondents">
-            Choose respondents...
+            Show respondents from...
           </Text>
         </label>
       </div>
       <div
         id="dataselectors"
-        class={style.knob}
+        class={`${style.knob} ${style.chooseresp}`}
         style={wantsChooseRespondents ? "" : "display: none"}
       >
         <div>
@@ -312,21 +317,26 @@ export default function Knobs(props) {
           </div>
         </div>
       </div>
-      <p>
-        Total = {totalRespondents}{" "}
-        <Text id="results.knobs.respondents">respondents</Text>
-        {isBrushed && (
-          <span>
-            &nbsp;({Object.keys(state.brushMap).length}
-            &nbsp;<Text id="results.knobs.selected">selected</Text>)
-          </span>
-        )}
-      </p>
+      {state.newBrushing && (
+        <p class={style.total}>
+          Total = {totalRespondents}{" "}
+          <Text id="results.knobs.respondents">respondents</Text>
+          {isBrushed && (
+            <span>
+              &nbsp;({Object.keys(state.brushMap).length}
+              &nbsp;<Text id="results.knobs.selected">selected</Text>)
+            </span>
+          )}
+        </p>
+      )}
       <div class={style.knob}>
         <button type="button" onclick={handleResetClick}>
           <Text id="results.knobs.reset">Reset</Text>
         </button>
       </div>
+      {/* <div class={style.showbar}>
+        <p>Show visualization options</p>
+      </div> */}
     </div>
   );
 }

@@ -84,7 +84,10 @@ export async function reducer(state, action) {
     }
     case "BRUSH": {
       const brushMap = action.payload;
-      return assign({ ...state }, { brushMap });
+      return assign({ ...state }, { brushMap, newBrushing: true });
+    }
+    case "OLDBRUSH": {
+      return assign({ ...state }, { newBrushing: false });
     }
 
     default:

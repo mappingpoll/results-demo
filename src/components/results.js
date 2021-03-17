@@ -33,6 +33,10 @@ export default function Results() {
     }
   }
 
+  if (state.newBrushing) {
+    setTimeout(() => dispatch({ type: "OLDBRUSH" }), 6000);
+  }
+
   // const visuals = state.standardColumnSet.map(columns => (
   //   <Viz state={state} columns={columns} callback={handleVizInput} />
   // ));
@@ -40,21 +44,6 @@ export default function Results() {
   // JSX
   return (
     <div class={style.results}>
-      <Knobs reducer={{ state, dispatch }} />
-      {shouldShowCustomViz && (
-        <div class={style.map}>
-          <div class={style.maptitle}>
-            <Text id="results.customgraph">Custom graph:</Text>
-          </div>
-          <div class={style.mapviz}>
-            <Viz
-              state={state}
-              columns={state.vizColumns}
-              callback={handleVizInput}
-            />
-          </div>
-        </div>
-      )}
       <div class={style.intro}>
         <MarkupText id="results.intro">
           <h1>Mapping Exercise:</h1>
@@ -76,6 +65,21 @@ export default function Results() {
           <p>The questions appear exactly as on the original questionnaire.</p>
         </MarkupText>
       </div>
+      <Knobs reducer={{ state, dispatch }} />
+      {shouldShowCustomViz && (
+        <div class={style.map}>
+          <div class={style.maptitle}>
+            <Text id="results.customgraph">Custom graph:</Text>
+          </div>
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.vizColumns}
+              callback={handleVizInput}
+            />
+          </div>
+        </div>
+      )}
       <div class={style.map}>
         <div class={style.maptitle}>
           <div>

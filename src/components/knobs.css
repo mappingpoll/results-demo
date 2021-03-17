@@ -7,7 +7,60 @@
   background-color: var(--background-color);
   border-bottom: 18px solid transparent;
   border-image: url(../assets/little_wave_line.png) 100 repeat;
-  z-index: 100;
+  z-index: 500;
+  transition: top 500ms;
+}
+
+.knobs:hover {
+  top: 0;
+}
+
+.knobs * {
+  font-size: 0.8rem;
+}
+
+.showbar {
+  position: fixed;
+  height: 5rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.2rem 0.2rem;
+  border-bottom: 18px solid transparent;
+  border-image: url(../assets/little_wave_line.png) 100 repeat;
+}
+.showbar p {
+  background: black;
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 2rem;
+}
+
+.total {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  display: inline-block;
+  background: black;
+  color: white;
+  font-weight: bold;
+  padding: 0 0.2rem;
+  animation: disappear 3s;
+  animation-delay: 3s;
+}
+
+.total,
+.total > span {
+  font-size: 2rem;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .knob {
@@ -30,6 +83,18 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
+  padding-left: 2rem;
+}
+
+.chooseresp {
+  padding-left: 2rem;
+}
+
+.graphselect {
+  padding-left: inherit;
+}
+.graphselect > label {
+  flex-basis: 12rem !important;
 }
 
 .labeledinput > label {
@@ -55,6 +120,9 @@ input[type="checkbox"] {
     position: static;
   }
 
+  .chooseresp {
+    padding-left: inherit;
+  }
   .knob > label {
     padding-left: 1rem;
   }
