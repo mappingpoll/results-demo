@@ -334,7 +334,7 @@ export default function Knobs(props) {
           <Text id="results.knobs.reset">Reset</Text>
         </button>
       </div>
-      {/* <div class={style.showbar}>
+      {/* <div class={style.showba}>
         <p>Show visualization options</p>
       </div> */}
     </div>
