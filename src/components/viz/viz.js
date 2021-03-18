@@ -15,6 +15,7 @@ export function Viz({ state, columns, callback }) {
     <div class={style.vizContainer}>
       <div class={style.viz}>
         <SVG
+          numbers={state.regionCounts}
           data={data}
           columns={columns}
           colorScale={colorScale}

@@ -7,31 +7,37 @@ import {
   cleanQuestions,
   getPairwiseColumns,
   getCustomColumns,
+  applyJitter,
+  countGraphRegions,
 } from "./lib/data-manipulation";
 import { getColorScale } from "./lib/viztools";
 
 const CSV_PATH = "./assets/data/all_maps.csv";
 
-let fullData;
+let rawData;
+let jitteryData;
 
 export async function reducer(state, action) {
   switch (action.type) {
     case "RESET":
       state = INITIAL_STATE;
     case "FETCH_DATA": {
-      if (fullData == null) {
+      if (jitteryData == null) {
         const data = await parseLocalCSV(CSV_PATH);
-        fullData = data;
+        rawData = data;
+        jitteryData = applyJitter(rawData);
       }
 
-      const questions = cleanQuestions(fullData);
+      const questions = cleanQuestions(jitteryData);
+      const regionCounts = countGraphRegions(rawData, questions);
       const vizColumns = getPairwiseColumns(questions);
       const colorScale = getColorScale(state.options.color, DOMAIN);
       const standardColumnSet = vizColumns;
       return assign(
         { ...state },
         {
-          data: fullData,
+          data: jitteryData,
+          regionCounts,
           questions,
           vizColumns,
           colorScale,
@@ -42,7 +48,7 @@ export async function reducer(state, action) {
     case "FILTER_DATASET": {
       const options = { ...state.options };
       options.dataset = action.payload.dataset;
-      const data = filterDataByDataset(fullData, options.dataset);
+      const data = filterDataByDataset(jitteryData, options.dataset);
       return assign({ ...state }, { data, options });
     }
     case "TOGGLE_REV_COLOR": {

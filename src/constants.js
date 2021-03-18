@@ -1,4 +1,4 @@
-import { interpolateGreys, interpolateRgbBasis } from "d3";
+import { interpolateRgbBasis } from "d3";
 
 export const NA_SYMBOL = "NA";
 
@@ -9,6 +9,7 @@ export const GRAPH_TYPE = {
   contour: "contour",
   colorContour: "color contour",
   contourScatterplot: "contour scatterplot",
+  numbers: "numbers",
 };
 export const COLOR_SCHEME = {
   greyscale: "interpolateGreys",
@@ -96,6 +97,7 @@ export const VIEWBOX = [
 export const INITIAL_STATE = {
   data: null,
   filteredDataset: null,
+  regionCounts: null,
   questions: null,
   vizColumns: [],
   standardColumnSet: [],

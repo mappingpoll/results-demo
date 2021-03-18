@@ -1,6 +1,5 @@
 import { csv } from "d3-fetch";
-import { NA_SYMBOL, UNCERTAINTY } from "../constants";
-import jitter from "./jitter";
+import { NA_SYMBOL } from "../constants";
 
 // load & parse the result data asynchronously
 export async function parseLocalCSV(path) {
@@ -9,7 +8,7 @@ export async function parseLocalCSV(path) {
     const row = d;
     for (let col in row) {
       if (col !== "poll" && col != "Language" && row[col] !== NA_SYMBOL) {
-        row[col] = +row[col] + jitter(UNCERTAINTY);
+        row[col] = +row[col];
       }
     }
     return row;

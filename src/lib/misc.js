@@ -5,6 +5,7 @@ import ContourScatterplot from "../components/viz/contour-scatterplot";
 import DensityScatterplot from "../components/viz/density-scatterplot";
 import Heatmap from "../components/viz/heatmap";
 import Scatterplot from "../components/viz/scatterplot";
+import Numbers from "../components/viz/numbers";
 
 export const isChosenAxis = a => a != "";
 
@@ -43,6 +44,8 @@ export function graphType2Component(graphType) {
       return ContourChart;
     case GRAPH_TYPE.colorContour:
       return ColorContour;
+    case GRAPH_TYPE.numbers:
+      return Numbers;
     default: {
       const Fallback = () => <span>nothing to display</span>;
       return Fallback;

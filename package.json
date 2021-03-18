@@ -24,6 +24,7 @@
   "dependencies": {
     "d3": "^6.6.0",
     "lodash.assign": "^4.2.0",
+    "lodash.clonedeep": "^4.5.0",
     "preact": "^10.1.0",
     "preact-i18n": "^2.3.0-preactx",
     "preact-render-to-string": "^5.1.2"

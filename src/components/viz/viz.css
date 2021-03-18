@@ -95,6 +95,11 @@
   right: 0;
 }
 
+svg {
+  font-size: 1.4rem;
+  text-anchor: middle;
+}
+
 @media only screen and (max-device-width: 414px) {
   .label {
     font-size: 0.9em;

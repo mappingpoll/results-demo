@@ -22,6 +22,7 @@
       "contour": "contour",
       "colorContour": "topographie",
       "heatmap": "heatmap",
+      "numbers": "décomptes",
       "revColor": "inversé?",
       "dotsize": "Taille des points",
       "dotopacity": "Opacité des points",
