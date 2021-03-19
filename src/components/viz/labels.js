@@ -9,6 +9,6 @@ export function appendLabel(svg, textContent, x, y) {
     .append("text")
     .text(textContent)
     .style("stroke", "white")
-    .style("stroke-width", "8");
+    .style("stroke-width", "25");
   label.append("text").text(textContent).style("fill", "black");
 }

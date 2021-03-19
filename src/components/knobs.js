@@ -118,7 +118,7 @@ export default function Knobs(props) {
               <Text id="results.knobs.heatmap">heatmap</Text>
             </option>
             <option value={GRAPH_TYPE.numbers}>
-              <Text id="results.knobs.heatmap">numbers</Text>
+              <Text id="results.knobs.numbers">numbers</Text>
             </option>
 
             <option value={GRAPH_TYPE.contour}>

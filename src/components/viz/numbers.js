@@ -8,7 +8,6 @@ import "./viz.css";
 export default function Numbers({ numbers, columns }) {
   let [x, y] = columns;
   const counts = numbers[x]; // same as numbers[y]
-  console.log(counts);
   const ref = useD3(
     svg => {
       // draw axes, columns
@@ -17,8 +16,31 @@ export default function Numbers({ numbers, columns }) {
       // add numbers
       // origin
       appendLabel(svg, counts.origin, 0, 0);
+      // quadrants
+      const getQuadrantTotal = quadrant =>
+        counts.quadrants[quadrant] + counts.outerQuadrants[quadrant];
+      const nw = getQuadrantTotal("nw");
+      const ne = getQuadrantTotal("ne");
+      const se = getQuadrantTotal("se");
+      const sw = getQuadrantTotal("sw");
+      appendLabel(svg, nw, -5, 5);
+      appendLabel(svg, ne, 5, 5);
+      appendLabel(svg, se, 5, -5);
+      appendLabel(svg, sw, -5, -5);
+
+      // axes
+      const getAxisTotal = cardinal =>
+        counts.axes[cardinal] + counts.outerAxes[cardinal];
+      const n = getAxisTotal("n");
+      const e = getAxisTotal("e");
+      const s = getAxisTotal("s");
+      const w = getAxisTotal("w");
+      appendLabel(svg, n, 0, 5);
+      appendLabel(svg, e, 5, 0);
+      appendLabel(svg, s, 0, -5);
+      appendLabel(svg, w, -5, 0);
     },
-    [columns]
+    [numbers, columns]
   );
 
   return (

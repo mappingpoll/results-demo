@@ -78,7 +78,6 @@ export function countGraphRegions(data, header) {
       if (typeof x === "number" && typeof y === "number") {
         // origin
         if (x === 0 && y === 0) {
-          console.log("tic");
           region.origin++;
           // quadrants
         } else if ([x, y].every(n => n >= -10 && n <= 10 && n !== 0)) {

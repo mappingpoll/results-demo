@@ -48,8 +48,10 @@ export async function reducer(state, action) {
     case "FILTER_DATASET": {
       const options = { ...state.options };
       options.dataset = action.payload.dataset;
-      const data = filterDataByDataset(jitteryData, options.dataset);
-      return assign({ ...state }, { data, options });
+      const filteredData = filterDataByDataset(rawData, options.dataset);
+      const jittery = applyJitter(filteredData);
+      const regionCounts = countGraphRegions(filteredData, state.questions);
+      return assign({ ...state }, { data: jittery, regionCounts, options });
     }
     case "TOGGLE_REV_COLOR": {
       const options = assign(state.options, {
