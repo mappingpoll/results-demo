@@ -108,7 +108,7 @@ export default function Knobs(props) {
       node.getBoundingClientRect().bottom - node.getBoundingClientRect().top
     );
     setKnobsHeight(height);
-  }, []);
+  }, [state, wantsChooseRespondents, state.customViz]);
 
   return (
     <div
