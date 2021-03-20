@@ -105,6 +105,9 @@ svg {
 }
 
 @media only screen and (max-device-width: 414px) {
+  .vizContainer {
+    width: 95%;
+  }
   .label {
     font-size: 0.9em;
   }

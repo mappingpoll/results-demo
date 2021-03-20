@@ -2,8 +2,6 @@
   --peach: #bd2d14;
 }
 .results {
-  /* overflow-x: hidden; */
-  /* padding-bottom: 1rem; */
 }
 
 .intro {
@@ -13,9 +11,6 @@
   background: linear-gradient(var(--peach) 85%, var(--background-color));
 }
 
-.intro h1,
-.intro p {
-}
 .intro h1,
 .intro p,
 footer h2,
@@ -105,16 +100,10 @@ footer::after {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-  .intro h1,
-  .intro p {
-    max-width: none;
-  }
   .intro h1 {
-    max-width: initial;
     font-size: 2rem;
   }
   .intro p {
-    /* text-align: justify; */
     font-size: 1.2rem;
   }
 

@@ -8,11 +8,13 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.5rem var(--content-lr-padding);
+  padding: 0.5rem 1rem 1rem;
+
   background-color: var(--background-color);
   border-bottom: 18px solid transparent;
   border-image: url(../assets/little_wave_line.png) 100 repeat;
   z-index: 500;
+
   transition: top 200ms ease;
 }
 
@@ -20,9 +22,51 @@
   font-size: 0.8rem;
 }
 
+.knob,
+.subknob {
+  max-width: var(--content-width);
+  margin: 0 auto 0.5rem;
+}
+
+.subknob {
+  padding-left: 2rem;
+}
+
+.labeled-input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.labeled-input > label {
+  flex-basis: 12rem;
+  white-space: nowrap;
+}
+
+.subknob > .labeled-input > label {
+  flex-basis: 10rem;
+}
+
+.labeled-input > input,
+.labeled-input > select {
+  max-width: var(--slider-width);
+}
+
+.labeled-checkbox {
+  text-indent: -1.4rem;
+  padding-left: 1.4rem;
+}
+
+input[type="checkbox"] {
+  margin-right: 0.4rem;
+}
+
 .showhide {
   position: absolute;
-  top: calc(100% - 1.4rem);
+  top: calc(100% - 1.2rem);
   bottom: -1rem;
   left: 0;
   right: 0;
@@ -30,72 +74,11 @@
   text-align: center;
   user-select: none;
 }
-.showhide a {
-  color: black;
-}
-
-.showbar {
-  position: fixed;
-  height: 5rem;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 0.2rem 0.2rem;
-  border-bottom: 18px solid transparent;
-  border-image: url(../assets/little_wave_line.png) 100 repeat;
-}
-.showbar p {
-  background: black;
-  color: white;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 2rem;
-}
-
-.knob {
-  margin: 0.75rem 0 1rem 0;
-}
-
-.knob > div {
-  margin: 0.5rem 0;
-}
 
 .lang-swap {
   position: absolute;
   top: 0.5rem;
   right: var(--content-lr-padding);
-}
-
-.labeledinput {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  padding-left: 2rem;
-}
-
-.chooseresp {
-  padding-left: 2rem;
-}
-
-.graphselect {
-  padding-left: inherit;
-}
-.graphselect > label {
-  flex-basis: 12rem !important;
-}
-
-.labeledinput > label {
-  flex-basis: 10rem;
-  white-space: nowrap;
-}
-.labeledinput > input,
-.labeledinput > select {
-  max-width: var(--slider-width);
-}
-
-input[type="checkbox"] {
-  margin-right: 0.4rem;
 }
 
 @media only screen and (max-device-width: 414px) {
@@ -115,15 +98,19 @@ input[type="checkbox"] {
     padding-left: 1rem;
   }
 
-  .labeledinput > label {
+  .labeled-input > label {
     margin-bottom: 0.5em;
     flex-basis: 2rem;
     white-space: nowrap;
   }
 
-  .labeledinput > input,
-  .labeledinput > select {
+  .labeled-input > input,
+  .labeled-input > select {
     max-width: 90%;
     margin: 0 auto;
+  }
+
+  .showhide {
+    display: none;
   }
 }

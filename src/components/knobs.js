@@ -5,7 +5,7 @@ import { useLanguageContext } from "../context/language-context";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
-import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
+import { useRef, useState } from "preact/hooks";
 // eslint-disable-next-line no-duplicate-imports
 import "./knobs.css";
 
@@ -121,16 +121,16 @@ export default function Knobs(props) {
       style={
         shouldShowKnobs
           ? "top: 0;"
-          : `top: calc(-${getKnobsHeight()}px + 2.4rem);`
+          : `top: calc(-${getKnobsHeight()}px + 2rem);`
       }
     >
-      <div class={`${style.knob} ${style["lang-swap"]}`}>
+      <div class={style["lang-swap"]}>
         <a href="#" onclick={() => swapLang()}>
           <Text id="language">Français</Text>
         </a>
       </div>
       <div class={style.knob}>
-        <div class={`${style.graphselect} ${style.labeledinput}`}>
+        <div class={style["labeled-input"]}>
           <label for="graphselect">
             <Text id="results.knobs.graphtype">Graph type</Text>
           </label>
@@ -158,8 +158,11 @@ export default function Knobs(props) {
           </select>
         </div>
       </div>
-      <div class={style.knob}>
-        <div class={style.labeledinput} style={hasDots ? "" : "display: none"}>
+      <div class={style.subknob}>
+        <div
+          class={style["labeled-input"]}
+          style={hasDots ? "" : "display: none"}
+        >
           <label for="dotsize">
             <Text id="results.knobs.dotsize">Dot size</Text>
           </label>
@@ -174,9 +177,11 @@ export default function Knobs(props) {
             onchange={handleDotSizeChange}
             disabled={shouldDisableDotSize}
           />
-          {/* <span id="dotsizevalue">{dotSize}</span> */}
         </div>
-        <div class={style.labeledinput} style={hasDots ? "" : "display: none"}>
+        <div
+          class={style["labeled-input"]}
+          style={hasDots ? "" : "display: none"}
+        >
           <label for="dotopacity">
             <Text id="results.knobs.dotopacity">Dot opacity</Text>
           </label>
@@ -191,26 +196,7 @@ export default function Knobs(props) {
             onchange={handleDotOpacityChange}
             disabled={shouldDisableDotOpacity}
           />
-          {/* <span id="dotopacityvalue">{dotOpacity}</span> */}
         </div>
-        {/* <div
-          class={style.labeledinput}
-          style={hasContour ? "" : "display: none"}
-        >
-          <label for="bandwidthrange">
-            <Text id="results.knobs.bandwidthrange">Density bandwidth</Text>
-          </label>
-          <input
-            type="range"
-            id="contourBandwitdh"
-            min="1"
-            max="100"
-            step="1"
-            name="contourBandwitdh"
-            value={state.options.contourBandwidth}
-            onchange={handleContourBandwidthChange}
-          />
-        </div> */}
       </div>
       <div class={style.knob}>
         <input
@@ -227,10 +213,10 @@ export default function Knobs(props) {
       </div>
       <div
         id="dataselectors"
-        class={`${style.knob} ${style.chooseresp}`}
+        class={style.subknob}
         style={wantsChooseRespondents ? "" : "display: none"}
       >
-        <div>
+        <div class={style["labeled-checkbox"]}>
           <input
             type="checkbox"
             id="aga"
@@ -246,7 +232,7 @@ export default function Knobs(props) {
             </Text>
           </label>
         </div>
-        <div>
+        <div class={style["labeled-checkbox"]}>
           <input
             type="checkbox"
             id="ba"
@@ -262,7 +248,7 @@ export default function Knobs(props) {
             </Text>
           </label>
         </div>
-        <div>
+        <div class={style["labeled-checkbox"]}>
           <input
             type="checkbox"
             id="enforms"
@@ -275,7 +261,7 @@ export default function Knobs(props) {
             <Text id="results.knobs.engforms">English questionnaires</Text>
           </label>
         </div>
-        <div>
+        <div class={style["labeled-checkbox"]}>
           <input
             type="checkbox"
             id="frforms"
@@ -305,54 +291,50 @@ export default function Knobs(props) {
       </div>
       <div
         id="axesselectors"
-        class={style.knob}
+        class={style.subknob}
         style={state.customViz ? "" : "display: none"}
       >
-        <div>
-          <div class={style.labeledinput}>
-            <label for="xselect">
-              <Text id="results.knobs.horizontal">Horizontal axis:</Text>
-            </label>
-            <select
-              id="xselect"
-              onchange={handleXSelectChange}
-              disabled={shouldDisableXAxisSelect}
-            >
-              <option value="">
-                <Text id="results.knobs.option">choose an option</Text>
-              </option>
-              {state.questions != null &&
-                state.questions.map((option, idx) => (
-                  <option value={`${idx}`}>{option}</option>
-                ))}
-            </select>
-          </div>
+        <div class={style["labeled-input"]}>
+          <label for="xselect">
+            <Text id="results.knobs.horizontal">Horizontal axis</Text>
+          </label>
+          <select
+            id="xselect"
+            onchange={handleXSelectChange}
+            disabled={shouldDisableXAxisSelect}
+          >
+            <option value="">
+              <Text id="results.knobs.option">choose an option</Text>
+            </option>
+            {state.questions != null &&
+              state.questions.map((option, idx) => (
+                <option value={`${idx}`}>{option}</option>
+              ))}
+          </select>
         </div>
-        <div>
-          <div class={style.labeledinput}>
-            <label for="yselect">
-              <Text id="results.knobs.vertical">Vertical axis:</Text>
-            </label>
-            <select
-              id="yselect"
-              onchange={handleYSelectChange}
-              disabled={shouldDisableYAxisSelect}
-            >
-              <option value="">
-                <Text id="results.knobs.option">choose an option</Text>
-              </option>
-              {state.questions != null &&
-                state.questions.map((option, idx) => (
-                  <option value={`${idx}`}>{option}</option>
-                ))}
-            </select>
-          </div>
+        <div class={style["labeled-input"]}>
+          <label for="yselect">
+            <Text id="results.knobs.vertical">Vertical axis</Text>
+          </label>
+          <select
+            id="yselect"
+            onchange={handleYSelectChange}
+            disabled={shouldDisableYAxisSelect}
+          >
+            <option value="">
+              <Text id="results.knobs.option">choose an option</Text>
+            </option>
+            {state.questions != null &&
+              state.questions.map((option, idx) => (
+                <option value={`${idx}`}>{option}</option>
+              ))}
+          </select>
         </div>
       </div>
-      <p class={style.total}>
+      <div class={style.knob}>
         Total = {totalRespondents}{" "}
         <Text id="results.knobs.respondents">respondents</Text>
-      </p>
+      </div>
 
       <div class={style.knob}>
         <button type="button" onclick={handleResetClick}>
