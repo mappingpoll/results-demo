@@ -1,22 +1,32 @@
 .knobs {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  bottom: calc(100% - 2.4rem);
   left: 0;
+  width: 100%;
   padding: 0.5rem 2rem;
   background-color: var(--background-color);
   border-bottom: 18px solid transparent;
   border-image: url(../assets/little_wave_line.png) 100 repeat;
   z-index: 500;
-  transition: top 500ms;
-}
-
-.knobs:hover {
-  top: 0;
+  transition: bottom 100ms ease-in;
 }
 
 .knobs * {
   font-size: 0.8rem;
+}
+
+.showhide {
+  position: absolute;
+  top: calc(100% - 1.4rem);
+  bottom: -1rem;
+  left: 0;
+  right: 0;
+  padding-top: 0.2rem;
+  text-align: center;
+  user-select: none;
+}
+.showhide a {
+  color: black;
 }
 
 .showbar {
@@ -34,33 +44,6 @@
   color: white;
   font-family: "Times New Roman", Times, serif;
   font-size: 2rem;
-}
-
-.total {
-  position: fixed;
-  left: 1rem;
-  bottom: 1rem;
-  display: inline-block;
-  background: black;
-  color: white;
-  font-weight: bold;
-  padding: 0 0.2rem;
-  animation: disappear 3s;
-  animation-delay: 3s;
-}
-
-.total,
-.total > span {
-  font-size: 2rem;
-}
-
-@keyframes disappear {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
 }
 
 .knob {

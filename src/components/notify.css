@@ -1,0 +1,31 @@
+.notif {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  display: inline-block;
+  background: black;
+  color: white;
+  font-weight: bold;
+  padding: 0 0.2rem;
+  opacity: 0;
+  animation: disappear 6s;
+}
+
+.notif,
+.notif > span {
+  font-size: 2rem;
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

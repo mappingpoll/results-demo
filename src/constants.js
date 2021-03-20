@@ -97,7 +97,7 @@ export const VIEWBOX = [
 export const INITIAL_STATE = {
   data: null,
   filteredDataset: null,
-  regionCounts: null,
+  standardRegionCounts: null,
   questions: null,
   vizColumns: [],
   standardColumnSet: [],

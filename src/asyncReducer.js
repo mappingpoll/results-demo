@@ -1,4 +1,5 @@
 /* eslint-disable no-fallthrough */
+import { cloneDeep } from "lodash";
 import assign from "lodash.assign";
 import { AXES_DOMAIN, DOMAIN, INITIAL_STATE } from "./constants";
 import { parseLocalCSV } from "./fetch/parseLocalCSV";
@@ -8,36 +9,40 @@ import {
   getPairwiseColumns,
   getCustomColumns,
   applyJitter,
-  countGraphRegions,
+  countStandardSetGraphRegions,
 } from "./lib/data-manipulation";
 import { getColorScale } from "./lib/viztools";
 
 const CSV_PATH = "./assets/data/all_maps.csv";
 
-let rawData;
 let jitteryData;
 
 export async function reducer(state, action) {
   switch (action.type) {
     case "RESET":
-      state = INITIAL_STATE;
+      return cloneDeep(INITIAL_STATE);
     case "FETCH_DATA": {
-      if (jitteryData == null) {
+      let rawData = state.rawData;
+      if (state.data == null) {
         const data = await parseLocalCSV(CSV_PATH);
         rawData = data;
         jitteryData = applyJitter(rawData);
       }
 
       const questions = cleanQuestions(jitteryData);
-      const regionCounts = countGraphRegions(rawData, questions);
-      const vizColumns = getPairwiseColumns(questions);
+      const standardRegionCounts = countStandardSetGraphRegions(
+        rawData,
+        questions
+      );
+      const standardColumnSet = getPairwiseColumns(questions);
       const colorScale = getColorScale(state.options.color, DOMAIN);
-      const standardColumnSet = vizColumns;
+      const vizColumns = standardColumnSet;
       return assign(
         { ...state },
         {
           data: jitteryData,
-          regionCounts,
+          rawData,
+          standardRegionCounts,
           questions,
           vizColumns,
           colorScale,
@@ -48,10 +53,21 @@ export async function reducer(state, action) {
     case "FILTER_DATASET": {
       const options = { ...state.options };
       options.dataset = action.payload.dataset;
-      const filteredData = filterDataByDataset(rawData, options.dataset);
+      const filteredData = filterDataByDataset(state.rawData, options.dataset);
       const jittery = applyJitter(filteredData);
-      const regionCounts = countGraphRegions(filteredData, state.questions);
-      return assign({ ...state }, { data: jittery, regionCounts, options });
+      const standardRegionCounts = countStandardSetGraphRegions(
+        filteredData,
+        state.questions
+      );
+      return assign(
+        { ...state },
+        {
+          data: jittery,
+          processedRawData: filteredData,
+          standardRegionCounts,
+          options,
+        }
+      );
     }
     case "TOGGLE_REV_COLOR": {
       const options = assign(state.options, {
@@ -92,10 +108,10 @@ export async function reducer(state, action) {
     }
     case "BRUSH": {
       const brushMap = action.payload;
-      return assign({ ...state }, { brushMap, newBrushing: true });
+      return assign({ ...state }, { brushMap });
     }
     case "OLDBRUSH": {
-      return assign({ ...state }, { newBrushing: false });
+      return assign({ ...state }, { newBrushing: 0 });
     }
 
     default:

@@ -12,7 +12,7 @@ export default function Scatterplot({
   columns,
   options,
   brushMap,
-  callback,
+  dispatch,
 }) {
   let [x, y] = columns;
   const isMobile = useMobileContext();
@@ -46,7 +46,7 @@ export default function Scatterplot({
 
       // add brushing on desktop
       if (!isMobile)
-        svg.append("g").call(makeBrushTool(brushFn(data, columns, callback)));
+        svg.append("g").call(makeBrushTool(brushFn(data, columns, dispatch)));
     },
     [data, columns, brushMap, options.size, options.opacity]
   );

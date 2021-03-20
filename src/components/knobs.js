@@ -5,12 +5,19 @@ import { useLanguageContext } from "../context/language-context";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
-import { useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 // eslint-disable-next-line no-duplicate-imports
 import "./knobs.css";
 
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
+
+  let [shouldShowKnobs, setShouldShowKnobs] = useState(false);
+
+  function handleShowHideClick() {
+    setShouldShowKnobs(!shouldShowKnobs);
+  }
+
   let [wantsChooseRespondents, setWantsChooseRespondents] = useState(false);
   const { swapLang } = useLanguageContext();
 
@@ -19,13 +26,11 @@ export default function Knobs(props) {
   const graphType = state.options.graph;
 
   // CONDITIONALS
-  const isScatterplot =
-    graphType === GRAPH_TYPE.scatterplot ||
-    graphType === GRAPH_TYPE.contourScatterplot ||
-    graphType === GRAPH_TYPE.density;
-
-  const isBrushed = Object.keys(state.brushMap).length > 0;
-  // const isHeatmap = graphType === GRAPH_TYPE.heatmap;
+  const isScatterplot = graphType === GRAPH_TYPE.scatterplot;
+  const isHeatmap = graphType === GRAPH_TYPE.heatmap;
+  const isNumbers = graphType === GRAPH_TYPE.numbers;
+  const isContour = graphType === GRAPH_TYPE.contour;
+  const isColorContour = graphType === GRAPH_TYPE.colorContour;
 
   // const hasColor =
   //   graphType === GRAPH_TYPE.colorContour || graphType === GRAPH_TYPE.heatmap;
@@ -35,10 +40,10 @@ export default function Knobs(props) {
     graphType === GRAPH_TYPE.contourScatterplot ||
     graphType === GRAPH_TYPE.density;
 
-  const hasContour =
-    graphType === GRAPH_TYPE.contourScatterplot ||
-    graphType === GRAPH_TYPE.colorContour ||
-    graphType === GRAPH_TYPE.contour;
+  // const hasContour =
+  //   graphType === GRAPH_TYPE.contourScatterplot ||
+  //   graphType === GRAPH_TYPE.colorContour ||
+  //   graphType === GRAPH_TYPE.contour;
 
   const shouldDisableDotSize = !isScatterplot;
   const shouldDisableDotOpacity = shouldDisableDotSize;
@@ -67,10 +72,10 @@ export default function Knobs(props) {
     "CHANGE_DOT_OPACITY",
     "opacity"
   );
-  const handleContourBandwidthChange = handleSettingChange(
-    "CHANGE_CONTOUR_BANDWIDTH",
-    "contourBandwidth"
-  );
+  // const handleContourBandwidthChange = handleSettingChange(
+  //   "CHANGE_CONTOUR_BANDWIDTH",
+  //   "contourBandwidth"
+  // );
   const handleWantsCustomGraphClick = handleSettingChange("TOGGLE_CUSTOM");
   // const handleReverseColorClick = handleSettingChange("TOGGLE_REV_COLOR");
   const handleXSelectChange = handleSettingChange("SET_X_AXIS", "x");
@@ -94,8 +99,23 @@ export default function Knobs(props) {
 
   const handleResetClick = () => dispatch({ type: "RESET" });
 
+  let [knobsHeight, setKnobsHeight] = useState();
+  const ref = useRef();
+  useLayoutEffect(() => {
+    if (ref.current == null) return;
+    const node = ref.current;
+    const height = Math.floor(
+      node.getBoundingClientRect().bottom - node.getBoundingClientRect().top
+    );
+    setKnobsHeight(height);
+  }, []);
+
   return (
-    <div class={style.knobs}>
+    <div
+      ref={ref}
+      class={style.knobs}
+      style={shouldShowKnobs ? `bottom: calc(100% - ${knobsHeight}px);` : ""}
+    >
       <div class={`${style.knob} ${style["lang-swap"]}`}>
         <a href="#" onclick={() => swapLang()}>
           <Text id="language">Français</Text>
@@ -111,20 +131,20 @@ export default function Knobs(props) {
             name="graphselect"
             onchange={handleGraphTypeChange}
           >
-            <option selected value={GRAPH_TYPE.scatterplot}>
+            <option selected={isScatterplot} value={GRAPH_TYPE.scatterplot}>
               <Text id="results.knobs.scatterplot">scatterplot</Text>
             </option>
-            <option value={GRAPH_TYPE.heatmap}>
+            <option selected={isHeatmap} value={GRAPH_TYPE.heatmap}>
               <Text id="results.knobs.heatmap">heatmap</Text>
             </option>
-            <option value={GRAPH_TYPE.numbers}>
+            <option selected={isNumbers} value={GRAPH_TYPE.numbers}>
               <Text id="results.knobs.numbers">numbers</Text>
             </option>
 
-            <option value={GRAPH_TYPE.contour}>
+            <option selected={isContour} value={GRAPH_TYPE.contour}>
               <Text id="results.knobs.contour">contour</Text>
             </option>
-            <option value={GRAPH_TYPE.colorContour}>
+            <option selected={isColorContour} value={GRAPH_TYPE.colorContour}>
               <Text id="results.knobs.colorContour">topography</Text>
             </option>
           </select>
@@ -321,23 +341,25 @@ export default function Knobs(props) {
           </div>
         </div>
       </div>
-      {state.newBrushing && (
-        <p class={style.total}>
-          Total = {totalRespondents}{" "}
-          <Text id="results.knobs.respondents">respondents</Text>
-          {isBrushed && (
-            <span>
-              &nbsp;({Object.keys(state.brushMap).length}
-              &nbsp;<Text id="results.knobs.selected">selected</Text>)
-            </span>
-          )}
-        </p>
-      )}
+      <p class={style.total}>
+        Total = {totalRespondents}{" "}
+        <Text id="results.knobs.respondents">respondents</Text>
+      </p>
+
       <div class={style.knob}>
         <button type="button" onclick={handleResetClick}>
           <Text id="results.knobs.reset">Reset</Text>
         </button>
       </div>
+      <div class={style.showhide} onClick={handleShowHideClick}>
+        <Text id="results.knobs.clickto">Click to </Text>
+        {shouldShowKnobs ? (
+          <Text id="results.knobs.hide">hide</Text>
+        ) : (
+          <Text id="results.knobs.show">show</Text>
+        )}
+      </div>
+
       {/* <div class={style.showba}>
         <p>Show visualization options</p>
       </div> */}

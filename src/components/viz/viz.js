@@ -4,9 +4,9 @@ import { graphType2Component } from "../../lib/misc";
 import { questions } from "../../i18n/fr.json";
 import style from "./viz.css";
 
-export function Viz({ state, columns, callback }) {
+export function Viz({ state, columns, dispatch }) {
   const { data, colorScale, options, brushMap } = state;
-  if (columns == null) return; //columns = state.vizColumns;
+  if (columns == null) return;
   let [x, y] = columns;
 
   const SVG = graphType2Component(options.graph);
@@ -15,13 +15,13 @@ export function Viz({ state, columns, callback }) {
     <div class={style.vizContainer}>
       <div class={style.viz}>
         <SVG
-          numbers={state.regionCounts}
+          state={state}
           data={data}
           columns={columns}
           colorScale={colorScale}
           options={options}
           brushMap={brushMap}
-          callback={callback}
+          dispatch={dispatch}
         />
       </div>
 

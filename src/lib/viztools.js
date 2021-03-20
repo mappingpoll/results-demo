@@ -71,7 +71,7 @@ export function brushFn(data, columns, cb) {
   return function (BrushEvent) {
     const { selection } = BrushEvent;
     if (!BrushEvent.sourceEvent || selection == null) {
-      cb({ type: "brush", payload: {} });
+      cb({ type: "BRUSH", payload: {} });
       return;
     }
     const extent = selection;
@@ -83,7 +83,7 @@ export function brushFn(data, columns, cb) {
           : map,
       {}
     );
-    cb({ type: "brush", payload: brushed });
+    cb({ type: "BRUSH", payload: brushed });
   };
 }
 

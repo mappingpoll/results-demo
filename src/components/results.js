@@ -8,6 +8,8 @@ import { Viz } from "./viz/viz";
 import { INITIAL_STATE } from "../constants";
 import Knobs from "./knobs";
 import style from "./results.css";
+import Notify from "./notify";
+import { cloneDeep } from "lodash";
 
 function useAsyncReducer(reducer, initState) {
   const [state, setState] = useState(initState),
@@ -17,7 +19,8 @@ function useAsyncReducer(reducer, initState) {
 
 export default function Results() {
   // STATE
-  const [state, dispatch] = useAsyncReducer(reducer, INITIAL_STATE);
+  const [state, dispatch] = useAsyncReducer(reducer, cloneDeep(INITIAL_STATE));
+
   useEffect(() => {
     if (state.data == null) dispatch({ type: "FETCH_DATA" });
   });
@@ -25,21 +28,26 @@ export default function Results() {
   const shouldShowCustomViz =
     state.customViz && canShowCustomViz(state.userAxes);
 
-  function handleVizInput(input) {
-    switch (input.type) {
-      case "brush":
-        dispatch({ type: "BRUSH", payload: input.payload });
-        break;
+  let [notification, setNotification] = useState(null);
+
+  useEffect(() => {
+    const latestCount = Object.keys(state.brushMap).length;
+    if (latestCount !== 0) {
+      setNotification(null);
+      setTimeout(
+        () =>
+          setNotification(
+            <Notify>
+              <span>
+                {latestCount}&nbsp;
+                <Text id="results.knobs.selected">selected</Text>
+              </span>
+            </Notify>
+          ),
+        1
+      );
     }
-  }
-
-  if (state.newBrushing) {
-    setTimeout(() => dispatch({ type: "OLDBRUSH" }), 6000);
-  }
-
-  // const visuals = state.standardColumnSet.map(columns => (
-  //   <Viz state={state} columns={columns} callback={handleVizInput} />
-  // ));
+  }, [state.brushMap]);
 
   // JSX
   return (
@@ -66,17 +74,22 @@ export default function Results() {
         </MarkupText>
       </div>
       <Knobs reducer={{ state, dispatch }} />
+      {notification}
+      {/* {shouldShowSelectionNotification && (
+        <Notify>
+          <span>
+            {selectionCount}&nbsp;
+            <Text id="results.knobs.selected">selected</Text>
+          </span>
+        </Notify>
+      )} */}
       {shouldShowCustomViz && (
         <div class={style.map}>
           <div class={style.maptitle}>
             <Text id="results.customgraph">Custom graph:</Text>
           </div>
           <div class={style.mapviz}>
-            <Viz
-              state={state}
-              columns={state.vizColumns}
-              callback={handleVizInput}
-            />
+            <Viz state={state} columns={state.vizColumns} dispatch={dispatch} />
           </div>
         </div>
       )}
@@ -93,7 +106,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[0]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
 
@@ -101,7 +114,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[1]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
       </div>
@@ -131,7 +144,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[2]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
 
@@ -139,7 +152,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[3]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
 
@@ -147,7 +160,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[4]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
       </div>
@@ -176,7 +189,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[5]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
 
@@ -184,7 +197,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[6]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
 
@@ -192,7 +205,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[7]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
       </div>
@@ -207,7 +220,7 @@ export default function Results() {
           <Viz
             state={state}
             columns={state.standardColumnSet?.[8]}
-            callback={handleVizInput}
+            dispatch={dispatch}
           />
         </div>
       </div>

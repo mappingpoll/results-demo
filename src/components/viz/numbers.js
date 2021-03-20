@@ -4,12 +4,21 @@ import { VIEWBOX } from "../../constants";
 import { appendAxes } from "./scatterplot-axes";
 import { appendLabel } from "./labels";
 import "./viz.css";
+import {
+  countGraphRegions,
+  inStandardColumnSet,
+} from "../../lib/data-manipulation";
 
-export default function Numbers({ numbers, columns }) {
+export default function Numbers({ state, columns }) {
   let [x, y] = columns;
-  const counts = numbers[x]; // same as numbers[y]
+
+  let counts;
+  if (inStandardColumnSet(state.standardColumnSet, columns))
+    counts = state.standardRegionCounts[x];
+  else counts = countGraphRegions(state.processedRawData, columns);
   const ref = useD3(
     svg => {
+      svg.selectAll("*").remove();
       // draw axes, columns
       appendAxes(svg);
 
@@ -40,7 +49,7 @@ export default function Numbers({ numbers, columns }) {
       appendLabel(svg, s, 0, -5);
       appendLabel(svg, w, -5, 0);
     },
-    [numbers, columns]
+    [state.standardRegionCounts, columns]
   );
 
   return (
