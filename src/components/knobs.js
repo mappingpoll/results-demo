@@ -5,14 +5,14 @@ import { useLanguageContext } from "../context/language-context";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
-import { useLayoutEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 // eslint-disable-next-line no-duplicate-imports
 import "./knobs.css";
 
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
 
-  let [shouldShowKnobs, setShouldShowKnobs] = useState(false);
+  let [shouldShowKnobs, setShouldShowKnobs] = useState(true);
 
   function handleShowHideClick() {
     setShouldShowKnobs(!shouldShowKnobs);
@@ -101,6 +101,10 @@ export default function Knobs(props) {
 
   const ref = useRef();
 
+  // useEffect(() => {
+  //   setTimeout(() => setShouldShowKnobs(false), 100);
+  // }, []);
+
   function getKnobsHeight() {
     if (ref.current == null) return 0;
     const node = ref.current;
@@ -115,7 +119,9 @@ export default function Knobs(props) {
       ref={ref}
       class={style.knobs}
       style={
-        shouldShowKnobs ? "" : `top: calc(-${getKnobsHeight()}px + 2.4rem);`
+        shouldShowKnobs
+          ? "top: 0;"
+          : `top: calc(-${getKnobsHeight()}px + 2.4rem);`
       }
     >
       <div class={`${style.knob} ${style["lang-swap"]}`}>
@@ -361,10 +367,6 @@ export default function Knobs(props) {
           <Text id="results.knobs.show">show</Text>
         )}
       </div>
-
-      {/* <div class={style.showba}>
-        <p>Show visualization options</p>
-      </div> */}
     </div>
   );
 }

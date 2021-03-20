@@ -1,14 +1,19 @@
+:root {
+  --content-lr-padding: calc((100% - var(--content-width)) / 2);
+}
+
 .knobs {
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem var(--content-lr-padding);
   background-color: var(--background-color);
   border-bottom: 18px solid transparent;
   border-image: url(../assets/little_wave_line.png) 100 repeat;
   z-index: 500;
-  transition: top 200ms ease-in;
+  transition: top 200ms ease;
 }
 
 .knobs * {
@@ -57,7 +62,7 @@
 .lang-swap {
   position: absolute;
   top: 0.5rem;
-  right: 1rem;
+  right: var(--content-lr-padding);
 }
 
 .labeledinput {
