@@ -1,6 +1,6 @@
 .knobs {
   position: fixed;
-  bottom: calc(100% - 2.4rem);
+  top: 0;
   left: 0;
   width: 100%;
   padding: 0.5rem 2rem;
@@ -8,7 +8,7 @@
   border-bottom: 18px solid transparent;
   border-image: url(../assets/little_wave_line.png) 100 repeat;
   z-index: 500;
-  transition: bottom 100ms ease-in;
+  transition: top 200ms ease-in;
 }
 
 .knobs * {

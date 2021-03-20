@@ -5,7 +5,7 @@ import { useLanguageContext } from "../context/language-context";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
-import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
+import { useLayoutEffect, useRef, useState } from "preact/hooks";
 // eslint-disable-next-line no-duplicate-imports
 import "./knobs.css";
 
@@ -99,22 +99,24 @@ export default function Knobs(props) {
 
   const handleResetClick = () => dispatch({ type: "RESET" });
 
-  let [knobsHeight, setKnobsHeight] = useState();
   const ref = useRef();
-  useLayoutEffect(() => {
-    if (ref.current == null) return;
+
+  function getKnobsHeight() {
+    if (ref.current == null) return 0;
     const node = ref.current;
     const height = Math.floor(
       node.getBoundingClientRect().bottom - node.getBoundingClientRect().top
     );
-    setKnobsHeight(height);
-  }, [state, wantsChooseRespondents, state.customViz]);
+    return height;
+  }
 
   return (
     <div
       ref={ref}
       class={style.knobs}
-      style={shouldShowKnobs ? `bottom: calc(100% - ${knobsHeight}px);` : ""}
+      style={
+        shouldShowKnobs ? "" : `top: calc(-${getKnobsHeight()}px + 2.4rem);`
+      }
     >
       <div class={`${style.knob} ${style["lang-swap"]}`}>
         <a href="#" onclick={() => swapLang()}>
