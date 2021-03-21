@@ -29,6 +29,11 @@
   --svg-canvasmarginright: 40;
   --svg-canvasmarginbottom: 40;
   --svg-canvasmarginleft: 40;
+
+
+  --peach: #bd2d14;
+  --intro--margin-bottom: 8rem;
+  --knobs--lip-height: 2rem;
 }
 
 @import "rangeslider.css";

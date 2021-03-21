@@ -1,14 +1,15 @@
 :root {
-  --peach: #bd2d14;
 }
 .results {
 }
 
 .intro {
+  position:relative;
   padding-top: 1rem;
   padding-bottom: 15rem;
-  margin-bottom: 8rem;
+  margin-bottom: var(--intro--margin-bottom);
   background: linear-gradient(var(--peach) 85%, var(--background-color));
+  z-index: 600;
 }
 
 .intro h1,
@@ -34,8 +35,8 @@ footer p {
 }
 
 .map {
+  margin: 5rem 0;
   padding: 0 1rem;
-  margin-bottom: 5rem;
 }
 
 .maptitle {

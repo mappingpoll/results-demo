@@ -12,7 +12,7 @@ import "./knobs.css";
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
 
-  let [shouldShowKnobs, setShouldShowKnobs] = useState(true);
+  let [shouldShowKnobs, setShouldShowKnobs] = useState(false);
 
   function handleShowHideClick() {
     setShouldShowKnobs(!shouldShowKnobs);
@@ -113,7 +113,7 @@ export default function Knobs(props) {
     );
     return height;
   }
-
+  const knobsHeight = getKnobsHeight()
   return (
     <div
       ref={ref}
@@ -121,7 +121,7 @@ export default function Knobs(props) {
       style={
         shouldShowKnobs
           ? "top: 0;"
-          : `top: calc(-${getKnobsHeight()}px + 2rem);`
+          : `margin-top: calc(${-knobsHeight}px - var(--intro--margin-bottom) + var(--knobs--lip-height)); top: calc(var(--knobs--lip-height) - ${knobsHeight}px);`
       }
     >
       <div class={style["lang-swap"]}>
