@@ -29,6 +29,7 @@ export default function Knobs(props) {
   const isScatterplot = graphType === GRAPH_TYPE.scatterplot;
   const isHeatmap = graphType === GRAPH_TYPE.heatmap;
   const isNumbers = graphType === GRAPH_TYPE.numbers;
+  const isProportions = graphType === GRAPH_TYPE.proportions;
   const isContour = graphType === GRAPH_TYPE.contour;
   const isColorContour = graphType === GRAPH_TYPE.colorContour;
 
@@ -113,7 +114,7 @@ export default function Knobs(props) {
     );
     return height;
   }
-  const knobsHeight = getKnobsHeight()
+  const knobsHeight = getKnobsHeight();
   return (
     <div
       ref={ref}
@@ -148,7 +149,9 @@ export default function Knobs(props) {
             <option selected={isNumbers} value={GRAPH_TYPE.numbers}>
               <Text id="results.knobs.numbers">numbers</Text>
             </option>
-
+            <option selected={isProportions} value={GRAPH_TYPE.proportions}>
+              proportions
+            </option>
             <option selected={isContour} value={GRAPH_TYPE.contour}>
               <Text id="results.knobs.contour">contour</Text>
             </option>

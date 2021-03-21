@@ -6,6 +6,7 @@ import DensityScatterplot from "../components/viz/density-scatterplot";
 import Heatmap from "../components/viz/heatmap";
 import Scatterplot from "../components/viz/scatterplot";
 import Numbers from "../components/viz/numbers";
+import Proportions from "../components/viz/proportions";
 
 export const isChosenAxis = a => a != "";
 
@@ -46,6 +47,8 @@ export function graphType2Component(graphType) {
       return ColorContour;
     case GRAPH_TYPE.numbers:
       return Numbers;
+    case GRAPH_TYPE.proportions:
+      return Proportions;
     default: {
       const Fallback = () => <span>nothing to display</span>;
       return Fallback;

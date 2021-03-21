@@ -10,6 +10,7 @@ import {
   getCustomColumns,
   applyJitter,
   countStandardSetGraphRegions,
+  countGraphRegionProportions,
 } from "./lib/data-manipulation";
 import { getColorScale } from "./lib/viztools";
 
@@ -35,6 +36,15 @@ export async function reducer(state, action) {
         questions
       );
       const standardColumnSet = getPairwiseColumns(questions);
+      const standardProportions = standardColumnSet.reduce((obj, pair) => {
+        obj[pair[0]] = countGraphRegionProportions(
+          null,
+          null,
+          standardRegionCounts[pair[0]]
+        );
+        return obj;
+      }, {});
+
       const colorScale = getColorScale(state.options.color, DOMAIN);
       const vizColumns = standardColumnSet;
       return assign(
@@ -43,6 +53,7 @@ export async function reducer(state, action) {
           data: jitteryData,
           rawData,
           standardRegionCounts,
+          standardProportions,
           questions,
           vizColumns,
           colorScale,
@@ -59,12 +70,24 @@ export async function reducer(state, action) {
         filteredData,
         state.questions
       );
+      const standardProportions = state.standardColumnSet.reduce(
+        (obj, pair) => {
+          obj[pair[0]] = countGraphRegionProportions(
+            null,
+            null,
+            standardRegionCounts[pair[0]]
+          );
+          return obj;
+        },
+        {}
+      );
       return assign(
         { ...state },
         {
           data: jittery,
           processedRawData: filteredData,
           standardRegionCounts,
+          standardProportions,
           options,
         }
       );

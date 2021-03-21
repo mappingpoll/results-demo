@@ -66,7 +66,8 @@ export function applyJitter(data) {
 }
 
 function sumRegionCounts(region) {
-  const sumProps = obj => Object.keys(obj).reduce((sum, key) => sum + obj[key]);
+  const sumProps = obj =>
+    Object.keys(obj).reduce((sum, key) => sum + obj[key], 0);
 
   return (
     region.origin +
@@ -77,24 +78,34 @@ function sumRegionCounts(region) {
   );
 }
 
-export function countGraphRegionProportions(data, columns, counts = null) {
-  if (counts == null) counts = countGraphRegions(data, columns);
-  const total = sumRegionCounts(counts);
+function roundProps(obj) {
+  for (let key in obj) {
+    obj[key] = Math.round(obj[key]);
+  }
+  return obj;
+}
+
+export function countGraphRegionProportions(data, columns, count = null) {
+  if (count == null) count = countGraphRegions(data, columns);
+  const total = sumRegionCounts(count);
   const proportions = {
-    origin: counts.origin / total,
+    origin: (count.origin / total) * 100,
     quadrants: {
-      nw: (counts.quadrants.nw + counts.outerQuadrants.nw) / total,
-      ne: (counts.quadrants.ne + counts.outerQuadrants.ne) / total,
-      se: (counts.quadrants.se + counts.outerQuadrants.se) / total,
-      sw: (counts.quadrants.sw + counts.outerQuadrants.sw) / total,
+      nw: ((count.quadrants.nw + count.outerQuadrants.nw) / total) * 100,
+      ne: ((count.quadrants.ne + count.outerQuadrants.ne) / total) * 100,
+      se: ((count.quadrants.se + count.outerQuadrants.se) / total) * 100,
+      sw: ((count.quadrants.sw + count.outerQuadrants.sw) / total) * 100,
     },
     axes: {
-      nw: (counts.axes.nw + counts.outerAxes.nw) / total,
-      ne: (counts.axes.ne + counts.outerAxes.ne) / total,
-      se: (counts.axes.se + counts.outerAxes.se) / total,
-      sw: (counts.axes.sw + counts.outerAxes.sw) / total,
+      n: ((count.axes.n + count.outerAxes.n) / total) * 100,
+      e: ((count.axes.e + count.outerAxes.e) / total) * 100,
+      s: ((count.axes.s + count.outerAxes.s) / total) * 100,
+      w: ((count.axes.w + count.outerAxes.w) / total) * 100,
     },
   };
+  proportions.origin = Math.round(proportions.origin);
+  proportions.quadrants = roundProps(proportions.quadrants);
+  proportions.axes = roundProps(proportions.axes);
   return proportions;
 }
 

@@ -10,6 +10,7 @@ export const GRAPH_TYPE = {
   colorContour: "color contour",
   contourScatterplot: "contour scatterplot",
   numbers: "numbers",
+  proportions: "proportions",
 };
 export const COLOR_SCHEME = {
   greyscale: "interpolateGreys",

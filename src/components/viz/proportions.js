@@ -13,10 +13,12 @@ export default function Proportions({ state, columns }) {
   let [x, y] = columns;
 
   let proportions;
+
   if (inStandardColumnSet(state.standardColumnSet, columns))
     proportions = state.standardProportions[x];
   else
     proportions = countGraphRegionProportions(state.processedRawData, columns);
+
   const ref = useD3(
     svg => {
       svg.selectAll("*").remove();
@@ -27,30 +29,20 @@ export default function Proportions({ state, columns }) {
       // origin
       appendLabel(svg, `${proportions.origin}%`, 0, 0);
       // quadrants
-      const getQuadrantTotal = quadrant =>
-        proportions.quadrants[quadrant] + proportions.outerQuadrants[quadrant];
-      const nw = getQuadrantTotal("nw");
-      const ne = getQuadrantTotal("ne");
-      const se = getQuadrantTotal("se");
-      const sw = getQuadrantTotal("sw");
+      const { nw, ne, se, sw } = proportions.quadrants;
       appendLabel(svg, `${ne}%`, 5, 5);
       appendLabel(svg, `${nw}%`, -5, 5);
       appendLabel(svg, `${se}%`, 5, -5);
       appendLabel(svg, `${sw}%`, -5, -5);
 
       // axes
-      const getAxisTotal = cardinal =>
-        proportions.axes[cardinal] + proportions.outerAxes[cardinal];
-      const n = getAxisTotal("n");
-      const e = getAxisTotal("e");
-      const s = getAxisTotal("s");
-      const w = getAxisTotal("w");
+      const { n, e, s, w } = proportions.axes;
       appendLabel(svg, `${n}%`, 0, 5);
       appendLabel(svg, `${e}%`, 5, 0);
       appendLabel(svg, `${s}%`, 0, -5);
       appendLabel(svg, `${w}%`, -5, 0);
     },
-    [state.standardRegionCounts, columns]
+    [state.standardProportions, columns]
   );
 
   return (
