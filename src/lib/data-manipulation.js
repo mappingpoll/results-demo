@@ -65,6 +65,39 @@ export function applyJitter(data) {
   return dataCopy;
 }
 
+function sumRegionCounts(region) {
+  const sumProps = obj => Object.keys(obj).reduce((sum, key) => sum + obj[key]);
+
+  return (
+    region.origin +
+    sumProps(region.axes) +
+    sumProps(region.outerAxes) +
+    sumProps(region.quadrants) +
+    sumProps(region.outerQuadrants)
+  );
+}
+
+export function countGraphRegionProportions(data, columns, counts = null) {
+  if (counts == null) counts = countGraphRegions(data, columns);
+  const total = sumRegionCounts(counts);
+  const proportions = {
+    origin: counts.origin / total,
+    quadrants: {
+      nw: (counts.quadrants.nw + counts.outerQuadrants.nw) / total,
+      ne: (counts.quadrants.ne + counts.outerQuadrants.ne) / total,
+      se: (counts.quadrants.se + counts.outerQuadrants.se) / total,
+      sw: (counts.quadrants.sw + counts.outerQuadrants.sw) / total,
+    },
+    axes: {
+      nw: (counts.axes.nw + counts.outerAxes.nw) / total,
+      ne: (counts.axes.ne + counts.outerAxes.ne) / total,
+      se: (counts.axes.se + counts.outerAxes.se) / total,
+      sw: (counts.axes.sw + counts.outerAxes.sw) / total,
+    },
+  };
+  return proportions;
+}
+
 export function countGraphRegions(data, columns) {
   const [a, b] = columns;
   const region = {
