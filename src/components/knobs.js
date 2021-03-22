@@ -1,7 +1,6 @@
 import { h } from "preact";
 import { Text } from "preact-i18n";
 import { useLanguageContext } from "../context/language-context";
-// import ColorScaleLegend from "./components/viz/colorScaleLegend/colorScaleLegend";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
@@ -12,7 +11,7 @@ import "./knobs.css";
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
 
-  let [shouldShowKnobs, setShouldShowKnobs] = useState(false);
+  let [shouldShowKnobs, setShouldShowKnobs] = useState(true);
 
   function handleShowHideClick() {
     setShouldShowKnobs(!shouldShowKnobs);
@@ -32,24 +31,13 @@ export default function Knobs(props) {
   const isProportions = graphType === GRAPH_TYPE.proportions;
   const isContour = graphType === GRAPH_TYPE.contour;
   const isColorContour = graphType === GRAPH_TYPE.colorContour;
-
-  // const hasColor =
-  //   graphType === GRAPH_TYPE.colorContour || graphType === GRAPH_TYPE.heatmap;
-
   const hasDots =
     graphType === GRAPH_TYPE.scatterplot ||
     graphType === GRAPH_TYPE.contourScatterplot ||
     graphType === GRAPH_TYPE.density;
 
-  // const hasContour =
-  //   graphType === GRAPH_TYPE.contourScatterplot ||
-  //   graphType === GRAPH_TYPE.colorContour ||
-  //   graphType === GRAPH_TYPE.contour;
-
   const shouldDisableDotSize = !isScatterplot;
   const shouldDisableDotOpacity = shouldDisableDotSize;
-  // const shouldDisableColorMid = !wantsColorDimension;
-  // const shouldDisableColorSchemeSelect = !hasColor;
   const shouldDisableXAxisSelect = !state.customViz;
   const shouldDisableYAxisSelect =
     !state.customViz || !hasXAxis(state.userAxes);
@@ -59,62 +47,45 @@ export default function Knobs(props) {
     dispatch({ type, payload: { [prop]: event.target.value } });
     if (callback != null && typeof callback === "function") callback();
   };
-
   const handleGraphTypeChange = handleSettingChange(
     "CHANGE_GRAPH_TYPE",
     "graph"
   );
-  // const handleColorSchemeChange = handleSettingChange(
-  //   "CHANGE_COLOR_SCHEME",
-  //   "color"
-  // );
   const handleDotSizeChange = handleSettingChange("CHANGE_DOT_SIZE", "size");
   const handleDotOpacityChange = handleSettingChange(
     "CHANGE_DOT_OPACITY",
     "opacity"
   );
-  // const handleContourBandwidthChange = handleSettingChange(
-  //   "CHANGE_CONTOUR_BANDWIDTH",
-  //   "contourBandwidth"
-  // );
   const handleWantsCustomGraphClick = handleSettingChange("TOGGLE_CUSTOM");
-  // const handleReverseColorClick = handleSettingChange("TOGGLE_REV_COLOR");
   const handleXSelectChange = handleSettingChange("SET_X_AXIS", "x");
   const handleYSelectChange = handleSettingChange("SET_Y_AXIS", "y");
-
   const handleDatasetChange = event => {
     const clicked = event.target.value;
     let other,
-      dataset = { ...state.options.dataset };
+    dataset = { ...state.options.dataset };
     if (DATASETS.form.includes(clicked))
-      other = clicked === "aga" ? "ba" : "aga";
+    other = clicked === "aga" ? "ba" : "aga";
     else if (DATASETS.language.includes(clicked))
-      other = clicked === "en" ? "fr" : "en";
-
+    other = clicked === "en" ? "fr" : "en";
     dataset[clicked] = !dataset[clicked];
     if (!dataset[clicked] && !dataset[other]) {
       dataset[other] = true;
     }
     dispatch({ type: "FILTER_DATASET", payload: { dataset } });
   };
-
   const handleResetClick = () => dispatch({ type: "RESET" });
 
+  // DOM
   const ref = useRef();
-
-  // useEffect(() => {
-  //   setTimeout(() => setShouldShowKnobs(false), 100);
-  // }, []);
-
-  function getKnobsHeight() {
+  const knobsHeight = (function() {
     if (ref.current == null) return 0;
     const node = ref.current;
-    const height = Math.floor(
+    return  Math.floor(
       node.getBoundingClientRect().bottom - node.getBoundingClientRect().top
     );
-    return height;
-  }
-  const knobsHeight = getKnobsHeight();
+  })();
+
+  //
   return (
     <div
       ref={ref}
@@ -122,7 +93,7 @@ export default function Knobs(props) {
       style={
         shouldShowKnobs
           ? "top: 0;"
-          : `margin-top: calc(${-knobsHeight}px - var(--intro--margin-bottom) + var(--knobs--lip-height)); top: calc(var(--knobs--lip-height) - ${knobsHeight}px);`
+          : `margin-top: calc(-${knobsHeight}px - var(--intro--margin-bottom) + var(--knobs--lip-height)); top: calc(var(--knobs--lip-height) - ${knobsHeight}px);`
       }
     >
       <div class={style["lang-swap"]}>

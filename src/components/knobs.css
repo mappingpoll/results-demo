@@ -15,7 +15,7 @@
   border-image: url(../assets/little_wave_line.png) 100 repeat;
   z-index: 500;
 
-  transition: top 200ms ease;
+  transition: top 200ms ease, margin-top 200ms ease;
 }
 
 .knobs * {
