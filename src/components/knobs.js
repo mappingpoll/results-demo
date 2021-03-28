@@ -106,7 +106,7 @@ export default function Knobs(props) {
                   <Text id="results.knobs.numbers">numbers</Text>
                 </option>
                 <option selected={isProportions} value={GRAPH_TYPE.proportions}>
-                  proportions
+                  <Text id="results.knobs.percentage">percentage</Text>
                 </option>
                 <option selected={isContour} value={GRAPH_TYPE.contour}>
                   <Text id="results.knobs.contour">contour</Text>

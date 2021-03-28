@@ -265,16 +265,84 @@ export default function Results() {
         </div>
       </div>
       <footer>
-        <div>
-          <MarkupText id="results.footer">
-            <h2>Track specific respondents</h2>
-            <p>
+        <section>
+          <h1>
+            <Text id="results.footer.select">Select & Follow Respondents</Text>
+          </h1>
+          <p>
+            <Text id="results.footer.select--body">
               You can draw a rectangle around a selection of dots, and you will
               then see how the participants corresponding to those dots answered
               from one question to the next.
-            </p>
-          </MarkupText>
-        </div>
+            </Text>
+          </p>
+        </section>
+        <section>
+          <h1>
+            <Text id="results.footer.interpretation">Interpretation</Text>
+          </h1>
+          <p>
+            <Text id="results.footer.interpretation--body">
+              Phasellus a ultrices enim. Nam nulla elit, pellentesque sit amet
+              maximus ut, fermentum nec risus. Nam gravida est leo, ac suscipit
+              velit vestibulum sit amet. Nullam elementum neque risus, congue
+              molestie sem egestas in. Ut sit amet imperdiet lacus. Integer
+              mattis felis at semper posuere. Cras aliquam ac tortor a euismod.
+              Aenean lorem odio, pretium ut nibh eget, fringilla pellentesque
+              urna. Curabitur non lacinia arcu. Quisque in congue magna. Nulla
+              ac metus at enim interdum luctus. In faucibus ex mauris, sed
+              convallis leo congue sit amet. Integer sollicitudin ligula id
+              ipsum pellentesque, a gravida leo scelerisque. Sed scelerisque
+              nisl sit amet rhoncus bibendum. Etiam quis erat magna. Orci varius
+              natoque penatibus et magnis dis parturient montes, nascetur
+              ridiculus mus.{" "}
+            </Text>
+          </p>
+        </section>
+        <section>
+          <h1>
+            <Text id="results.footer.context">Context</Text>
+          </h1>
+          <p>
+            <Text id="results.footer.context--body">
+              Phasellus a ultrices enim. Nam nulla elit, pellentesque sit amet
+              maximus ut, fermentum nec risus. Nam gravida est leo, ac suscipit
+              velit vestibulum sit amet. Nullam elementum neque risus, congue
+              molestie sem egestas in. Ut sit amet imperdiet lacus. Integer
+              mattis felis at semper posuere. Cras aliquam ac tortor a euismod.
+              Aenean lorem odio, pretium ut nibh eget, fringilla pellentesque
+              urna. Curabitur non lacinia arcu. Quisque in congue magna. Nulla
+              ac metus at enim interdum luctus. In faucibus ex mauris, sed
+              convallis leo congue sit amet. Integer sollicitudin ligula id
+              ipsum pellentesque, a gravida leo scelerisque. Sed scelerisque
+              nisl sit amet rhoncus bibendum. Etiam quis erat magna. Orci varius
+              natoque penatibus et magnis dis parturient montes, nascetur
+              ridiculus mus.{" "}
+            </Text>
+          </p>
+        </section>
+        <section>
+          <h1>
+            <Text id="results.footer.acknowledgements">Acknowledgements</Text>
+          </h1>
+          <p>
+            <Text id="results.footer.acknowledgements--bodu">
+              Phasellus a ultrices enim. Nam nulla elit, pellentesque sit amet
+              maximus ut, fermentum nec risus. Nam gravida est leo, ac suscipit
+              velit vestibulum sit amet. Nullam elementum neque risus, congue
+              molestie sem egestas in. Ut sit amet imperdiet lacus. Integer
+              mattis felis at semper posuere. Cras aliquam ac tortor a euismod.
+              Aenean lorem odio, pretium ut nibh eget, fringilla pellentesque
+              urna. Curabitur non lacinia arcu. Quisque in congue magna. Nulla
+              ac metus at enim interdum luctus. In faucibus ex mauris, sed
+              convallis leo congue sit amet. Integer sollicitudin ligula id
+              ipsum pellentesque, a gravida leo scelerisque. Sed scelerisque
+              nisl sit amet rhoncus bibendum. Etiam quis erat magna. Orci varius
+              natoque penatibus et magnis dis parturient montes, nascetur
+              ridiculus mus.{" "}
+            </Text>
+          </p>
+        </section>
       </footer>
     </div>
   );
