@@ -11,13 +11,13 @@
   width: 100%;
 
   background-color: var(--background-color);
-  border-top: 18px solid transparent;
-  border-bottom: 18px solid transparent;
-  border-image: url(../assets/little_wave_template.png) 18 0 18 0 repeat;
+  border-top: var(--wavy-border-top-bottom);
+  border-bottom: var(--wavy-border-top-bottom);
+  border-image: var(--wavy-border-image);
   z-index: 500;
 
-  transition: top 200ms ease;
   padding: 0.5rem var(--content-lr-padding);
+  transition: opacity 200ms ease;
 }
 
 h1 {
@@ -79,7 +79,7 @@ input[type="checkbox"] {
 }
 
 .show-hide {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   cursor: pointer;
   grid-row: 1;
   text-align: center;

@@ -34,6 +34,9 @@
   --background-primary: #bd2d14;
   --intro--margin-bottom: 1rem;
   --knobs--lip-height: 2rem;
+
+  --wavy-border-image: url(./assets/little_wave_template.png) 18 0 18 0 repeat;
+  --wavy-border-top-bottom: 18px solid transparent;
 }
 
 @import "rangeslider.css";

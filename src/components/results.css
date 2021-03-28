@@ -25,7 +25,7 @@
 
 .intro,
 footer {
-  padding: 2rem calc((100% - var(--content-width)) / 2);
+  padding: 2rem calc((100% - var(--content-width)) / 2) 5rem;
 }
 
 .intro h1,
@@ -48,6 +48,11 @@ footer p {
 .intro p,
 footer p {
   font-size: 1.4rem;
+}
+
+.maps {
+  border-bottom: var(--wavy-border-top-bottom);
+  border-image: var(--wavy-border-image);
 }
 
 .map {
@@ -90,18 +95,21 @@ footer p {
 
 footer {
   position: relative;
-  min-height: 90rem;
+  min-height: 200rem;
   /* background: linear-gradient(
     var(--background-color),
     var(--background-primary) 25%
   ); */
   background: var(--background-primary);
+  border-bottom: var(--wavy-border-top-bottom);
+  border-image: var(--wavy-border-image);
 }
+
 footer > div {
   position: relative;
   z-index: 100;
 }
-footer::after {
+/* footer::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -112,7 +120,7 @@ footer::after {
   background-position: bottom left;
   background-repeat: no-repeat;
   z-index: 1;
-}
+} */
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-device-width: 414px) {

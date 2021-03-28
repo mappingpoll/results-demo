@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 import { MarkupText, Text } from "preact-i18n";
 import { reducer } from "../asyncReducer";
 
@@ -21,7 +21,7 @@ function useAsyncReducer(reducer, initState) {
 export default function Results() {
   // STATE
   const [state, dispatch] = useAsyncReducer(reducer, cloneDeep(INITIAL_STATE));
-
+  const [shouldShowKnobs, setShouldShowKnobs] = useState(true);
   const { swapLang } = useLanguageContext();
 
   useEffect(() => {
@@ -33,8 +33,11 @@ export default function Results() {
 
   let [notification, setNotification] = useState(null);
 
+  const getLatestCount = () =>
+    state.brushMap != null ? Object.keys(state.brushMap).length : 0;
+
   useEffect(() => {
-    const latestCount = Object.keys(state.brushMap).length;
+    const latestCount = getLatestCount();
     if (latestCount !== 0) {
       setNotification(null);
       setTimeout(
@@ -49,13 +52,29 @@ export default function Results() {
           ),
         1
       );
+    } else {
+      setNotification(null);
     }
   }, [state.brushMap]);
 
+  const introRef = useRef();
+  const mapsRef = useRef();
+
+  useEffect(() => {
+    document.onscroll = () => {
+      if (mapsRef.current != null) {
+        const height = mapsRef.current.getBoundingClientRect().bottom;
+        if (height < window.innerHeight / 2) setShouldShowKnobs(false);
+        else {
+          setShouldShowKnobs(true);
+        }
+      }
+    };
+  }, []);
   // JSX
   return (
     <div class={style.results}>
-      <div class={style.intro}>
+      <div ref={introRef} class={style.intro}>
         <div class={style["en-fr"]}>
           <span onclick={() => swapLang("en")}>English</span>&nbsp;/&nbsp;
           <span onclick={() => swapLang("fr")}>Français</span>
@@ -83,7 +102,11 @@ export default function Results() {
           <p>The questions appear exactly as on the original questionnaire.</p>
         </MarkupText>
       </div>
-      <Knobs reducer={{ state, dispatch }} />
+      <Knobs
+        reducer={{ state, dispatch }}
+        selected={getLatestCount()}
+        visible={shouldShowKnobs}
+      />
       {notification}
       {/* {shouldShowSelectionNotification && (
         <Notify>
@@ -93,145 +116,152 @@ export default function Results() {
           </span>
         </Notify>
       )} */}
-      {shouldShowCustomViz && (
+      <div ref={mapsRef} class={style.maps}>
+        {shouldShowCustomViz && (
+          <div class={style.map}>
+            <div class={style.maptitle}>
+              <Text id="results.customgraph">Custom graph:</Text>
+            </div>
+            <div class={style.mapviz}>
+              <Viz
+                state={state}
+                columns={state.vizColumns}
+                dispatch={dispatch}
+              />
+            </div>
+          </div>
+        )}
         <div class={style.map}>
           <div class={style.maptitle}>
-            <Text id="results.customgraph">Custom graph:</Text>
+            <div>
+              <Text id="results.part">PART</Text> I
+            </div>
+            <div>
+              <Text id="results.part1.title">YOU</Text>
+            </div>
           </div>
           <div class={style.mapviz}>
-            <Viz state={state} columns={state.vizColumns} dispatch={dispatch} />
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[0]}
+              dispatch={dispatch}
+            />
           </div>
-        </div>
-      )}
-      <div class={style.map}>
-        <div class={style.maptitle}>
-          <div>
-            <Text id="results.part">PART</Text> I
-          </div>
-          <div>
-            <Text id="results.part1.title">YOU</Text>
-          </div>
-        </div>
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[0]}
-            dispatch={dispatch}
-          />
-        </div>
 
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[1]}
-            dispatch={dispatch}
-          />
-        </div>
-      </div>
-      <div class={style.map}>
-        <div class={style.maptitle}>
-          <div>
-            <Text id="results.part">Part</Text> II
-          </div>
-          <div>
-            <Text id="results.part2.title">You and the world</Text>
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[1]}
+              dispatch={dispatch}
+            />
           </div>
         </div>
-        <div class={style.mapdescription}>
-          <MarkupText id="results.part2.description">
-            <p>
-              Think of the land where you grew up. Think of its natural physical
-              properties, such as mountains, valleys, plains, forests, wetlands,
-              rivers, lakes, sea, desert, etc. Then try to imagine this land in
-              relation to the totality of physical spaces all across the globe.
-            </p>
-            <p>
-              In your life, how much did you get to know the physical world?
-            </p>
-          </MarkupText>
-        </div>
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[2]}
-            dispatch={dispatch}
-          />
-        </div>
+        <div class={style.map}>
+          <div class={style.maptitle}>
+            <div>
+              <Text id="results.part">Part</Text> II
+            </div>
+            <div>
+              <Text id="results.part2.title">You and the world</Text>
+            </div>
+          </div>
+          <div class={style.mapdescription}>
+            <MarkupText id="results.part2.description">
+              <p>
+                Think of the land where you grew up. Think of its natural
+                physical properties, such as mountains, valleys, plains,
+                forests, wetlands, rivers, lakes, sea, desert, etc. Then try to
+                imagine this land in relation to the totality of physical spaces
+                all across the globe.
+              </p>
+              <p>
+                In your life, how much did you get to know the physical world?
+              </p>
+            </MarkupText>
+          </div>
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[2]}
+              dispatch={dispatch}
+            />
+          </div>
 
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[3]}
-            dispatch={dispatch}
-          />
-        </div>
-
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[4]}
-            dispatch={dispatch}
-          />
-        </div>
-      </div>
-      <div class={style.map}>
-        <div class={style.maptitle}>
-          <div>
-            <Text id="results.part">Part</Text> III
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[3]}
+              dispatch={dispatch}
+            />
           </div>
-          <div>
-            <Text id="results.part3.title">You and the future</Text>
+
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[4]}
+              dispatch={dispatch}
+            />
           </div>
         </div>
-        <div class={style.mapdescription}>
-          <MarkupText id="results.part3.description">
-            <p>
-              Try to picture the totality of human activities taking place on
-              the planet today.
-            </p>
-            <p>
-              Do you think that humanity as a whole is moving in a good
-              direction, aligned with a coherent vision for the future?
-            </p>
-          </MarkupText>
-        </div>
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[5]}
-            dispatch={dispatch}
-          />
-        </div>
+        <div class={style.map}>
+          <div class={style.maptitle}>
+            <div>
+              <Text id="results.part">Part</Text> III
+            </div>
+            <div>
+              <Text id="results.part3.title">You and the future</Text>
+            </div>
+          </div>
+          <div class={style.mapdescription}>
+            <MarkupText id="results.part3.description">
+              <p>
+                Try to picture the totality of human activities taking place on
+                the planet today.
+              </p>
+              <p>
+                Do you think that humanity as a whole is moving in a good
+                direction, aligned with a coherent vision for the future?
+              </p>
+            </MarkupText>
+          </div>
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[5]}
+              dispatch={dispatch}
+            />
+          </div>
 
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[6]}
-            dispatch={dispatch}
-          />
-        </div>
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[6]}
+              dispatch={dispatch}
+            />
+          </div>
 
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[7]}
-            dispatch={dispatch}
-          />
-        </div>
-      </div>
-      <div class={style.map}>
-        <div class={style.maptitle}>
-          <div />
-          <div>
-            <Text id="results.part4.title">You and this exercise</Text>
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[7]}
+              dispatch={dispatch}
+            />
           </div>
         </div>
-        <div class={style.mapviz}>
-          <Viz
-            state={state}
-            columns={state.standardColumnSet?.[8]}
-            dispatch={dispatch}
-          />
+        <div class={style.map}>
+          <div class={style.maptitle}>
+            <div />
+            <div>
+              <Text id="results.part4.title">You and this exercise</Text>
+            </div>
+          </div>
+          <div class={style.mapviz}>
+            <Viz
+              state={state}
+              columns={state.standardColumnSet?.[8]}
+              dispatch={dispatch}
+            />
+          </div>
         </div>
       </div>
       <footer>

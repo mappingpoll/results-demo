@@ -43,7 +43,7 @@
       "frforms": "Formulaires français",
       "respondents": "répondant.e.s",
       "reset": "Réinitialiser",
-      "clickto": "Cliquez pour ",
+      "clickto": "Cliquez pour montrer / cacher",
       "show": "afficher",
       "hide": "cacher"
     },
@@ -196,7 +196,7 @@
       },
       "fr": {
         "start": "S'exposer à différemts systèmes de valeurs et croyance mène à la confusion / confrontation / violence",
-        "end": "S'exposer à différents systèmes de valeurs et croyances mène à une plus grandes tolérance et à une compréhension mutuelle"
+        "end": "S'exposer à différents systèmes de valeurs et croyances mène à une plus grande tolérance et à une compréhension mutuelle"
       }
     },
     "Going toward self-destruction / progress": {
