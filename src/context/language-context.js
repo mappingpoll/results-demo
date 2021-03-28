@@ -15,9 +15,9 @@ export const Language = createContext();
 
 export function LanguageContextProvider({ children }) {
   let [definition, setDefinition] = useState(getDefinition(userLang));
-  function swapLang(lang = "en") {
-    if (userLang === "en") {
-      userLang = "fr";
+  function swapLang(lang) {
+    if (lang == null) {
+      userLang = userLang === "en" ? "fr" : "en";
     } else {
       userLang = lang;
     }

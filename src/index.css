@@ -5,6 +5,7 @@
   --text-color: black;
 
   --content-width: 45rem;
+  --content-padding: calc((100vw - var(var(--content-width))) / 2);
 
   --slider-width: 18rem;
   --slider-contrast: 25%;
@@ -30,9 +31,8 @@
   --svg-canvasmarginbottom: 40;
   --svg-canvasmarginleft: 40;
 
-
-  --peach: #bd2d14;
-  --intro--margin-bottom: 8rem;
+  --background-primary: #bd2d14;
+  --intro--margin-bottom: 1rem;
   --knobs--lip-height: 2rem;
 }
 
@@ -47,11 +47,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background-color);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
 }
 
 select,

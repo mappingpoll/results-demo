@@ -1,5 +1,6 @@
 :root {
   --content-lr-padding: calc((100% - var(--content-width)) / 2);
+  --knobs-font-size: 0.75rem;
 }
 
 .knobs {
@@ -8,24 +9,38 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 0.5rem 1rem 1rem;
 
   background-color: var(--background-color);
+  border-top: 18px solid transparent;
   border-bottom: 18px solid transparent;
-  border-image: url(../assets/little_wave_line.png) 100 repeat;
+  border-image: url(../assets/little_wave_template.png) 18 0 18 0 repeat;
   z-index: 500;
 
   transition: top 200ms ease;
+  padding: 0.5rem var(--content-lr-padding);
 }
 
-.knobs * {
-  font-size: 0.8rem;
+h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: start;
+  align-items: center;
 }
 
 .knob,
 .subknob {
-  max-width: var(--content-width);
-  margin: 0 auto 0.5rem;
+  /* border: 1px solid blue; */
+  font-size: var(--knobs-font-size);
+  grid-column: 1 / 2;
+  justify-self: start;
+  width: 100%;
 }
 
 .subknob {
@@ -34,25 +49,24 @@
 
 .labeled-input {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 0;
+  /* margin: 0.5rem 0; */
 }
 
 .labeled-input > label {
-  flex-basis: 12rem;
+  flex-basis: 15ch;
   white-space: nowrap;
+  margin-right: 1em;
 }
 
-.subknob > .labeled-input > label {
-  flex-basis: 10rem;
+.labeled-input > input {
+  flex-grow: 1;
 }
-
-.labeled-input > input,
 .labeled-input > select {
-  max-width: var(--slider-width);
+  /* flex-shrink: 1; */
+  /* max-width: var(--slider-width); */
+  font-size: var(--knobs-font-size);
 }
 
 .labeled-checkbox {
@@ -64,31 +78,29 @@ input[type="checkbox"] {
   margin-right: 0.4rem;
 }
 
-.showhide {
-  position: absolute;
-  top: calc(100% - 1.2rem);
-  bottom: -1rem;
-  left: 0;
-  right: 0;
-  padding-top: 0.2rem;
+.show-hide {
+  text-decoration: underline;
+  cursor: pointer;
+  grid-row: 1;
   text-align: center;
   user-select: none;
 }
 
-.lang-swap {
-  position: absolute;
-  top: 0.5rem;
-  right: var(--content-lr-padding);
+.show-hide,
+.reset-btn {
+  font-size: var(--knobs-font-size);
+  justify-self: end;
+  grid-column: 2 / 3;
+}
+
+.reset-btn > button {
+  font-size: var(--knobs-font-size);
 }
 
 @media only screen and (max-device-width: 414px) {
   .knobs {
     position: static;
     padding: 0 0.5rem;
-  }
-
-  .lang-swap {
-    position: static;
   }
 
   .chooseresp {
@@ -110,7 +122,7 @@ input[type="checkbox"] {
     margin: 0 auto;
   }
 
-  .showhide {
+  .show-hide {
     display: none;
   }
 }

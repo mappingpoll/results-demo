@@ -3,30 +3,46 @@
 .results {
 }
 
+.en-fr {
+  display: inline-block;
+  background: black;
+  color: white;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.4rem;
+}
+
+.en-fr > span {
+  text-decoration: underline;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
 .intro {
-  position:relative;
-  padding-top: 1rem;
-  padding-bottom: 15rem;
-  margin-bottom: var(--intro--margin-bottom);
-  background: linear-gradient(var(--peach) 85%, var(--background-color));
+  position: relative;
+  background: var(--background-primary);
   z-index: 600;
+}
+
+.intro,
+footer {
+  padding: 2rem calc((100% - var(--content-width)) / 2);
 }
 
 .intro h1,
 .intro p,
 footer h2,
 footer p {
-  max-width: var(--content-width);
+  /* max-width: var(--content-width); */
   margin: 0 auto;
-  padding: 1rem;
   color: white;
   font-family: "Times New Roman", Times, serif;
 }
 
 .intro h1 {
   font-size: 2.4rem;
+  line-height: 1.2;
   font-weight: 400;
-  margin-top: 1em;
+  margin: 1em 0;
 }
 
 .intro p,
@@ -75,8 +91,11 @@ footer p {
 footer {
   position: relative;
   min-height: 90rem;
-  padding-top: 30rem;
-  background: linear-gradient(var(--background-color), var(--peach) 25%);
+  /* background: linear-gradient(
+    var(--background-color),
+    var(--background-primary) 25%
+  ); */
+  background: var(--background-primary);
 }
 footer > div {
   position: relative;

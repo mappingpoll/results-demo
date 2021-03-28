@@ -15,6 +15,7 @@
     "title": "Résultats",
     "content": "Présentation des résultats...",
     "knobs": {
+      "title": "Options de visualisation",
       "graphtype": "Type de graphique:",
       "scatterplot": "nuage de points",
       "density": "nuage de points avec courbe de densité",
@@ -46,7 +47,7 @@
       "show": "afficher",
       "hide": "cacher"
     },
-    "intro": "<h1>Exercice de cartographie</h1><p>Dans deux de mes récentes expositions, j'ai invité les visiteurs·euses à prendre quelques minutes pour remplir un questionnaire papier comprenant une variété de questions existentielles.</p><p>Les participant·e·s devaient indiquer leur position en traçant un point sur une série de diagrammes.</p><h1>Résultats</h1><p>Au total, j'ai reçu 1222 questionnaires individuels.</p><p>Dans les graphiques en nuage de points ci-dessous (présentation par défaut), chaque point correspond à la réponse d'un·e participant·e.</p><p>Les questions apparaissent exactement comme sur le questionnaire original.</p>",
+    "intro": "<h1>Questions Existentielles:<br/>Un Exercice de cartographie</h1><p>Dans deux de mes récentes expositions, j'ai invité les visiteurs·euses à prendre quelques minutes pour remplir un questionnaire papier comprenant une variété de questions existentielles.</p><p>Les participant·e·s devaient indiquer leur position en traçant un point sur une série de diagrammes.</p><h1>Résultats</h1><p>Au total, j'ai reçu 1222 questionnaires individuels.</p><p>Dans les graphiques en nuage de points ci-dessous (présentation par défaut), chaque point correspond à la réponse d'un·e participant·e.</p><p>Les questions apparaissent exactement comme sur le questionnaire original.</p>",
     "footer": "<h2>Comment suivre certains répondants</h2><p>Vous pouvez tracer un rectangle autour d'une sélection de points, et vous verrez alors comment les participants correspondants à ces points ont répondu d'une question à l'autre.</p>",
     "customgraph": "Graphique sur mesure:",
     "part": "Partie",

@@ -10,6 +10,7 @@ import Knobs from "./knobs";
 import style from "./results.css";
 import Notify from "./notify";
 import { cloneDeep } from "lodash";
+import { useLanguageContext } from "../context/language-context";
 
 function useAsyncReducer(reducer, initState) {
   const [state, setState] = useState(initState),
@@ -20,6 +21,8 @@ function useAsyncReducer(reducer, initState) {
 export default function Results() {
   // STATE
   const [state, dispatch] = useAsyncReducer(reducer, cloneDeep(INITIAL_STATE));
+
+  const { swapLang } = useLanguageContext();
 
   useEffect(() => {
     if (state.data == null) dispatch({ type: "FETCH_DATA" });
@@ -53,8 +56,15 @@ export default function Results() {
   return (
     <div class={style.results}>
       <div class={style.intro}>
+        <div class={style["en-fr"]}>
+          <span onclick={() => swapLang("en")}>English</span>&nbsp;/&nbsp;
+          <span onclick={() => swapLang("fr")}>Français</span>
+        </div>
         <MarkupText id="results.intro">
-          <h1>Mapping Exercise:</h1>
+          <h1>
+            Existential Issues:
+            <br />A Mapping Exercise
+          </h1>
           <p>
             In two of my recent exhibitions, I invited visitors to take a few
             minutes to fill a paper questionnaire comprising a variety of
