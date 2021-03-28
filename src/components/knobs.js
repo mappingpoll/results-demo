@@ -4,14 +4,14 @@ import { Text } from "preact-i18n";
 import { DATASETS, GRAPH_TYPE } from "../constants";
 import { hasXAxis } from "../lib/misc";
 import style from "./knobs.css";
-import { useRef, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 // eslint-disable-next-line no-duplicate-imports
 import "./knobs.css";
 
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
 
-  let [shouldShowKnobs, setShouldShowKnobs] = useState(false);
+  let [shouldShowKnobs, setShouldShowKnobs] = useState(true);
 
   function handleShowHideClick() {
     setShouldShowKnobs(!shouldShowKnobs);
@@ -30,24 +30,13 @@ export default function Knobs(props) {
   const isProportions = graphType === GRAPH_TYPE.proportions;
   const isContour = graphType === GRAPH_TYPE.contour;
   const isColorContour = graphType === GRAPH_TYPE.colorContour;
-
-  // const hasColor =
-  //   graphType === GRAPH_TYPE.colorContour || graphType === GRAPH_TYPE.heatmap;
-
   const hasDots =
     graphType === GRAPH_TYPE.scatterplot ||
     graphType === GRAPH_TYPE.contourScatterplot ||
     graphType === GRAPH_TYPE.density;
 
-  // const hasContour =
-  //   graphType === GRAPH_TYPE.contourScatterplot ||
-  //   graphType === GRAPH_TYPE.colorContour ||
-  //   graphType === GRAPH_TYPE.contour;
-
   const shouldDisableDotSize = !isScatterplot;
   const shouldDisableDotOpacity = shouldDisableDotSize;
-  // const shouldDisableColorMid = !wantsColorDimension;
-  // const shouldDisableColorSchemeSelect = !hasColor;
   const shouldDisableXAxisSelect = !state.customViz;
   const shouldDisableYAxisSelect =
     !state.customViz || !hasXAxis(state.userAxes);
@@ -57,29 +46,18 @@ export default function Knobs(props) {
     dispatch({ type, payload: { [prop]: event.target.value } });
     if (callback != null && typeof callback === "function") callback();
   };
-
   const handleGraphTypeChange = handleSettingChange(
     "CHANGE_GRAPH_TYPE",
     "graph"
   );
-  // const handleColorSchemeChange = handleSettingChange(
-  //   "CHANGE_COLOR_SCHEME",
-  //   "color"
-  // );
   const handleDotSizeChange = handleSettingChange("CHANGE_DOT_SIZE", "size");
   const handleDotOpacityChange = handleSettingChange(
     "CHANGE_DOT_OPACITY",
     "opacity"
   );
-  // const handleContourBandwidthChange = handleSettingChange(
-  //   "CHANGE_CONTOUR_BANDWIDTH",
-  //   "contourBandwidth"
-  // );
   const handleWantsCustomGraphClick = handleSettingChange("TOGGLE_CUSTOM");
-  // const handleReverseColorClick = handleSettingChange("TOGGLE_REV_COLOR");
   const handleXSelectChange = handleSettingChange("SET_X_AXIS", "x");
   const handleYSelectChange = handleSettingChange("SET_Y_AXIS", "y");
-
   const handleDatasetChange = event => {
     const clicked = event.target.value;
     let other,
@@ -88,14 +66,12 @@ export default function Knobs(props) {
       other = clicked === "aga" ? "ba" : "aga";
     else if (DATASETS.language.includes(clicked))
       other = clicked === "en" ? "fr" : "en";
-
     dataset[clicked] = !dataset[clicked];
     if (!dataset[clicked] && !dataset[other]) {
       dataset[other] = true;
     }
     dispatch({ type: "FILTER_DATASET", payload: { dataset } });
   };
-
   const handleResetClick = () => dispatch({ type: "RESET" });
 
   // const ref = useRef();
