@@ -1,7 +1,7 @@
 input[type="range"] {
   -webkit-appearance: none;
   max-width: var(--track-width);
-  margin: 0.2rem 0;
+  margin: 0.5rem 0;
 }
 
 input[type="range"]:disabled {
