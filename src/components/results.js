@@ -58,6 +58,15 @@ export default function Results() {
     }
   }, [state.brushMap]);
 
+  useEffect(() => {
+    console.log("hello");
+    if (shouldShowCustomViz && introRef.current != null) {
+      const y = introRef.current.getBoundingClientRect().bottom;
+      console.log(y);
+      window.scrollBy(0, y);
+    }
+  }, [shouldShowCustomViz, state.userAxes]);
+
   const introRef = useRef();
   const mapsRef = useRef();
 
@@ -109,20 +118,14 @@ export default function Results() {
         selected={getLatestCount()}
         visible={shouldShowKnobs}
       />
+
       {notification}
-      {/* {shouldShowSelectionNotification && (
-        <Notify>
-          <span>
-            {selectionCount}&nbsp;
-            <Text id="results.knobs.selected">selected</Text>
-          </span>
-        </Notify>
-      )} */}
+
       <div ref={mapsRef} class={style.maps}>
         {shouldShowCustomViz && (
           <div class={style.map}>
             <div class={style.maptitle}>
-              <Text id="results.customgraph">Custom graph:</Text>
+              <Text id="results.customgraph">Custom graph</Text>
             </div>
             <div class={style.mapviz}>
               <Viz
@@ -133,6 +136,7 @@ export default function Results() {
             </div>
           </div>
         )}
+
         <div class={style.map}>
           <div class={style.maptitle}>
             <div>
