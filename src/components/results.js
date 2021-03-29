@@ -11,6 +11,7 @@ import style from "./results.css";
 import Notify from "./notify";
 import { cloneDeep } from "lodash";
 import { useLanguageContext } from "../context/language-context";
+import CollapsibleSection from "./collapsible-section";
 
 function useAsyncReducer(reducer, initState) {
   const [state, setState] = useState(initState),
@@ -71,6 +72,7 @@ export default function Results() {
       }
     };
   }, []);
+
   // JSX
   return (
     <div class={style.results}>
@@ -265,10 +267,11 @@ export default function Results() {
         </div>
       </div>
       <footer>
-        <section>
-          <h1>
+        <CollapsibleSection
+          title={
             <Text id="results.footer.select">Select & Follow Respondents</Text>
-          </h1>
+          }
+        >
           <p>
             <Text id="results.footer.select--body">
               You can draw a rectangle around a selection of dots, and you will
@@ -276,11 +279,10 @@ export default function Results() {
               from one question to the next.
             </Text>
           </p>
-        </section>
-        <section>
-          <h1>
-            <Text id="results.footer.interpretation">Interpretation</Text>
-          </h1>
+        </CollapsibleSection>
+        <CollapsibleSection
+          title={<Text id="results.footer.interpretation">Interpretation</Text>}
+        >
           <p>
             <Text id="results.footer.interpretation--body">
               Phasellus a ultrices enim. Nam nulla elit, pellentesque sit amet
@@ -298,11 +300,10 @@ export default function Results() {
               ridiculus mus.{" "}
             </Text>
           </p>
-        </section>
-        <section>
-          <h1>
-            <Text id="results.footer.context">Context</Text>
-          </h1>
+        </CollapsibleSection>
+        <CollapsibleSection
+          title={<Text id="results.footer.context">Context</Text>}
+        >
           <p>
             <Text id="results.footer.context--body">
               Phasellus a ultrices enim. Nam nulla elit, pellentesque sit amet
@@ -320,7 +321,7 @@ export default function Results() {
               ridiculus mus.{" "}
             </Text>
           </p>
-        </section>
+        </CollapsibleSection>
         <section>
           <h1>
             <Text id="results.footer.acknowledgements">Acknowledgements</Text>

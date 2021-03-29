@@ -84,23 +84,13 @@ footer > section,
 
 .mapviz {
   max-width: 55rem;
-  margin: 0 auto 14rem;
+  margin: 0 auto 13rem;
 }
 
 footer {
-  position: relative;
-
   font-family: "Times New Roman", Times, serif;
   color: white;
-
-  /* background: linear-gradient(
-    var(--background-color),
-    var(--background-primary) 25%
-  ); */
   background: var(--background-primary);
-}
-
-footer > section {
 }
 
 /* Smartphones (portrait) ----------- */
