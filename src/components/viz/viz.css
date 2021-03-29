@@ -1,9 +1,16 @@
+:root {
+  --label--top-bottom: 87%;
+  --label--left-right: 82%;
+  --label-lr--top-bottom-mobile: 9%;
+  --label-lr--left-right-mobile: 81%;
+}
+
 .vizContainer {
   position: relative;
   width: 100%;
   max-width: 90vh;
   margin: 0 auto;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
 }
 
 .viz {
@@ -15,37 +22,41 @@
 
 .label {
   position: absolute;
+  display: table-cell;
   text-align: center;
+  vertical-align: middle;
+
   text-shadow: -1px -1px white, -1px 1px white, 1px 1px white, 1px -1px white;
   user-select: none;
-  /* border: 1px solid blue; */
+  /* border: 1px solid red; */
+  line-height: 1;
 }
 
 .top,
 .bottom {
-  max-width: 28em;
+  max-width: 35ch;
 }
 
 .top {
-  bottom: 85%;
+  bottom: var(--label--top-bottom);
   left: 50%;
   transform: translate(-50%);
 }
 
 .bottom {
-  top: 85%;
+  top: var(--label--top-bottom);
   left: 50%;
   transform: translate(-50%);
 }
 
 .left {
   top: 50%;
-  right: 85%;
+  right: var(--label--left-right);
   transform: translate(0, -50%);
 }
 .right {
   top: 50%;
-  left: 85%;
+  left: var(--label--left-right);
   transform: translate(0, -50%);
 }
 
@@ -74,7 +85,7 @@
 }
 
 /* density-scatterplot */
-.densityline {
+/* .densityline {
   fill: none;
   stroke: #444;
   stroke-width: 1.2;
@@ -84,7 +95,7 @@
 
 /*  CONTOUR PLOTS */
 
-.contourPath {
+/* .contourPath {
   fill: none;
   stroke: #444;
   stroke-linejoin: round;
@@ -94,7 +105,7 @@
   position: relative;
   top: 5em;
   right: 0;
-}
+}  */
 
 svg {
   font-family: Arial, Helvetica, sans-serif;
@@ -105,24 +116,34 @@ svg {
 
 @media only screen and (max-device-width: 414px) {
   .vizContainer {
-    width: 95%;
+    max-width: 100%;
   }
+
   .label {
     font-size: 0.9em;
   }
 
+  .top,
+  .bottom {
+    width: 100%;
+    max-width: 25ch;
+  }
+
   .right,
   .left {
-    top: 0;
-    bottom: 0;
+    top: var(--label-lr--top-bottom-mobile);
+    bottom: var(--label-lr--top-bottom-mobile);
     transform: rotate(180deg);
     writing-mode: vertical-rl;
+    line-height: 0.9;
   }
   .left {
-    right: 80%;
+    right: var(--label-lr--left-right-mobile);
+    /* left: 0; */
   }
   .right {
-    left: 80%;
+    left: var(--label-lr--left-right-mobile);
+    /* right: 0; */
   }
 
   svg {
