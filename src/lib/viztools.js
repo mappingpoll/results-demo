@@ -1,10 +1,5 @@
 import * as d3 from "d3";
-import {
-  CUSTOM_COLORS,
-  DEFAULT_CANVAS_HEIGHT,
-  DEFAULT_CANVAS_WIDTH,
-  NA_SYMBOL,
-} from "../constants";
+import { CUSTOM_COLORS, NA_SYMBOL, VIEWBOX } from "../constants";
 import { rangeSize, symFloor } from "./misc";
 import { xScale, yScale } from "./scales";
 import svgExport from "./svg-export";
@@ -62,7 +57,7 @@ export function makeBrushTool(emit) {
     .brush()
     .extent([
       [0, 0],
-      [DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT],
+      [VIEWBOX[2], VIEWBOX[3]],
     ])
     .on("end", emit);
 }

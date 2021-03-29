@@ -54,6 +54,11 @@ footer > section,
   padding: 0 1rem;
 }
 
+.maptitle,
+.mapdescription {
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
 .maptitle {
   display: flex;
   justify-content: space-between;
@@ -61,7 +66,7 @@ footer > section,
   font-weight: bold;
   text-transform: uppercase;
   margin-top: 1.5rem;
-  margin-bottom: 6rem;
+  margin-bottom: 2rem;
 }
 .maptitle div:nth-child(1) {
   white-space: nowrap;
@@ -71,20 +76,9 @@ footer > section,
   text-align: right;
 }
 
-.mapdescription {
-  margin-bottom: 6rem;
-}
-
-.maptitle,
-.mapdescription {
-  max-width: var(--content-width);
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mapviz {
   max-width: 55rem;
-  margin: 0 auto 13rem;
+  margin: 6rem auto;
 }
 
 footer {
