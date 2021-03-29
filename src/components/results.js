@@ -59,10 +59,8 @@ export default function Results() {
   }, [state.brushMap]);
 
   useEffect(() => {
-    console.log("hello");
     if (shouldShowCustomViz && introRef.current != null) {
       const y = introRef.current.getBoundingClientRect().bottom;
-      console.log(y);
       window.scrollBy(0, y);
     }
   }, [shouldShowCustomViz, state.userAxes]);

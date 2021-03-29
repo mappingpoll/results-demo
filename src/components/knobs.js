@@ -11,7 +11,7 @@ import "./knobs.css";
 export default function Knobs(props) {
   const { state, dispatch } = props.reducer;
 
-  let [shouldShowKnobs, setShouldShowKnobs] = useState(true);
+  let [shouldShowKnobs, setShouldShowKnobs] = useState(false);
 
   function handleShowHideClick() {
     setShouldShowKnobs(!shouldShowKnobs);

@@ -12,14 +12,9 @@ export async function parseLocalCSV(path) {
       }
     }
     return row;
-  })
-    .then(data => {
-      // give unique ids to each respondant
-      data.forEach((d, i) => (d.id = i));
-      return data;
-    })
-    .then(data => {
-      console.log("csv loaded");
-      return data;
-    });
+  }).then(data => {
+    // give unique ids to each respondant
+    data.forEach((d, i) => (d.id = i));
+    return data;
+  });
 }

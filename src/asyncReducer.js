@@ -52,6 +52,7 @@ export async function reducer(state, action) {
         {
           data: jitteryData,
           rawData,
+          processedRawData: rawData,
           standardRegionCounts,
           standardProportions,
           questions,
