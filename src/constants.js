@@ -22,6 +22,7 @@ export const COLOR_SCHEME = {
   nicolas: "nicolas",
   nicolas2: "nicolas2",
   nicolas3: "nicolas3",
+  nicolas4: "nicolas4",
 };
 
 export const CUSTOM_COLORS = {
@@ -45,9 +46,19 @@ export const CUSTOM_COLORS = {
     "#640700",
   ]),
   nicolas3: interpolateRgbBasis(["#eeeeee", "#272727"]),
+  nicolas4: interpolateRgbBasis([
+    "#e2e2e2",
+    "#c4c4c4",
+    "#a1a1a1",
+    "#7c7c7c",
+    "#5f5f5f",
+    "#4a4a4a",
+    "#3b3b3b",
+    "#2d2d2d",
+  ]),
 };
 export const DEFAULT_DOT_COLOR = "black";
-export const DEFAULT_COLOR_SCHEME = COLOR_SCHEME.nicolas3;
+export const DEFAULT_COLOR_SCHEME = COLOR_SCHEME.nicolas4;
 export const DEFAULT_GRAPH_TYPE = GRAPH_TYPE.scatterplot;
 export const DEFAULT_DOT_SIZE = 22;
 export const DEFAULT_DOT_OPACITY = 0.28;
