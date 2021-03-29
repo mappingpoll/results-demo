@@ -20,15 +20,19 @@
 .intro {
   position: relative;
   background: var(--background-primary);
+  padding: 2rem calc((100% - var(--content-width)) / 2);
   z-index: 600;
 }
 
 .intro,
 footer > section {
-  padding: 0.25rem calc((100% - var(--content-width)) / 2);
-  padding-bottom: 2rem;
   font-family: "Times New Roman", Times, serif;
   color: white;
+}
+
+footer > section {
+  padding: 0.25rem calc((100% - var(--content-width)) / 2);
+  padding-bottom: 2rem;
 }
 
 .intro h1,
