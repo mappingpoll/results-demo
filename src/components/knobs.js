@@ -77,7 +77,7 @@ export default function Knobs(props) {
   return (
     <div class={style.knobs} style={props.visible ? "" : "opacity: 0"}>
       <div style="display: flex; justify-content: space-between; align-items: center">
-        <h1>
+        <h1 onClick={handleShowHideClick}>
           <Text id="results.knobs.title">Visualization Options</Text>
         </h1>
         <div class={style["show-hide"]} onClick={handleShowHideClick}>

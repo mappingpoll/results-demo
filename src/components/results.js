@@ -325,8 +325,10 @@ export default function Results() {
           </p>
         </CollapsibleSection>
         <section>
-          <h1>
-            <Text id="results.footer.acknowledgements">Acknowledgements</Text>
+          <h1 lang="en">
+            <Text id="results.footer.acknowledgements">
+              Acknowledge&shy;ments
+            </Text>
           </h1>
           <p>
             <Text id="results.footer.acknowledgements--bodu">

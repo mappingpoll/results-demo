@@ -1,13 +1,10 @@
 .collapsed {
-  padding-top: 0;
+  /* padding-top: 0; */
   padding-bottom: 0;
 }
 
 .collapsed h1 {
-  margin: 0;
-  padding: 1rem 0;
-}
-
-h1 {
+  /* margin: 0; */
+  /* padding: 1rem 0; */
   cursor: pointer;
 }
