@@ -95,7 +95,7 @@
 
 /*  CONTOUR PLOTS */
 
-/* .contourPath {
+.contourPath {
   fill: none;
   stroke: #444;
   stroke-linejoin: round;
@@ -105,7 +105,7 @@
   position: relative;
   top: 5em;
   right: 0;
-}  */
+}
 
 svg {
   font-family: Arial, Helvetica, sans-serif;
