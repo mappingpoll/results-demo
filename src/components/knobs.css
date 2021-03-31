@@ -20,7 +20,7 @@
   transition: opacity 200ms ease;
 }
 
-h1 {
+.title {
   font-size: 1.8rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -34,6 +34,11 @@ h1 {
   align-items: center;
 }
 
+/* spacing after title when open */
+.grid-container > div:first-child {
+  margin-top: 1rem;
+}
+
 .knob,
 .subknob {
   font-size: var(--knobs-font-size);
@@ -45,6 +50,10 @@ h1 {
 .subknob .labeled-input {
   padding-left: 2rem;
 }
+.subknob .labeled-checkbox {
+  padding-left: 3rem;
+}
+
 
 .labeled-input {
   display: flex;
