@@ -127,7 +127,13 @@ td {
   max-width: 100%;
   margin: 2rem 0;
 }
-
+.acknowledgements > h1 {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  /* word-break: break-all; */
+}
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-device-width: 414px) {
   .intro,
@@ -171,12 +177,5 @@ td {
     overflow: hidden;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-  }
-  section > h1 {
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    overflow-wrap: break-word;
-    /* word-break: break-all; */
   }
 }

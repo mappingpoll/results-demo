@@ -571,8 +571,8 @@ export default function Results() {
             <p>
               About 10-15% of respondents left a comment. Here is a
               non-exhaustive list of comments received. The most repetitive
-              compliments ("very interesting," "congrats for the great show,"
-              etc.) have been removed.
+              comments ("very interesting," "congrats for the great show," etc.)
+              have been removed.
             </p>
           </MarkupText>
           <h2>Edmonton:</h2>
@@ -1187,7 +1187,11 @@ export default function Results() {
           </table>
         </CollapsibleSection>
         <CollapsibleSection
-          title={<Text id="results.footer.considerations">Considerations</Text>}
+          title={
+            <Text id="results.footer.considerations">
+              Observations & Considerations
+            </Text>
+          }
         >
           <MarkupText id="results.footer.considerations--body">
             <h2>Why are there so many dots in the center?</h2>
