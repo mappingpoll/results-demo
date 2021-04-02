@@ -108,7 +108,7 @@ export default function Results() {
             corresponds to the answer of one participant.
           </p>
           <p>
-            You will find more information under the graphs, at
+            You will find more information under the graphs, at{" "}
             <a href="#footer">the bottom of the page.</a>
           </p>
         </MarkupText>
@@ -585,9 +585,6 @@ export default function Results() {
             </tr>
             <tr>
               <td>the human experiment</td>
-            </tr>
-            <tr>
-              <td></td>
             </tr>
             <tr>
               <td>CLIMATE CHANGE IS REAL</td>
