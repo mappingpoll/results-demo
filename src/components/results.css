@@ -43,6 +43,17 @@ footer h1 {
   margin: 1em 0;
 }
 
+.intro h2,
+footer h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.intro h3,
+footer h3 {
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
 .intro p,
 footer p {
   font-size: 1.4rem;
@@ -90,6 +101,31 @@ footer {
   font-family: "Times New Roman", Times, serif;
   color: white;
   background: var(--background-primary);
+}
+table {
+  font-size: 1.1rem;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+table,
+td {
+  text-align: center;
+  border: 1px solid white;
+}
+td {
+  padding: 0.1rem 0;
+}
+
+.acknowledgements {
+  background-color: white;
+  color: black;
+}
+
+.acknowledgements > img {
+  display: block;
+  max-height: 5em;
+  max-width: 100%;
+  margin: 2rem 0;
 }
 
 /* Smartphones (portrait) ----------- */
