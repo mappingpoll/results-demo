@@ -62,7 +62,7 @@ footer p {
 hr {
   max-width: var(--content-width);
   border: none;
-  border-image-source: url("../assets/plus-border.png");
+  border-image-source: url("../assets/plus-border.svg");
   border-image-slice: 33.33%;
   border-image-repeat: round;
   border-top: 17px solid black;
