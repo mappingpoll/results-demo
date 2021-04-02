@@ -30,7 +30,7 @@ export function MobileContextProvider({ children }) {
 
 export function useMobileContext() {
   const context = useContext(MobileContext);
-  if (context == null)
+  if (context == null && typeof window !== "undefined")
     throw new Error(
       "useMobileContext must be used with a MobileContextProvider"
     );
