@@ -269,6 +269,9 @@ export default function Results() {
             />
           </div>
         </div>
+        <div>
+          <hr />
+        </div>
       </div>
       <footer id="footer">
         <CollapsibleSection

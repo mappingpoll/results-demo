@@ -39,6 +39,12 @@
   --wavy-border-top-bottom: 18px solid transparent;
 }
 
+::selection,
+::-moz-selection {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
 @import "rangeslider.css";
 
 html,
