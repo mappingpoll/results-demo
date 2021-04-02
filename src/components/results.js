@@ -1268,7 +1268,7 @@ export default function Results() {
           <MarkupText id="results.footer.acknowledgements--body">
             <p>
               The questionnaire was conceived with help from
-              <strong>Tyson Atkings, David Elliott</strong>, and
+              <strong> Tyson Atkings, David Elliott</strong>, and
               <strong> Chantal Gevrey</strong>.
             </p>
             <p>
@@ -1293,7 +1293,7 @@ export default function Results() {
             </p>
             <p>
               This interface for data visualisation was built by
-              <strong> Nicolas Epstein</strong>.
+              <strong> Nicolas&nbsp;Epstein</strong>.
             </p>
             <p>The project was made possible thanks to the support of:</p>
           </MarkupText>
