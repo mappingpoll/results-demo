@@ -235,7 +235,6 @@ svg {
   padding-left: 3rem;
 }
 
-
 .labeled-input__3_bcu {
   display: -ms-flexbox;
   display: flex;
@@ -296,7 +295,7 @@ input[type="checkbox"] {
 
 @media only screen and (max-device-width: 414px) {
   .knobs__E0y9d {
-    position: static;
+    /* position: static; */
     padding: 0 0.5rem;
     margin: 0;
   }
@@ -371,28 +370,67 @@ footer > section {
   padding-bottom: 2rem;
 }
 
-.intro__3DW69 h1,
+/* .intro h1,
 footer h1 {
   font-size: 2.4rem;
   line-height: 1.2;
   font-weight: 400;
   margin: 1em 0;
+} */
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 1em 0;
 }
 
-.intro__3DW69 h2,
-footer h2 {
+h2 {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 400;
 }
-.intro__3DW69 h3,
-footer h3 {
+h3 {
   font-size: 1.75rem;
+  font-weight: 400;
+}
+
+aside h3 {
+  font-size: 1rem;
   font-weight: 400;
 }
 
 .intro__3DW69 p,
 footer p {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+}
+
+/* .plus-divider {
+  font-weight: bold;
+}
+.plus-divider:after {
+  white-space: pre;
+  content: " +         +         +         +         +         +         +         +         +         +         +         +         +         +         +         +         +";
+} */
+
+aside {
+  overflow: hidden;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  color: #4b41ff;
+}
+aside::before,
+aside::after {
+  font-size: 1.2rem;
+  color: #4b41ff;
+  font-weight: bold;
+  text-align: center;
+  text-overflow: "";
+  overflow: hidden;
+  white-space: pre;
+  content: "+       +       +       +       +       +       +       +       +       +       +       +       +       +       +";
+}
+
+.empty-after__3NmaI::after {
+  content: "";
 }
 
 footer > section,
@@ -405,6 +443,10 @@ footer > section,
 .map__3-ZVt {
   margin: 5rem 0;
   padding: 0 1rem;
+}
+
+.map__3-ZVt:last-of-type {
+  margin-bottom: 0;
 }
 
 .maptitle__2aNHj,
@@ -466,6 +508,31 @@ td {
   max-width: 100%;
   margin: 2rem 0;
 }
+.acknowledgements__1LzvG > h1 {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  /* word-break: break-all; */
+}
+
+.back-to-top__2-M98 {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0 0.2rem;
+  opacity: 0;
+  font-size: 1.5rem;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  cursor: pointer;
+  z-index: 1000;
+  -webkit-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-device-width: 414px) {
@@ -474,12 +541,26 @@ td {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-  .intro__3DW69 h1,
-  section h1 {
-    font-size: 2rem;
+
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 1em 0;
   }
-  .intro__3DW69 p {
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+  h3 {
     font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .intro__3DW69 p,
+  footer p {
+    font-size: 1rem;
   }
 
   .map__3-ZVt {
@@ -513,13 +594,6 @@ td {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-  section > h1 {
-    -webkit-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    overflow-wrap: break-word;
-    /* word-break: break-all; */
-  }
 }
 
 .notif__178Vq {
@@ -531,7 +605,7 @@ td {
   color: white;
   font-weight: bold;
   padding: 0 0.2rem;
-  opacity: 1;
+  z-index: 1000;
   /* 
   opacity: 0;
   animation: disappear 6s; */
@@ -539,10 +613,10 @@ td {
 
 .notif__178Vq,
 .notif__178Vq > span {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-@keyframes disappear__3tXay {
+/* @keyframes disappear {
   0% {
     opacity: 1;
   }
@@ -554,7 +628,7 @@ td {
   100% {
     opacity: 0;
   }
-}
+} */
 
 .collapsed__1wkFV {
   /* padding-top: 0; */
@@ -700,6 +774,12 @@ input[type="range"]:disabled {
   --wavy-border-top-bottom: 18px solid transparent;
 }
 
+::selection,
+::-moz-selection {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
 html,
 body {
   height: 100%;
@@ -725,8 +805,8 @@ button {
 }
 
 a {
-  color: var(--text-color);
+  color: var(--white);
 }
 
 
-/*# sourceMappingURL=ssr-bundle.5d87c.css.map*/
+/*# sourceMappingURL=ssr-bundle.cf7ff.css.map*/
