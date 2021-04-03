@@ -35,37 +35,67 @@ footer > section {
   padding-bottom: 2rem;
 }
 
-.intro h1,
+/* .intro h1,
 footer h1 {
   font-size: 2.4rem;
   line-height: 1.2;
   font-weight: 400;
   margin: 1em 0;
+} */
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 400;
+  margin: 1em 0;
 }
 
-.intro h2,
-footer h2 {
+h2 {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 400;
 }
-.intro h3,
-footer h3 {
+h3 {
   font-size: 1.75rem;
+  font-weight: 400;
+}
+
+aside h3 {
+  font-size: 1rem;
   font-weight: 400;
 }
 
 .intro p,
 footer p {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
-hr {
+/* .plus-divider {
+  font-weight: bold;
+}
+.plus-divider:after {
+  white-space: pre;
+  content: " +         +         +         +         +         +         +         +         +         +         +         +         +         +         +         +         +";
+} */
+
+aside {
+  overflow: hidden;
   max-width: var(--content-width);
-  border: none;
-  border-image-source: url("../assets/plus-border.svg");
-  border-image-slice: 33.33%;
-  border-image-repeat: round;
-  border-top: 17px solid black;
+  margin: 0 auto;
+  color: #4b41ff;
+}
+aside::before,
+aside::after {
+  font-size: 1.2rem;
+  color: #4b41ff;
+  font-weight: bold;
+  text-align: center;
+  text-overflow: "";
+  overflow: hidden;
+  white-space: pre;
+  content: "+       +       +       +       +       +       +       +       +       +       +       +       +       +       +";
+}
+
+.empty-after::after {
+  content: "";
 }
 
 footer > section,
@@ -77,6 +107,10 @@ footer > section,
 .map {
   margin: 5rem 0;
   padding: 0 1rem;
+}
+
+.map:last-of-type {
+  margin-bottom: 0;
 }
 
 .maptitle,
@@ -143,6 +177,23 @@ td {
   overflow-wrap: break-word;
   /* word-break: break-all; */
 }
+
+.back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-block;
+  font-weight: bold;
+  padding: 0 0.2rem;
+  opacity: 0;
+  font-size: 1.5rem;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  cursor: pointer;
+  z-index: 1000;
+  user-select: none;
+}
+
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-device-width: 414px) {
   .intro,
@@ -150,12 +201,26 @@ td {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-  .intro h1,
-  section h1 {
-    font-size: 2rem;
+
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 1em 0;
   }
-  .intro p {
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+  h3 {
     font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .intro p,
+  footer p {
+    font-size: 1rem;
   }
 
   .map {

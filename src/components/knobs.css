@@ -54,7 +54,6 @@
   padding-left: 3rem;
 }
 
-
 .labeled-input {
   display: flex;
   justify-content: space-between;
@@ -107,7 +106,7 @@ input[type="checkbox"] {
 
 @media only screen and (max-device-width: 414px) {
   .knobs {
-    position: static;
+    /* position: static; */
     padding: 0 0.5rem;
     margin: 0;
   }
