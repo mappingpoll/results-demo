@@ -791,7 +791,7 @@ body {
   background-color: var(--background-color);
   font-family: Arial, Helvetica, sans-serif;
 
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
 
 * {
@@ -809,4 +809,4 @@ a {
 }
 
 
-/*# sourceMappingURL=ssr-bundle.cf7ff.css.map*/
+/*# sourceMappingURL=ssr-bundle.0d7df.css.map*/
