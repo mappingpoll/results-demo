@@ -46,7 +46,27 @@
       "reset": "Réinitialiser",
       "clickto": "Cliquez pour afficher / cacher",
       "show": "afficher",
-      "hide": "cacher"
+      "hide": "cacher",
+      "questions": {
+        "0": "Début / fin de ma vie",
+        "1": "C'est facile / dur d'exister dans ce monde",
+        "2": "La vie n'est que la vie / besoin de signification",
+        "3": "Normes sociales universelles / culturelles",
+        "4": "Jamais quitté / me déplace constamment",
+        "5": "Profonde connexion / ne pense pas territoire",
+        "6": "Réalité concrète / grandes abstractions",
+        "7": "Je crois / ne crois pas légitimité ordre mondial",
+        "8": "Définis identité moi-même / avec groupes",
+        "9": "S'exposer mène à tolérance / confrontation",
+        "10": "Nous allons vers autodestruction / progrès",
+        "11": "Impact cosmologique / aucun impact",
+        "12": "Défendre l'économie / protéger la planète",
+        "13": "Donner ma vie / indifférent.e",
+        "14": "J'ai le pouvoir de changer / impuissant.e",
+        "15": "Pragmatisme / idéalisme",
+        "16": "Questions biaisées / équilibrées",
+        "17": "Représente ma position / n'importe quoi"
+      }
     },
     "back-to-top": "Retour",
     "intro": "<h1>Enjeux Existentiels:<br/>Exercice de cartographie</h1><p>Dans deux de mes récentes expositions (Sobey Art Award Exhibition à la Art Gallery of Alberta, et «Positions» à la Galerie Bradley Ertaskiran), j'ai invité les gens à prendre quelques minutes pour remplir un questionnaire papier comprenant une variété de questions existentielles. Les participant·e·s devaient indiquer leur position en traçant un point sur une série de diagrammes.</p><h1>Résultats</h1><p>Au total, j'ai reçu 1222 questionnaires individuels. Dans les graphiques en nuage de points ci-dessous, chaque point correspond à la réponse d'un·e participant·e. Les questions apparaissent exactement comme sur le questionnaire original.<p>Une interprétation, en bleu, a été ajoutée après chaque graphique. (Analyse des données par Group Leger Analytics, interprétation complémentaire et commentaires de Nicolas Grenier.)</p></p><p>Vous trouverez plus d’informations sous les graphiques, <a href='#footer'>en bas de la page</a></p>",

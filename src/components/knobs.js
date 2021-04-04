@@ -74,6 +74,14 @@ export default function Knobs(props) {
   };
   const handleResetClick = () => dispatch({ type: "RESET" });
 
+  const axesOptions =
+    state.questions != null &&
+    state.questions.map((option, idx) => (
+      <option value={`${idx}`}>
+        <Text id={`results.knobs.questions.${idx}`}>{option}</Text>
+      </option>
+    ));
+
   return (
     <div
       class={style.knobs}
@@ -275,10 +283,7 @@ export default function Knobs(props) {
                 <option value="">
                   <Text id="results.knobs.option">choose an option</Text>
                 </option>
-                {state.questions != null &&
-                  state.questions.map((option, idx) => (
-                    <option value={`${idx}`}>{option}</option>
-                  ))}
+                {axesOptions}
               </select>
             </div>
             <div class={style["labeled-input"]}>
@@ -293,10 +298,7 @@ export default function Knobs(props) {
                 <option value="">
                   <Text id="results.knobs.option">choose an option</Text>
                 </option>
-                {state.questions != null &&
-                  state.questions.map((option, idx) => (
-                    <option value={`${idx}`}>{option}</option>
-                  ))}
+                {axesOptions}
               </select>
             </div>
           </div>
