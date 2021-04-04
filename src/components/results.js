@@ -77,14 +77,19 @@ export default function Results() {
 
   function collapseFooterSections() {
     setCollapseOverride(true);
-    setTimeout(() => setCollapseOverride(false), 1000);
+    setTimeout(() => setCollapseOverride(false), 100);
   }
 
   function handleBackToTopClick() {
     const topY = introRef.current.getBoundingClientRect().top;
     const introY = introRef.current.getBoundingClientRect().bottom;
     const mapsY = mapsRef.current.getBoundingClientRect().bottom;
-    window.scrollBy(0, mapsY < 0 ? mapsY - 2 : introY < 0 ? introY - 2 : topY);
+    window.scrollTo(
+      0,
+      1 +
+        window.pageYOffset +
+        (mapsY < -1 ? mapsY : introY < -1 ? introY : topY)
+    );
     collapseFooterSections();
   }
 
