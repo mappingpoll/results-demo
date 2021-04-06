@@ -86,14 +86,15 @@ export default function Results() {
   }
 
   function handleBackToTopClick() {
-    const topY = introRef.current.getBoundingClientRect().top;
     const introY = introRef.current.getBoundingClientRect().bottom;
     const mapsY = mapsRef.current.getBoundingClientRect().bottom;
     window.scrollTo(
       0,
-      1 +
-        window.pageYOffset +
-        (mapsY < -1 ? mapsY - 20 : introY < -1 ? introY : topY)
+      mapsY < -1
+        ? window.pageYOffset + mapsY - 20
+        : introY < -1
+        ? window.pageYOffset + introY + 1
+        : 0
     );
     collapseFooterSections();
   }
