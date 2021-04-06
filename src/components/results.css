@@ -12,9 +12,12 @@
 }
 
 .en-fr > span {
-  text-decoration: underline;
   cursor: pointer;
   line-height: 1.2;
+}
+
+.en-fr > span:hover {
+  text-decoration: underline;
 }
 
 .intro {
@@ -50,7 +53,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1.9rem;
   font-weight: 400;
 }
 h3 {
@@ -64,7 +67,8 @@ aside h3 {
 }
 
 .intro p,
-footer p {
+footer p,
+footer li {
   font-size: 1.3rem;
 }
 

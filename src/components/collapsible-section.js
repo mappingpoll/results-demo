@@ -21,6 +21,9 @@ export default function CollapsibleSection({
     <section class={isCollapsed ? style.collapsed : style.open}>
       <div class={style.title} onclick={() => setIsCollapsed(!isCollapsed)}>
         <h1>{title}</h1>
+        <h1>
+          <strong>{isCollapsed ? "+" : "−"}</strong>
+        </h1>
         {/* {!isMobile && (
           <span>
             <Text id="results.knobs.clickto">Click to show / hide</Text>
@@ -28,6 +31,14 @@ export default function CollapsibleSection({
         )} */}
       </div>
       {!isCollapsed && children}
+      {!isCollapsed && (
+        <h1
+          style="text-align: right; cursor: pointer;"
+          onclick={() => setIsCollapsed(true)}
+        >
+          <strong>−</strong>
+        </h1>
+      )}
     </section>
   );
 }

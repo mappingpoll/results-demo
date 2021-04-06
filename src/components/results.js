@@ -80,6 +80,11 @@ export default function Results() {
     setTimeout(() => setCollapseOverride(false), 100);
   }
 
+  function handleToBottomClick() {
+    const footerY = footerRef.current.getBoundingClientRect().top - 20;
+    window.scrollTo(0, footerY);
+  }
+
   function handleBackToTopClick() {
     const topY = introRef.current.getBoundingClientRect().top;
     const introY = introRef.current.getBoundingClientRect().bottom;
@@ -88,7 +93,7 @@ export default function Results() {
       0,
       1 +
         window.pageYOffset +
-        (mapsY < -1 ? mapsY : introY < -1 ? introY : topY)
+        (mapsY < -1 ? mapsY - 20 : introY < -1 ? introY : topY)
     );
     collapseFooterSections();
   }
@@ -125,7 +130,7 @@ export default function Results() {
             : "opacity: 0; pointer-events: none; cursor: default;"
         }
       >
-        <Text id="results.back-to-top">Back to top</Text>
+        <Text id="results.back-to-top">Go up</Text> ⬆
       </div>
       <div ref={introRef} class={style.intro}>
         <div class={style["en-fr"]}>
@@ -152,16 +157,16 @@ export default function Results() {
             participant. The questions appear exactly as on the original
             questionnaire.
           </p>
-          <p>
-            An interpretation, in blue, was added after each graph. (Data
-            analysis by Group Leger Analytics, with further interpretation and
-            comments by Nicolas Grenier.)
-          </p>
-          <p>
-            You will find more information under the graphs, at{" "}
-            <a href="#footer">the bottom of the page.</a>
-          </p>
         </MarkupText>
+        <p>
+          <Text id="results.intro--link-p1">
+            You will find more information under the graphs, at{" "}
+          </Text>
+          <a href="#null" onclick={handleToBottomClick}>
+            <Text id="results.intro--link-p2">the bottom of the page</Text>
+          </a>
+          .
+        </p>
       </div>
       <Knobs
         reducer={{ state, dispatch }}
@@ -203,25 +208,7 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph1">
-              <h3>Graph 1</h3>
-              <ul>
-                <li>
-                  <strong>
-                    Most respondents situate themselves in the first half of
-                    their life and find it rather “easy to exist in this world.”
-                  </strong>
-                </li>
-                <li>
-                  Overall, about a third (360 respondents, or 32%) find it
-                  rather “hard to exist in this world.”
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
+
           <div class={style.mapviz}>
             <Viz
               state={state}
@@ -229,37 +216,6 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph2">
-              <h3>Graph 2</h3>
-              <ul>
-                <li>
-                  <strong>The vast majority of respondents</strong> (782
-                  individuals, or 66%){" "}
-                  <strong>
-                    want their life to have greater meaning beyond their small
-                    existence.{" "}
-                  </strong>
-                  Among these, a majority believes that morality and social
-                  norms are human universals.
-                </li>
-                <li>
-                  However,
-                  <strong>
-                    {" "}
-                    there is no overall consensus as to whether morality is
-                    universal or cultural.{" "}
-                  </strong>
-                  Slightly more respondents (535, or 45%) believe that morality
-                  is subjective and cultural rather than human universals (486,
-                  or 41%), and a significant proportion are neutral or
-                  ambivalent (146, or 13%).
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
         </div>
         <div class={style.map}>
           <div class={style.maptitle}>
@@ -291,24 +247,7 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph3">
-              <h3>Graph 3</h3>
-              <ul>
-                <li>
-                  There is a strong concentration in the top right quadrant,
-                  where <strong>a majority of respondents</strong> (657, or 56%)
-                  <strong>
-                    {" "}
-                    indicate that they both feel a deep connexion to the land
-                    and keep moving far and wide.
-                  </strong>
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
+
           <div class={style.mapviz}>
             <Viz
               state={state}
@@ -316,31 +255,6 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph4">
-              <h3>Graph 4</h3>
-              <ul>
-                <li>
-                  <strong>A clear majority of respondents</strong> (665, or 57%)
-                  <strong>
-                    {" "}
-                    does not accept the legitimacy of the current world order.
-                  </strong>
-                  Among these, most respondents (371) indicate that they care
-                  more about larger questions and abstractions than the tangible
-                  reality of life.
-                </li>
-                <li>
-                  Overall, answers are scattered on all quadrants, and a large
-                  proportion (332, or 28%) is neutral or ambivalent when given
-                  the choice between caring more about the “tangible reality of
-                  life” or “larger questions and abstractions.”
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
 
           <div class={style.mapviz}>
             <Viz
@@ -349,31 +263,6 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph5">
-              <h3>Graph 5</h3>
-              <ul>
-                <li>
-                  <strong>There is almost complete unanimity</strong> (1049
-                  respondents, or 92%):
-                  <strong>
-                    {" "}
-                    exposure to different beliefs and value systems leads to
-                    increased tolerance and mutual understanding.
-                  </strong>
-                </li>
-                <li>
-                  A majority of respondents (589 or 51%) indicate that they
-                  define themselves and their convictions on their own, but many
-                  also define themselves in relation to groups with whom they
-                  belong (380, or 33%) and a good proportion is neutral or
-                  ambivalent (182, or 16%).
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
         </div>
         <div class={style.map}>
           <div class={style.maptitle}>
@@ -403,34 +292,6 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph6">
-              <h3>Graph 6</h3>
-              <ul>
-                <li>
-                  <strong>There is a very strong consensus</strong> (938
-                  respondents, or 83%)
-                  <strong>
-                    {" "}
-                    that we, humans living today, will have an impact of
-                    cosmological importance for the future of humanity.
-                  </strong>
-                </li>
-                <li>
-                  <strong>A strong majority</strong> (653 respondents, or 57%)
-                  <strong>
-                    {" "}
-                    believes that “we’re going toward self-destruction,”
-                  </strong>
-                  while a small minority (266, or 23%) believes that we’re
-                  making constant progress, and almost as many (223, or 20%) are
-                  neutral or ambivalent.
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
 
           <div class={style.mapviz}>
             <Viz
@@ -439,35 +300,6 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph7">
-              <h3>Graph 7</h3>
-              <ul>
-                <li>
-                  <strong>A strong majority</strong> (847 respondents, or 75%)
-                  <strong>
-                    {" "}
-                    wants to protect the planet and reinvent a more egalitarian
-                    world
-                  </strong>
-                  , and within this majority most respondents
-                  <strong>
-                    {" "}
-                    are willing to dedicate themselves to the cause.
-                  </strong>
-                </li>
-                <li>
-                  By contrast, a tiny minority affirms being strongly committed
-                  to defending “private property, the free market economy, and
-                  the freedom of the individual” (70 respondents or 6%). A more
-                  significant proportion is neutral or ambivalent (161
-                  respondents, or 15%).
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
 
           <div class={style.mapviz}>
             <Viz
@@ -476,35 +308,6 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
-          <aside>
-            <h1 />
-            <MarkupText id="results.analysis.graph8">
-              <h3>Graph 8</h3>
-              <ul>
-                <li>
-                  <strong>
-                    Answers are scattered across all four quadrants.
-                  </strong>
-                </li>
-                <li>
-                  <strong>A small majority of people</strong> (586 respondents,
-                  or 51%)
-                  <strong>
-                    {" "}
-                    feel that they have the power to change things on a
-                    structural level
-                  </strong>
-                  , while about one third feels powerless (386, or 34%).
-                </li>
-                <li>
-                  A small majority believes that idealism is more important than
-                  pragmatism, and a third of all respondents (351, or 31%) are
-                  neutral or ambivalent.
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
         </div>
         <div class={style.map}>
           <div class={style.maptitle}>
@@ -520,39 +323,8 @@ export default function Results() {
               dispatch={dispatch}
             />
           </div>
+
           <aside class={style["empty-after"]}>
-            <h1 />
-            <MarkupText id="results.analysis.graph9">
-              <h3>Graph 9</h3>
-              <ul>
-                <li>
-                  Thankfully,
-                  <strong>
-                    {" "}
-                    there is a strong consensus among respondents{" "}
-                  </strong>
-                  (871, or 76%):
-                  <strong>
-                    they estimate that the questions were well-balanced and
-                    relevant, and that their answers truly represent how they
-                    feel.
-                  </strong>
-                </li>
-                <li>
-                  A small proportion of respondents (100, or 8%) consider the
-                  questions rather biased and / or moralizing and / or annoying.
-                </li>
-                <li>
-                  A tiny proportion affirms that their answers to the
-                  questionnaire are rather meaningless (19 respondents, or less
-                  than 2%).
-                </li>
-              </ul>
-            </MarkupText>
-            <h1 />
-          </aside>
-          <aside class={style["empty-after"]}>
-            <h1 />
             <p>
               <strong>
                 <Text id="results.footer.select">
@@ -568,7 +340,7 @@ export default function Results() {
               </Text>
             </p>
             <img
-              style="display: block; max-width: min(80vw, 400px); margin: 2rem auto;"
+              style="display: block; max-width: min(80vw, 400px); margin: 2rem auto 6rem;"
               src="../assets/transparency_select_blue.png"
               alt="an example of a mouse pointer selecting a rectangular section of points from a scatterplot"
             />
@@ -1209,55 +981,200 @@ export default function Results() {
           </table>
         </CollapsibleSection>
 
-        {/* ABOUT */}
+        {/* ANALYSIS */}
         <CollapsibleSection
-          title={<Text id="results.footer.about">About this project</Text>}
+          title={<Text id="results.footer.analysis">Analysis</Text>}
           collapseOverride={collapseOverride}
         >
-          <MarkupText id="results.footer.about--body">
+          <MarkupText id="results.footer.analysis--body">
             <p>
-              This questionnaire was designed as part of my installation for the
-              Sobey Art Award Exhibition, which took place at the Art Gallery of
-              Alberta, Edmonton, Canada from October 5, 2019 to January 5, 2020.
+              (Data analysis by Group Leger Analytics, with further
+              interpretation and comments by Nicolas Grenier.)
             </p>
-            <p>
-              The diagrammatic structure of the questionnaire mirrors some of my
-              paintings. I wanted to create an experience in which visitors
-              could immerse themselves in the works not only by looking, but
-              also by positioning themselves in relation to the same existential
-              issues that I address in my work. Taking position involves
-              choosing this over that, which is to say, it involves a form of
-              measurement. But a quantitative framework is inherently
-              inappropriate to consider qualitative notions such as morality or
-              progress. So I deliberately avoided presenting participants with
-              precise grids, numbers and metrics. I didn’t want the focus to be
-              on quantification, but on navigation — I wanted participants to
-              navigate through different sets of issues put in relation with one
-              another and find their own position as intuitively as possible. To
-              make visitors engage in this experience was the essence of the
-              project.
-            </p>
-            <p>
-              During the Sobey Art Award exhibition, 941 visitors took the time
-              to fill a questionnaire — much more than I expected. I often
-              witnessed people spending several minutes pondering the questions,
-              and many left positive feedback on the questionnaire.
-            </p>
-            <p>
-              So I decided to integrate the same questionnaire in my next
-              exhibition, “Positions,” which took place in the Bunker at Galerie
-              Bradley Ertaskiran, Montreal, from January 24 to March 7, 2020. We
-              collected a total of 281 questionnaires, much more than I expected
-              for a private gallery exhibition.
-            </p>
-            <p>
-              1222 individual questionnaires were collected during the two
-              exhibitions.
-            </p>
-            <p>
-              It took one year to secure funding, compile the data, analyze the
-              results, and build this interface.
-            </p>
+            <h2>PART I - YOU</h2>
+            <h3>Graph 1</h3>
+            <ul>
+              <li>
+                <strong>
+                  Most respondents situate themselves in the first half of their
+                  life and find it rather “easy to exist in this world.”
+                </strong>
+              </li>
+              <li>
+                Overall, about a third (360 respondents, or 32%) find it rather
+                “hard to exist in this world.”
+              </li>
+            </ul>
+
+            <h3>Graph 2</h3>
+            <ul>
+              <li>
+                <strong>The vast majority of respondents</strong> (782
+                individuals, or 66%){" "}
+                <strong>
+                  want their life to have greater meaning beyond their small
+                  existence.{" "}
+                </strong>
+                Among these, a majority believes that morality and social norms
+                are human universals.
+              </li>
+              <li>
+                However,
+                <strong>
+                  {" "}
+                  there is no overall consensus as to whether morality is
+                  universal or cultural.{" "}
+                </strong>
+                Slightly more respondents (535, or 45%) believe that morality is
+                subjective and cultural rather than human universals (486, or
+                41%), and a significant proportion are neutral or ambivalent
+                (146, or 13%).
+              </li>
+            </ul>
+            <h2>PART II - YOU AND THE WORLD</h2>
+            <h3>Graph 3</h3>
+            <ul>
+              <li>
+                There is a strong concentration in the top right quadrant, where
+                <strong>a majority of respondents</strong> (657, or 56%)
+                <strong>
+                  {" "}
+                  indicate that they both feel a deep connexion to the land and
+                  keep moving far and wide.
+                </strong>
+              </li>
+            </ul>
+            <h3>Graph 4</h3>
+            <ul>
+              <li>
+                <strong>A clear majority of respondents</strong> (665, or 57%)
+                <strong>
+                  {" "}
+                  does not accept the legitimacy of the current world order.
+                </strong>{" "}
+                Among these, most respondents (371) indicate that they care more
+                about larger questions and abstractions than the tangible
+                reality of life.
+              </li>
+              <li>
+                Overall, answers are scattered on all quadrants, and a large
+                proportion (332, or 28%) is neutral or ambivalent when given the
+                choice between caring more about the “tangible reality of life”
+                or “larger questions and abstractions.”
+              </li>
+            </ul>
+            <h3>Graph 5</h3>
+            <ul>
+              <li>
+                <strong>There is almost complete unanimity</strong> (1049
+                respondents, or 92%):
+                <strong>
+                  {" "}
+                  exposure to different beliefs and value systems leads to
+                  increased tolerance and mutual understanding.
+                </strong>
+              </li>
+              <li>
+                A majority of respondents (589 or 51%) indicate that they define
+                themselves and their convictions on their own, but many also
+                define themselves in relation to groups with whom they belong
+                (380, or 33%) and a good proportion is neutral or ambivalent
+                (182, or 16%).
+              </li>
+            </ul>
+            <h2>PART III - YOU AND THE FUTURE</h2>
+            <h3>Graph 6</h3>
+            <ul>
+              <li>
+                <strong>There is a very strong consensus</strong> (938
+                respondents, or 83%)
+                <strong>
+                  {" "}
+                  that we, humans living today, will have an impact of
+                  cosmological importance for the future of humanity.
+                </strong>
+              </li>
+              <li>
+                <strong>A strong majority</strong> (653 respondents, or 57%)
+                <strong>
+                  {" "}
+                  believes that “we’re going toward self-destruction,”
+                </strong>{" "}
+                while a small minority (266, or 23%) believes that we’re making
+                constant progress, and almost as many (223, or 20%) are neutral
+                or ambivalent.
+              </li>
+            </ul>
+            <h3>Graph 7</h3>
+            <ul>
+              <li>
+                <strong>A strong majority</strong> (847 respondents, or 75%)
+                <strong>
+                  {" "}
+                  wants to protect the planet and reinvent a more egalitarian
+                  world
+                </strong>
+                , and within this majority most respondents
+                <strong>
+                  {" "}
+                  are willing to dedicate themselves to the cause.{" "}
+                </strong>
+              </li>
+              <li>
+                By contrast, a tiny minority affirms being strongly committed to
+                defending “private property, the free market economy, and the
+                freedom of the individual” (70 respondents or 6%). A more
+                significant proportion is neutral or ambivalent (161
+                respondents, or 15%).
+              </li>
+            </ul>
+            <h3>Graph 8</h3>
+            <ul>
+              <li>
+                <strong>
+                  {" "}
+                  Answers are scattered across all four quadrants.{" "}
+                </strong>
+              </li>
+              <li>
+                <strong>A small majority of people</strong> (586 respondents, or
+                51%)
+                <strong>
+                  {" "}
+                  feel that they have the power to change things on a structural
+                  level
+                </strong>
+                , while about one third feels powerless (386, or 34%).
+              </li>
+              <li>
+                A small majority believes that idealism is more important than
+                pragmatism, and a third of all respondents (351, or 31%) are
+                neutral or ambivalent.
+              </li>
+            </ul>
+            <h2>YOU AND THIS EXERCISE</h2>
+            <h3>Graph 9</h3>
+            <ul>
+              <li>
+                Thankfully,
+                <strong> there is a strong consensus among respondents </strong>
+                (871, or 76%):
+                <strong>
+                  they estimate that the questions were well-balanced and
+                  relevant, and that their answers truly represent how they
+                  feel.
+                </strong>
+              </li>
+              <li>
+                A small proportion of respondents (100, or 8%) consider the
+                questions rather biased and / or moralizing and / or annoying.
+              </li>
+              <li>
+                A tiny proportion affirms that their answers to the
+                questionnaire are rather meaningless (19 respondents, or less
+                than 2%).
+              </li>
+            </ul>
           </MarkupText>
         </CollapsibleSection>
         {/* CONSIDERATIONS */}
@@ -1349,6 +1266,57 @@ export default function Results() {
               of the results. But numbers can only give you the simplified
               portrait; always refer to the scatterplot graphs to interpret the
               numbers.
+            </p>
+          </MarkupText>
+        </CollapsibleSection>
+        {/* ABOUT */}
+        <CollapsibleSection
+          title={<Text id="results.footer.about">About this project</Text>}
+          collapseOverride={collapseOverride}
+        >
+          <MarkupText id="results.footer.about--body">
+            <p>
+              This questionnaire was designed as part of my installation for the
+              Sobey Art Award Exhibition, which took place at the Art Gallery of
+              Alberta, Edmonton, Canada from October 5, 2019 to January 5, 2020.
+            </p>
+            <p>
+              The diagrammatic structure of the questionnaire mirrors some of my
+              paintings. I wanted to create an experience in which visitors
+              could immerse themselves in the works not only by looking, but
+              also by positioning themselves in relation to the same existential
+              issues that I address in my work. Taking position involves
+              choosing this over that, which is to say, it involves a form of
+              measurement. But a quantitative framework is inherently
+              inappropriate to consider qualitative notions such as morality or
+              progress. So I deliberately avoided presenting participants with
+              precise grids, numbers and metrics. I didn’t want the focus to be
+              on quantification, but on navigation — I wanted participants to
+              navigate through different sets of issues put in relation with one
+              another and find their own position as intuitively as possible. To
+              make visitors engage in this experience was the essence of the
+              project.
+            </p>
+            <p>
+              During the Sobey Art Award exhibition, 941 visitors took the time
+              to fill a questionnaire — much more than I expected. I often
+              witnessed people spending several minutes pondering the questions,
+              and many left positive feedback on the questionnaire.
+            </p>
+            <p>
+              So I decided to integrate the same questionnaire in my next
+              exhibition, “Positions,” which took place in the Bunker at Galerie
+              Bradley Ertaskiran, Montreal, from January 24 to March 7, 2020. We
+              collected a total of 281 questionnaires, much more than I expected
+              for a private gallery exhibition.
+            </p>
+            <p>
+              1222 individual questionnaires were collected during the two
+              exhibitions.
+            </p>
+            <p>
+              It took one year to secure funding, compile the data, analyze the
+              results, and build this interface.
             </p>
           </MarkupText>
         </CollapsibleSection>
