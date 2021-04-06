@@ -96,7 +96,9 @@ export default function Knobs(props) {
           <Text id="results.knobs.title">Visualization Options</Text>
         </h1>
         <div class={style["show-hide"]} onClick={handleShowHideClick}>
-          <Text id="results.knobs.clickto">Click to hide / show</Text>
+          <h1 style="margin: 0 2rem 0 0;">
+            <strong>{shouldShowKnobs ? "−" : "+"}</strong>
+          </h1>
         </div>
       </div>
       {shouldShowKnobs && (

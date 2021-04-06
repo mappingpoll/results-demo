@@ -563,7 +563,8 @@ td {
   }
 
   .intro__3DW69 p,
-  footer p {
+  footer p,
+  footer li {
     font-size: 1rem;
   }
 
@@ -819,4 +820,4 @@ a:hover {
 }
 
 
-/*# sourceMappingURL=ssr-bundle.bde21.css.map*/
+/*# sourceMappingURL=ssr-bundle.71493.css.map*/

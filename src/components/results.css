@@ -223,7 +223,8 @@ td {
   }
 
   .intro p,
-  footer p {
+  footer p,
+  footer li {
     font-size: 1rem;
   }
 

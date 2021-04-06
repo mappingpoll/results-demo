@@ -1355,7 +1355,16 @@ export default function Results() {
             </p>
             <p>
               This interface for data visualisation was built by
-              <strong> Nicolas&nbsp;Epstein</strong>.
+              <strong>
+                {" "}
+                <a
+                  style="background: inherit; color: inherit;"
+                  href="https://nilueps.net"
+                >
+                  Nicolas&nbsp;Epstein
+                </a>
+              </strong>
+              .
             </p>
             <h1 style="margin-top: 3rem;">
               The project was made possible thanks to the support of:
