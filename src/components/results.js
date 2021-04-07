@@ -73,11 +73,22 @@ export default function Results() {
 
   let [showBackToTop, setShowBackToTop] = useState(false);
 
-  let [collapseOverride, setCollapseOverride] = useState(false);
+  let [footerSectionsState, setFooterSectionsState] = useState(0);
+  const footerSection = {
+    COMMENTS: 1,
+    ANALYSIS: 2,
+    CONSIDERATIONS: 4,
+    ABOUT: 8,
+  };
+  function footerSectionIsOpen(section) {
+    return (footerSectionsState & section) !== 0;
+  }
+  function toggleFooterSectionOpenClose(section) {
+    setFooterSectionsState((footerSectionsState ^= section));
+  }
 
   function collapseFooterSections() {
-    setCollapseOverride(true);
-    setTimeout(() => setCollapseOverride(false), 100);
+    setFooterSectionsState(0);
   }
 
   function handleToBottomClick() {
@@ -86,17 +97,18 @@ export default function Results() {
   }
 
   function handleBackToTopClick() {
-    const introY = introRef.current.getBoundingClientRect().bottom;
     const mapsY = mapsRef.current.getBoundingClientRect().bottom;
-    window.scrollTo(
-      0,
-      mapsY < -1
-        ? window.pageYOffset + mapsY - 20
-        : introY < -1
-        ? window.pageYOffset + introY + 1
-        : 0
-    );
-    collapseFooterSections();
+    if (mapsY < -1) {
+      window.scrollTo(0, window.pageYOffset + mapsY - 20);
+      collapseFooterSections();
+      return;
+    }
+    const introY = introRef.current.getBoundingClientRect().bottom;
+    if (introY < -1) {
+      window.scrollTo(0, window.pageYOffset + introY + 1);
+      return;
+    }
+    window.scrollTo(0, 0);
   }
 
   useEffect(() => {
@@ -356,7 +368,9 @@ export default function Results() {
               Comments left by respondents
             </Text>
           }
-          collapseOverride={collapseOverride}
+          cb={() => toggleFooterSectionOpenClose(footerSection.COMMENTS)}
+          isOpen={footerSectionIsOpen(footerSection.COMMENTS)}
+          //collapseOverride={collapseOverride}
         >
           <MarkupText id="results.footer.comments--body">
             <p>
@@ -985,7 +999,8 @@ export default function Results() {
         {/* ANALYSIS */}
         <CollapsibleSection
           title={<Text id="results.footer.analysis">Analysis</Text>}
-          collapseOverride={collapseOverride}
+          cb={() => toggleFooterSectionOpenClose(footerSection.ANALYSIS)}
+          isOpen={footerSectionIsOpen(footerSection.ANALYSIS)}
         >
           <MarkupText id="results.footer.analysis--body">
             <p>
@@ -1181,7 +1196,8 @@ export default function Results() {
         {/* CONSIDERATIONS */}
         <CollapsibleSection
           title={<Text id="results.footer.considerations">Considerations</Text>}
-          collapseOverride={collapseOverride}
+          cb={() => toggleFooterSectionOpenClose(footerSection.CONSIDERATIONS)}
+          isOpen={footerSectionIsOpen(footerSection.CONSIDERATIONS)}
         >
           <MarkupText id="results.footer.considerations--body">
             <h2>Extras: drawings, lines and other</h2>
@@ -1273,7 +1289,8 @@ export default function Results() {
         {/* ABOUT */}
         <CollapsibleSection
           title={<Text id="results.footer.about">About this project</Text>}
-          collapseOverride={collapseOverride}
+          cb={() => toggleFooterSectionOpenClose(footerSection.ABOUT)}
+          isOpen={footerSectionIsOpen(footerSection.ABOUT)}
         >
           <MarkupText id="results.footer.about--body">
             <p>

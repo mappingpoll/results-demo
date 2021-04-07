@@ -1,41 +1,18 @@
 import { h } from "preact";
-// import { Text } from "preact-i18n";
-import { useEffect, useState } from "preact/hooks";
-// import { useMobileContext } from "../context/mobile-context";
 import style from "./collapsible-section.css";
 
-export default function CollapsibleSection({
-  collapsedInitially = true,
-  children,
-  title,
-  collapseOverride,
-}) {
-  // const isMobile = useMobileContext();
-  const [isCollapsed, setIsCollapsed] = useState(collapsedInitially);
-
-  useEffect(() => {
-    if (collapseOverride) setIsCollapsed(true);
-  }, [collapseOverride]);
-
+export default function CollapsibleSection({ children, title, cb, isOpen }) {
   return (
-    <section class={isCollapsed ? style.collapsed : style.open}>
-      <div class={style.title} onclick={() => setIsCollapsed(!isCollapsed)}>
+    <section class={isOpen ? style.open : style.collapsed}>
+      <div class={style.title} onclick={cb}>
         <h1>{title}</h1>
         <h1>
-          <strong>{isCollapsed ? "+" : "−"}</strong>
+          <strong>{!isOpen ? "+" : "−"}</strong>
         </h1>
-        {/* {!isMobile && (
-          <span>
-            <Text id="results.knobs.clickto">Click to show / hide</Text>
-          </span>
-        )} */}
       </div>
-      {!isCollapsed && children}
-      {!isCollapsed && (
-        <h1
-          style="text-align: right; cursor: pointer;"
-          onclick={() => setIsCollapsed(true)}
-        >
+      {isOpen && children}
+      {isOpen && (
+        <h1 style="text-align: right; cursor: pointer;" onclick={cb}>
           <strong>−</strong>
         </h1>
       )}

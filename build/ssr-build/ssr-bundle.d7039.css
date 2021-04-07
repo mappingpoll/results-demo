@@ -648,6 +648,7 @@ td {
   -ms-flex-align: center;
       align-items: center;
   cursor: pointer;
+  margin: 0;
 }
 
 input[type="range"] {
@@ -820,4 +821,4 @@ a:hover {
 }
 
 
-/*# sourceMappingURL=ssr-bundle.71493.css.map*/
+/*# sourceMappingURL=ssr-bundle.d7039.css.map*/
