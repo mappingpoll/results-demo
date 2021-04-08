@@ -144,7 +144,11 @@ export default function Results() {
             : "opacity: 0; pointer-events: none; cursor: default;"
         }
       >
-        <Text id="results.back-to-top">Go up</Text> ⬆
+        <Text id="results.back-to-top">Go up </Text>
+        <img
+          style="max-height: 1em; padding-top: 0.2em"
+          src="../assets/up-arrow.svg"
+        />
       </div>
       <div ref={introRef} class={style.intro}>
         <SiteMenu style="margin-top: 0;" />
