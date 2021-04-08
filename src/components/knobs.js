@@ -93,7 +93,7 @@ export default function Knobs(props) {
           style="cursor: pointer"
           onClick={handleShowHideClick}
         >
-          <Text id="results.knobs.title">Visualization Options</Text>
+          Options
         </h1>
         <div class={style["show-hide"]} onClick={handleShowHideClick}>
           <h1 style="margin: 0 2rem 0 0;">

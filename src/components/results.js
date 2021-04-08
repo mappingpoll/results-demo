@@ -146,6 +146,23 @@ export default function Results() {
         <Text id="results.back-to-top">Go up</Text> ⬆
       </div>
       <div ref={introRef} class={style.intro}>
+        <div class={style["site-menu"]} style="margin-top: 0;">
+          <h1>Nicolas Grenier</h1>
+          <h3>
+            <a href="Exhibitions-Projects" rel="history">
+              Exhibitions &amp; Projects /
+            </a>
+            <a href="Paintings" rel="history">
+              / Paintings /
+            </a>
+            <a href="Research" rel="history">
+              / Research /
+            </a>
+            <a href="About" rel="history">
+              / About&nbsp;
+            </a>
+          </h3>
+        </div>
         <div class={style["en-fr"]}>
           <span onclick={() => swapLang("en")}>English</span>&nbsp;/&nbsp;
           <span onclick={() => swapLang("fr")}>Français</span>
@@ -159,7 +176,7 @@ export default function Results() {
             In two of my recent exhibitions (Sobey Art Award Exhibition at the
             Art Gallery of Alberta, and “Positions” at Galerie Bradley
             Ertaskiran), I invited visitors to participate in a “Mapping
-            Exercise” by taking a few minutes to fill a paper questionnaire
+            Exercise” by taking a few minutes to fill out a paper questionnaire
             comprising a variety of existential questions. Participants were
             asked to mark their position with a dot on a series of diagrams.
           </p>
@@ -381,7 +398,8 @@ export default function Results() {
               About 10-15% of respondents left a comment. Here is a
               non-exhaustive list of comments received. The most repetitive
               comments ("very interesting," "congrats for the great show," etc.)
-              have been removed.
+              have been removed, and some comments were condensed or shortened
+              during transcription..
             </p>
           </MarkupText>
           <h2>Edmonton:</h2>
@@ -478,7 +496,7 @@ export default function Results() {
             </tr>
             <tr>
               <td>
-                my 9 years ol daughter and i thought about the questions a lot
+                my 9 years old daughter and i thought about the questions a lot
               </td>
             </tr>
             <tr>
@@ -727,7 +745,7 @@ export default function Results() {
             </tr>
             <tr>
               <td>
-                pple kept saying it was too much work, but i thin they're nuts.
+                pple kept saying it was too much work, but i think they're nuts.
                 this is worth it
               </td>
             </tr>
@@ -739,7 +757,7 @@ export default function Results() {
             </tr>
             <tr>
               <td>
-                interview ai clever. exercise helped me thin about state of
+                interview ai clever. exercise helped me think about state of
                 things
               </td>
             </tr>
@@ -1130,7 +1148,7 @@ export default function Results() {
                   wants to protect the planet and reinvent a more egalitarian
                   world
                 </strong>
-                , and within this majority most respondents
+                , and withink this majority most respondents
                 <strong>
                   {" "}
                   are willing to dedicate themselves to the cause.{" "}
@@ -1261,7 +1279,7 @@ export default function Results() {
               different would the answers be if the survey was to be conducted
               today? Given the nature of the questionnaire, would the pandemic
               be more of a distraction, or would it fundamentally alter how
-              people think about those issues?)
+              people think about these issues?)
             </p>
             <h2>Representation of the dots</h2>
             <p>
@@ -1307,17 +1325,18 @@ export default function Results() {
               choosing this over that, which is to say, it involves a form of
               measurement. But a quantitative framework is inherently
               inappropriate to consider qualitative notions such as morality or
-              progress. So I deliberately avoided presenting participants with
-              precise grids, numbers and metrics. I didn’t want the focus to be
-              on quantification, but on navigation — I wanted participants to
-              navigate through different sets of issues put in relation with one
-              another and find their own position as intuitively as possible. To
-              make visitors engage in this experience was the essence of the
-              project.
+              progress. So I used a cartesian plane with X and Y axes (for its
+              simplicity and familiarity), but I deliberately avoided presenting
+              participants with precise grids, numbers and metrics. I didn’t
+              want the focus to be on quantification, but on navigation — I
+              wanted participants to navigate through different sets of issues
+              put in relation with one another and find their own position as
+              intuitively as possible. To make visitors engage in this
+              experience was the essence of the project.
             </p>
             <p>
               During the Sobey Art Award exhibition, 941 visitors took the time
-              to fill a questionnaire — much more than I expected. I often
+              to fill out a questionnaire — much more than I expected. I often
               witnessed people spending several minutes pondering the questions,
               and many left positive feedback on the questionnaire.
             </p>
@@ -1403,6 +1422,25 @@ export default function Results() {
             src="../assets/hero-text-sobeys-en_0.png"
             alt="logo of the sobey art award"
           />
+        </section>
+        <section style="border: none; background: white; padding-bottom: 0">
+          <div class={style["site-menu"]}>
+            <h1>Nicolas Grenier</h1>
+            <h3>
+              <a href="Exhibitions-Projects" rel="history">
+                Exhibitions &amp; Projects /
+              </a>
+              <a href="Paintings" rel="history">
+                / Paintings /
+              </a>
+              <a href="Research" rel="history">
+                / Research /
+              </a>
+              <a href="About" rel="history">
+                / About&nbsp;
+              </a>
+            </h3>
+          </div>
         </section>
       </footer>
     </div>
