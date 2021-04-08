@@ -1,0 +1,38 @@
+.site-menu {
+  color: black;
+  margin: 1.75rem 0;
+}
+.site-menu h1,
+.site-menu h3 {
+  margin: 0;
+}
+.site-menu h1 {
+  font-weight: bold;
+}
+.site-menu a {
+  font-size: 1.4rem;
+  color: black;
+  background-color: transparent;
+}
+.site-menu a:hover {
+  text-decoration: underline;
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-device-width: 414px) {
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 1em 0;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .site-menu a {
+    font-size: 1.2rem;
+  }
+}

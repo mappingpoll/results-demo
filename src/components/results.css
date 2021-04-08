@@ -3,26 +3,6 @@
 .results {
 }
 
-.site-menu {
-  color: black;
-  margin: 1.75rem 0;
-}
-.site-menu h1,
-.site-menu h3 {
-  margin: 0;
-}
-.site-menu h1 {
-  font-weight: bold;
-}
-.site-menu a {
-  font-size: 1.4rem;
-  color: black;
-  background-color: transparent;
-}
-.site-menu a:hover {
-  text-decoration: underline;
-}
-
 .en-fr {
   display: inline-block;
   background: black;
@@ -246,11 +226,6 @@ td {
     font-weight: 400;
   }
 
-  .site-menu a {
-    font-size: 1.2rem;
-    color: black;
-    background-color: transparent;
-  }
   .intro p,
   footer p,
   footer li {

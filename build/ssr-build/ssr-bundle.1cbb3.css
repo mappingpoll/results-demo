@@ -338,26 +338,6 @@ input[type="checkbox"] {
 .results__bquYd {
 }
 
-.site-menu__3p8Md {
-  color: black;
-  margin: 1.75rem 0;
-}
-.site-menu__3p8Md h1,
-.site-menu__3p8Md h3 {
-  margin: 0;
-}
-.site-menu__3p8Md h1 {
-  font-weight: bold;
-}
-.site-menu__3p8Md a {
-  font-size: 1.4rem;
-  color: black;
-  background-color: transparent;
-}
-.site-menu__3p8Md a:hover {
-  text-decoration: underline;
-}
-
 .en-fr__1XaSw {
   display: inline-block;
   background: black;
@@ -586,11 +566,6 @@ td {
     font-weight: 400;
   }
 
-  .site-menu__3p8Md a {
-    font-size: 1.2rem;
-    color: black;
-    background-color: transparent;
-  }
   .intro__3DW69 p,
   footer p,
   footer li {
@@ -678,6 +653,45 @@ td {
       align-items: center;
   cursor: pointer;
   margin: 0;
+}
+
+.site-menu__2F49D {
+  color: black;
+  margin: 1.75rem 0;
+}
+.site-menu__2F49D h1,
+.site-menu__2F49D h3 {
+  margin: 0;
+}
+.site-menu__2F49D h1 {
+  font-weight: bold;
+}
+.site-menu__2F49D a {
+  font-size: 1.4rem;
+  color: black;
+  background-color: transparent;
+}
+.site-menu__2F49D a:hover {
+  text-decoration: underline;
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-device-width: 414px) {
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 1em 0;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  .site-menu__2F49D a {
+    font-size: 1.2rem;
+  }
 }
 
 input[type="range"] {
@@ -850,4 +864,4 @@ a:hover {
 }
 
 
-/*# sourceMappingURL=ssr-bundle.3e283.css.map*/
+/*# sourceMappingURL=ssr-bundle.1cbb3.css.map*/

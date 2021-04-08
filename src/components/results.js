@@ -12,6 +12,7 @@ import Notify from "./notify";
 import { cloneDeep } from "lodash";
 import { useLanguageContext } from "../context/language-context";
 import CollapsibleSection from "./collapsible-section";
+import SiteMenu from "./site-menu";
 
 function useAsyncReducer(reducer, initState) {
   const [state, setState] = useState(initState),
@@ -146,23 +147,7 @@ export default function Results() {
         <Text id="results.back-to-top">Go up</Text> ⬆
       </div>
       <div ref={introRef} class={style.intro}>
-        <div class={style["site-menu"]} style="margin-top: 0;">
-          <h1>Nicolas Grenier</h1>
-          <h3>
-            <a href="Exhibitions-Projects" rel="history">
-              Exhibitions &amp; Projects /
-            </a>
-            <a href="Paintings" rel="history">
-              / Paintings /
-            </a>
-            <a href="Research" rel="history">
-              / Research /
-            </a>
-            <a href="About" rel="history">
-              / About&nbsp;
-            </a>
-          </h3>
-        </div>
+        <SiteMenu style="margin-top: 0;" />
         <div class={style["en-fr"]}>
           <span onclick={() => swapLang("en")}>English</span>&nbsp;/&nbsp;
           <span onclick={() => swapLang("fr")}>Français</span>
@@ -1424,23 +1409,7 @@ export default function Results() {
           />
         </section>
         <section style="border: none; background: white; padding-bottom: 0">
-          <div class={style["site-menu"]}>
-            <h1>Nicolas Grenier</h1>
-            <h3>
-              <a href="Exhibitions-Projects" rel="history">
-                Exhibitions &amp; Projects /
-              </a>
-              <a href="Paintings" rel="history">
-                / Paintings /
-              </a>
-              <a href="Research" rel="history">
-                / Research /
-              </a>
-              <a href="About" rel="history">
-                / About&nbsp;
-              </a>
-            </h3>
-          </div>
+          <SiteMenu />
         </section>
       </footer>
     </div>
