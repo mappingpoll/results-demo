@@ -338,12 +338,33 @@ input[type="checkbox"] {
 .results__bquYd {
 }
 
+.site-menu__3p8Md {
+  color: black;
+  margin: 1.75rem 0;
+}
+.site-menu__3p8Md h1,
+.site-menu__3p8Md h3 {
+  margin: 0;
+}
+.site-menu__3p8Md h1 {
+  font-weight: bold;
+}
+.site-menu__3p8Md a {
+  font-size: 1.4rem;
+  color: black;
+  background-color: transparent;
+}
+.site-menu__3p8Md a:hover {
+  text-decoration: underline;
+}
+
 .en-fr__1XaSw {
   display: inline-block;
   background: black;
   color: white;
   font-family: "Times New Roman", Times, serif;
   font-size: 1.4rem;
+  margin: 1.75rem 0;
 }
 
 .en-fr__1XaSw > span {
@@ -540,7 +561,10 @@ td {
 
 /* Smartphones (portrait) ----------- */
 @media only screen and (max-device-width: 414px) {
-  .intro__3DW69,
+  .intro__3DW69 {
+    padding: 0.25rem 0.5rem;
+  }
+
   section {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -562,6 +586,11 @@ td {
     font-weight: 400;
   }
 
+  .site-menu__3p8Md a {
+    font-size: 1.2rem;
+    color: black;
+    background-color: transparent;
+  }
   .intro__3DW69 p,
   footer p,
   footer li {
@@ -821,4 +850,4 @@ a:hover {
 }
 
 
-/*# sourceMappingURL=ssr-bundle.d7039.css.map*/
+/*# sourceMappingURL=ssr-bundle.3e283.css.map*/
