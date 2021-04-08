@@ -9,7 +9,11 @@ function getDefinition(lang) {
 }
 
 let userLang =
-  typeof navigator !== "undefined" ? navigator.language.slice(0, 2) : "en";
+  typeof navigator !== "undefined"
+    ? navigator.language.slice(0, 2) === "fr"
+      ? "fr"
+      : "en"
+    : "en";
 
 export const Language = createContext();
 
