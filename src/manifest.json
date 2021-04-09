@@ -1,7 +1,7 @@
 {
   "name": "Mapping Exercise",
   "short_name": "mapping-exercise",
-  "start_url": "/survey",
+  "start_url": "/survey/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
