@@ -1,16 +1,10 @@
 {
-  "name": "results-demo",
-  "short_name": "results-demo",
-  "start_url": "/",
+  "name": "Mapping Exercise",
+  "short_name": "mapping-exercise",
+  "start_url": "/survey",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
   "theme_color": "#673ab8",
-  "icons": [
-    {
-      "src": "/assets/icon.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ]
+  "icons": []
 }

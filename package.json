@@ -1,10 +1,10 @@
 {
   "private": true,
-  "name": "existential-issues",
+  "name": "mapping-exercise",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "preact build",
+    "build": "preact build && cp _redirects build/_redirects",
     "serve": "sirv build --port 8080 --cors --single --host",
     "dev": "preact watch",
     "lint": "eslint src"
