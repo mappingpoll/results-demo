@@ -1364,7 +1364,7 @@ export default function Results() {
               <strong> Lindsey Sharman</strong>) and by the team at
               <strong> Galerie Bradley Ertaskiran</strong> (thanks to
               <strong> Soad Carrier</strong>, <strong> Cécile Bertévas</strong>,
-              <strong> Mark Lowe</strong> and <strong> Russell Banx</strong>).
+              <strong> Mark Lowe</strong>, <strong> Russell Banx</strong>, <strong>Megan Bradley</strong> and <strong>Antoine Ertaskiran</strong>).
             </p>
             <p>
               Data from the paper questionnaires were compiled by
@@ -1413,7 +1413,7 @@ export default function Results() {
           />
         </section>
         <section style="border: none; background: white; padding-bottom: 0">
-          <SiteMenu />
+          <SiteMenu style="margin-bottom: 3.5rem" />
         </section>
       </footer>
     </div>
