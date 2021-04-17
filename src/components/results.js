@@ -80,6 +80,7 @@ export default function Results() {
     ANALYSIS: 2,
     CONSIDERATIONS: 4,
     ABOUT: 8,
+    CONTACT: 16,
   };
   function footerSectionIsOpen(section) {
     return (footerSectionsState & section) !== 0;
@@ -376,7 +377,7 @@ export default function Results() {
           }
           cb={() => toggleFooterSectionOpenClose(footerSection.COMMENTS)}
           isOpen={footerSectionIsOpen(footerSection.COMMENTS)}
-          //collapseOverride={collapseOverride}
+        //collapseOverride={collapseOverride}
         >
           <MarkupText id="results.footer.comments--body">
             <p>
@@ -1301,9 +1302,10 @@ export default function Results() {
         >
           <MarkupText id="results.footer.about--body">
             <p>
-              This questionnaire was designed as part of my installation for the
-              Sobey Art Award Exhibition, which took place at the Art Gallery of
-              Alberta, Edmonton, Canada from October 5, 2019 to January 5, 2020.
+              The objective of this project was not to collect data with the aim of publishing it, but rather to include an active experience of questioning as an integral part of the exhibitions.
+            </p>
+            <p>
+              This questionnaire was originally designed as part of my installation for the Sobey Art Award Exhibition, which took place at the Art Gallery of Alberta, Edmonton, Canada from October 5, 2019 to January 5, 2020.
             </p>
             <p>
               The diagrammatic structure of the questionnaire mirrors some of my
@@ -1333,8 +1335,7 @@ export default function Results() {
               So I decided to integrate the same questionnaire in my next
               exhibition, “Positions,” which took place in the Bunker at Galerie
               Bradley Ertaskiran, Montreal, from January 24 to March 7, 2020. We
-              collected a total of 281 questionnaires, much more than I expected
-              for a private gallery exhibition.
+              collected a total of 281 questionnaires, more than expected for a private gallery exhibition.
             </p>
             <p>
               1222 individual questionnaires were collected during the two
@@ -1344,7 +1345,19 @@ export default function Results() {
               It took one year to secure funding, compile the data, analyze the
               results, and build this interface.
             </p>
+            <h2>
+              Next step
+            </h2>
+            <p>
+              Following the results and the feedback I received, I am currently working on a visual tool to create questions that people could answer in different ways, in order to make visible the tension between the quantitative and qualitative dimensions. For example, in a given question, each respondent could create their own type of response, while expressing their frustration towards the question (if necessary), while also signaling that the issue behind the question is very important for them. The objective is to create a method allowing multidimensional answers, and results that make room for the emotional complexity that is often overlooked data visualization.
+            </p>
           </MarkupText>
+        </CollapsibleSection>
+        <CollapsibleSection
+          title={<Text id="results.footer.contact">Contact & Feedback</Text>}
+          cb={() => toggleFooterSectionOpenClose(footerSection.CONTACT)}
+          isOpen={footerSectionIsOpen(footerSection.CONTACT)}>
+          <p><Text id="results.footer.contact--body">For any questions, comments or other, feel free to contact me at grenier.nicolas@gmail.com</Text></p>
         </CollapsibleSection>
         <section class={style.acknowledgements}>
           <h1 lang="en">
@@ -1413,7 +1426,7 @@ export default function Results() {
           />
         </section>
         <section style="border: none; background: white; padding-bottom: 0">
-          <SiteMenu style="margin-bottom: 3.5rem" />
+          <SiteMenu style="padding-bottom: 2.5rem; margin-bottom: 0" />
         </section>
       </footer>
     </div>
