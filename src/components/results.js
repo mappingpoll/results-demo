@@ -163,19 +163,14 @@ export default function Results() {
             <br />A Mapping Exercise
           </h1>
           <p>
-            In two of my recent exhibitions (Sobey Art Award Exhibition at the
-            Art Gallery of Alberta, and “Positions” at Galerie Bradley
-            Ertaskiran), I invited visitors to participate in a “Mapping
-            Exercise” by taking a few minutes to fill out a paper questionnaire
-            comprising a variety of existential questions. Participants were
-            asked to mark their position with a dot on a series of diagrams.
+            In two of my recent exhibitions, I invited visitors to participate in a “Mapping Exercise” by taking a few minutes to fill out a questionnaire comprising a variety of existential questions. Participants were asked to mark their position with a dot on a series of diagrams.
           </p>
           <h1>Results</h1>
           <p>
-            In total, I received 1222 individual questionnaires. In the
-            scatterplot graphs below, each dot corresponds to the answer of one
-            participant. The questions appear exactly as on the original
-            questionnaire.
+            In total, 1222 people completed the questionnaire: 941 during the Sobey Art Award Exhibition at the Art Gallery of Alberta in Edmonton (October 5, 2019 to January 5, 2020), and 281 during my solo exhibition at Galerie Bradley Ertaskiran in Montreal (January 24 to March 7, 2020).
+          </p>
+          <p>
+            In the scatterplot graphs below, each dot corresponds to the answer of one participant. The questions appear exactly as on the original questionnaire.
           </p>
         </MarkupText>
         <p>
@@ -1294,65 +1289,31 @@ export default function Results() {
             </p>
           </MarkupText>
         </CollapsibleSection>
-        {/* ABOUT */}
+        {/* OBJECTIVES */}
         <CollapsibleSection
-          title={<Text id="results.footer.about">About this project</Text>}
+          title={<Text id="results.footer.objectives">Objectives</Text>}
           cb={() => toggleFooterSectionOpenClose(footerSection.ABOUT)}
           isOpen={footerSectionIsOpen(footerSection.ABOUT)}
         >
-          <MarkupText id="results.footer.about--body">
+          <MarkupText id="results.footer.objectives--body">
             <p>
-              The objective of this project was not to collect data with the aim of publishing it, but rather to include an active experience of questioning as an integral part of the exhibitions.
+              The goal of this project was not to collect data with the aim of publishing it, but rather to include an active experience of questioning as an integral part of the exhibitions.
             </p>
             <p>
               This questionnaire was originally designed as part of my installation for the Sobey Art Award Exhibition, which took place at the Art Gallery of Alberta, Edmonton, Canada from October 5, 2019 to January 5, 2020.
             </p>
             <p>
-              The diagrammatic structure of the questionnaire mirrors some of my
-              paintings. I wanted to create an experience in which visitors
-              could immerse themselves in the works not only by looking, but
-              also by positioning themselves in relation to the same existential
-              issues that I address in my work. Taking position involves
-              choosing this over that, which is to say, it involves a form of
-              measurement. But a quantitative framework is inherently
-              inappropriate to consider qualitative notions such as morality or
-              progress. So I used a cartesian plane with X and Y axes (for its
-              simplicity and familiarity), but I deliberately avoided presenting
-              participants with precise grids, numbers and metrics. I didn’t
-              want the focus to be on quantification, but on navigation — I
-              wanted participants to navigate through different sets of issues
-              put in relation with one another and find their own position as
-              intuitively as possible. To make visitors engage in this
-              experience was the essence of the project.
+              The diagrammatic structure of the questionnaire mirrors some of my paintings. I wanted to create an experience in which visitors could immerse themselves in the works not only by looking, but also by positioning themselves in relation to the same existential issues that I address in my work. Taking a position involves choosing this over that, which is to say, it implies a form of measurement. But a quantitative framework is inherently inappropriate to ponder on qualitative notions such as morality or progress. So I used a cartesian plane with X and Y axes (for its simplicity and familiarity), but I deliberately avoided presenting participants with precise grids, numbers and metrics. I didn’t want the focus to be on quantification, but on navigation — I wanted participants to navigate through different sets of issues put in relation with one another and find their own position as intuitively as possible. That is why this questionnaire, as opposed to most polls or surveys, deliberately avoided anything that can be measured objectively, such as age, income, ethnicity, and any question that can be answered by yes or no. The goal was to try to concretize, however modestly, the structure within which we consider big existential questions.
+            <br />
+              To make visitors engage in this experience was the essence of the project.
             </p>
             <p>
-              During the Sobey Art Award exhibition, 941 visitors took the time
-              to fill out a questionnaire — much more than I expected. I often
-              witnessed people spending several minutes pondering the questions,
-              and many left positive feedback on the questionnaire.
-            </p>
-            <p>
-              So I decided to integrate the same questionnaire in my next
-              exhibition, “Positions,” which took place in the Bunker at Galerie
-              Bradley Ertaskiran, Montreal, from January 24 to March 7, 2020. We
-              collected a total of 281 questionnaires, more than expected for a private gallery exhibition.
-            </p>
-            <p>
-              1222 individual questionnaires were collected during the two
-              exhibitions.
-            </p>
-            <p>
-              It took one year to secure funding, compile the data, analyze the
-              results, and build this interface.
-            </p>
-            <h2>
-              Next step
-            </h2>
-            <p>
-              Following the results and the feedback I received, I am currently working on a visual tool to create questions that people could answer in different ways, in order to make visible the tension between the quantitative and qualitative dimensions. For example, in a given question, each respondent could create their own type of response, while expressing their frustration towards the question (if necessary), while also signaling that the issue behind the question is very important for them. The objective is to create a method allowing multidimensional answers, and results that make room for the emotional complexity that is often overlooked data visualization.
+              Of course, legitimate criticism can be made about several aspects of the project — the binary nature of the questions, the choice of issues, my own biases as a white man, the loftiness inherent in asking big questions, and the tendency of such questions to bring back the old pitfalls of universalism. Despite these shortcomings, many more people than I expected took the time to complete the questionnaire and provided positive feedback, which signals that it might be worth pushing the experience further. I hope to develop a funkier questionnaire, where respondents could give multidimensional answers, express contradicting positions, critique the questions, etc. It seems relevant to develop experimental alternatives to conventional measurement systems and see what can be done with such methods.
+
             </p>
           </MarkupText>
         </CollapsibleSection>
+        {/* CONTACT */}
         <CollapsibleSection
           title={<Text id="results.footer.contact">Contact & Feedback</Text>}
           cb={() => toggleFooterSectionOpenClose(footerSection.CONTACT)}
